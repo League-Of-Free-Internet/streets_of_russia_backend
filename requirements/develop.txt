@@ -1,5 +1,8 @@
 asgiref==3.8.1
+black @ git+https://github.com/psf/black@3be19b306f77980349d2c9edece2d86b1f58663d
 cfgv==3.4.0
+click==8.1.7
+colorama==0.4.6
 distlib==0.3.8
 Django==5.0.6
 djangorestframework==3.15.1
@@ -12,7 +15,10 @@ flake8-return==1.2.0
 identify==2.5.36
 isort==5.13.2
 mccabe==0.7.0
+mypy-extensions==1.0.0
 nodeenv==1.8.0
+packaging==24.0
+pathspec==0.12.1
 pep8-naming==0.13.3
 platformdirs==4.2.1
 pre-commit==3.7.1

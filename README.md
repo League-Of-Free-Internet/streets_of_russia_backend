@@ -19,7 +19,7 @@
   <!-- Second row: -->
   <br>
   <a href="https://github.com/League-Of-Free-Internet/empty_project/actions">
-    <img src="https://img.shields.io/github/actions/workflow/status/League-Of-Free-Internet/empty_project/build.yml?branch=master&label=CI&logo=github&style=flat-square" height="20" alt="GitHub Workflow Status">
+    <img src="https://img.shields.io/github/actions/workflow/status/League-Of-Free-Internet/empty_project/codestyle_pep8.yml?branch=dev&label=Code Style&logo=github&style=flat-square" height="20" alt="GitHub Workflow Status">
   </a>
   <a href="https://github.com/pre-commit/pre-commit">
     <img src="https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white&style=flat-square" height="20" alt="pre-commit">
@@ -37,7 +37,7 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula 
 
 ## Документация для работы в команде над проектом
 
-[![Code Style](https://img.shields.io/badge/Прочитать-Документацию_Code_Style-blue?style=for-the-badge)]() [![Pull Request](https://img.shields.io/badge/Прочитать-Документацию_Pull_Request-2ea44f?style=for-the-badge)]()
+[![Code Style](https://img.shields.io/badge/Прочитать-Документацию_Code_Style-blue?style=for-the-badge)](https://github.com/League-Of-Free-Internet/empty_project/blob/dev/.github/docs/code_style_rules.md) [![Pull Request](https://img.shields.io/badge/Прочитать-Документацию_Pull_Request-2ea44f?style=for-the-badge)](https://github.com/League-Of-Free-Internet/empty_project/blob/dev/.github/docs/pull_requests_rules.md)
 
 ## Ссылка на проект
 [![Site](https://img.shields.io/badge/Перейти_на-Сайт-2ea44f?style=for-the-badge)]()

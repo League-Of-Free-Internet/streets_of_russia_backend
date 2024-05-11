@@ -75,7 +75,7 @@ source venv/bin/activate
 Для Windows:
 ```
 python -m pip install --upgrade pip
-pip install -r  requirements/develop.txt
+pip install -r requirements/develop.txt
 ```
 для Linux:
 ```

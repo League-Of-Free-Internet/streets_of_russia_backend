@@ -1,5 +1,4 @@
 # empty_project
-
 <div align="center">
 <!-- Title: -->
   <a href="https://github.com/League-Of-Free-Internet">

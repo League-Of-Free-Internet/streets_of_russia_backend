@@ -19,7 +19,7 @@
   <!-- Second row: -->
   <br>
   <a href="https://github.com/League-Of-Free-Internet/empty_project/actions">
-    <img src="https://img.shields.io/github/actions/workflow/status/League-Of-Free-Internet/empty_project/build.yml?branch=master&label=CI&logo=github&style=flat-square" height="20" alt="GitHub Workflow Status">
+    <img src="https://img.shields.io/github/actions/workflow/status/League-Of-Free-Internet/empty_project/codestyle_pep8.yml?branch=dev&label=Code Style&logo=github&style=flat-square" height="20" alt="GitHub Workflow Status">
   </a>
   <a href="https://github.com/pre-commit/pre-commit">
     <img src="https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white&style=flat-square" height="20" alt="pre-commit">

@@ -70,7 +70,7 @@ source venv/Scripts/Activate
 ```
 source venv/bin/activate
 ```
-- Установите зависимости из файла requirements.txt
+- Установите зависимости из файла requirements/develop.txt
 
 Для Windows:
 ```

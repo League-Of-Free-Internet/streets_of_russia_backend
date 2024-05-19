@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.template.defaultfilters import truncatechars
 
-from news.models import News
+from .models import News
 
 
 @admin.register(News)

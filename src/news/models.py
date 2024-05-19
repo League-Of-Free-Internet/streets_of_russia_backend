@@ -3,12 +3,12 @@ from django.db import models
 
 class NewsCfg:
     """
-    Настройки для модели News
+    Настройки для модели News.
     """
     MAX_LENGTH_DEFAULT = 255
-    NEWS_MAX_LENGHT = 5000
+    NEWS_MAX_LENGTH = 5000
     HELP_MSG_NAME = 'Введите название Новости'
-    HELP_MSG_TXT = f'Напишите текст новости до {NEWS_MAX_LENGHT} символов'
+    HELP_MSG_TXT = f'Напишите текст новости до {NEWS_MAX_LENGTH} символов'
 
 
 class News(models.Model):
@@ -32,7 +32,7 @@ class News(models.Model):
         verbose_name='Дата',)
     text = models.TextField(
         verbose_name='Содержание новости',
-        max_length=NewsCfg.NEWS_MAX_LENGHT,
+        max_length=NewsCfg.NEWS_MAX_LENGTH,
         help_text=NewsCfg.HELP_MSG_TXT
     )
 

@@ -32,7 +32,7 @@ class Events(models.Model):
         verbose_name='Дата события'
     )
     text = models.TextField(
-        verbose_name='Содержание новости',
+        verbose_name='Содержание события',
         max_length=EventsCfg.EVENTS_MAX_LENGTH,
         help_text=EventsCfg.EVENTS_HELP_MSG_TXT
     )

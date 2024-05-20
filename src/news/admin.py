@@ -11,7 +11,7 @@ class NewsAdmin(admin.ModelAdmin):
     в панели администратора для модели Новости.
     """
     list_display = (
-        'name', 'date', 'text',
+        'name', 'date', 'short_text_preview',
     )
     list_filter = ('date', )
     search_fields = ('name', )

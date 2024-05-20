@@ -12,18 +12,13 @@ class NewsCfg:
 
 
 class News(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(
         max_length=NewsCfg.MAX_LENGTH_DEFAULT,
         verbose_name='Новости',
         help_text=NewsCfg.HELP_MSG_NAME
     )
-    image = models.ImageField(
-        upload_to='media',
-        null=True,
-        blank=True,
-        verbose_name='Изображение'
-    )
-    url_image = models.URLField(
+    image = models.URLField(
         max_length=NewsCfg.MAX_LENGTH_DEFAULT,
         unique=True,
         verbose_name='Ссылка на изображение')

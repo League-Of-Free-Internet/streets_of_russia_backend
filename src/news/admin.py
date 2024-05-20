@@ -8,7 +8,7 @@ from news.models import News
 class NewsAdmin(admin.ModelAdmin):
     """
     Обеспечивает отображение, фильтрацию и возможности поиска
-    в панели администратора для модели Новости
+    в панели администратора для модели Новости.
     """
     list_display = (
         'name', 'date', 'text',
@@ -19,12 +19,12 @@ class NewsAdmin(admin.ModelAdmin):
     def short_text_preview(self, obj: News) -> str:
         """
         Генерирует краткий текст новости.
-        :param obj: Объект разработчика (экземпляр класса News)
-        :type obj: News
+        :param obj: Объект разработчика (экземпляр класса News).
+        :type obj: News.
 
         :return: Краткий текст новости,
         сокращенной до 50 символов.
-        :rtype: str
+        :rtype: str.
 
         """
         return truncatechars(obj.text, 50)

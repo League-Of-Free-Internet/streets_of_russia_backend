@@ -3,7 +3,7 @@ from django.db import models
 
 class NewsCfg:
     """
-    Настройки для модели News
+    Настройки для модели News.
     """
     MAX_LENGTH_DEFAULT = 255
     NEWS_MAX_LENGHT = 5000

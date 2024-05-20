@@ -15,11 +15,6 @@ class EventsCfg:
 
 
 class Events(models.Model):
-    id = models.IntegerField(
-        max_length=EventsCfg.ID_MAX_LENGTH,
-        verbose_name="id для создания ссылки",
-        unique=True
-    )
     name = models.CharField(
         max_length=EventsCfg.MAX_LENGTH_DEFAULT,
         verbose_name='Событие',

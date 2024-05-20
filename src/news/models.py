@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.safestring import mark_safe
 
 
 class NewsCfg:
@@ -18,10 +19,11 @@ class News(models.Model):
         verbose_name='Новости',
         help_text=NewsCfg.HELP_MSG_NAME
     )
-    image = models.URLField(
-        max_length=NewsCfg.MAX_LENGTH_DEFAULT,
-        unique=True,
-        verbose_name='Ссылка на изображение')
+    images = models.ManyToManyField(
+        'ImageURL',
+        related_name='images',
+        verbose_name='Изображения'
+    )
     date = models.DateTimeField(
         auto_now_add=True,
         verbose_name='Дата',)
@@ -32,6 +34,29 @@ class News(models.Model):
     )
 
     class Meta:
-        ordering = ('date',)
+        ordering = ('-date',)
         verbose_name = 'Новость'
         verbose_name_plural = 'Новости'
+
+    def __str__(self) -> str:
+        return self.name[:25]
+
+
+class ImageURL(models.Model):
+    news = models.ForeignKey(
+        'News',
+        on_delete=models.CASCADE,
+        related_name='news',
+        verbose_name='Новость'
+    )
+    image = models.URLField(
+        max_length=NewsCfg.MAX_LENGTH_DEFAULT,
+        unique=True,
+        verbose_name='Ссылка на изображение',
+        help_text='Укажите URL-адрес изображения')
+
+    def image_tag(self):
+        if self.image is not None:
+            return mark_safe(
+                f'<img src="{self.image}" height="50"/>')
+        return ""

@@ -16,7 +16,7 @@ class News(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(
         max_length=NewsCfg.MAX_LENGTH_DEFAULT,
-        verbose_name='Новости',
+        verbose_name='Название новости',
         help_text=NewsCfg.HELP_MSG_NAME
     )
     images = models.ManyToManyField(

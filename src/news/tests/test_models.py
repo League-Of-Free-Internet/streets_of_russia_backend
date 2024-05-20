@@ -50,7 +50,7 @@ class ImageURLModelTest(TestCase):
         )
         cls.image = ImageURL.objects.create(
             news=cls.news,
-            image='https://img.razrisyika.ru/kart/18/1200/70020-dlya-printera-28.jpg',
+            image='https://clck.ru/3AjpaT',
         )
         cls.news.images.add(cls.image)
 

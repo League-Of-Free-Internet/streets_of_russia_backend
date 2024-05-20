@@ -1,7 +1,16 @@
 from django.contrib import admin
 from django.template.defaultfilters import truncatechars
 
-from news.models import News
+from news.models import ImageURL, News
+
+
+class ImageURLInline(admin.TabularInline):
+    model = ImageURL
+    extra = 1
+    readonly_fields = ('id', 'image_tag',)
+    verbose_name = 'Изображение'
+    verbose_name_plural = 'Изображения'
+    ImageURL.image_tag.short_description = 'Миниатюра'
 
 
 @admin.register(News)
@@ -10,6 +19,8 @@ class NewsAdmin(admin.ModelAdmin):
     Обеспечивает отображение, фильтрацию и возможности поиска
     в панели администратора для модели Новости.
     """
+    exclude = ('images',)
+    inlines = (ImageURLInline,)
     list_display = (
         'name', 'date', 'short_text_preview',
     )

@@ -9,7 +9,9 @@ class EventsCfg:
     MAX_LENGTH_DEFAULT = 255
     EVENTS_MAX_LENGTH = 5000
     EVENTS_HELP_MSG_NAME = 'Введите название События'
-    EVENTS_HELP_MSG_TXT = f'Напишите текст события до {EVENTS_MAX_LENGTH} символов'
+    EVENTS_HELP_MSG_TXT = (
+        f'Напишите текст события до {EVENTS_MAX_LENGTH} символов'
+    )
 
 
 class Events(models.Model):

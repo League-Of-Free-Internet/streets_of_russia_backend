@@ -26,10 +26,12 @@ class News(models.Model):
     url_image = models.URLField(
         max_length=NewsCfg.MAX_LENGTH_DEFAULT,
         unique=True,
-        verbose_name='Ссылка на изображение')
+        verbose_name='Ссылка на изображение'
+    )
     date = models.DateTimeField(
         auto_now_add=True,
-        verbose_name='Дата',)
+        verbose_name='Дата',
+    )
     text = models.TextField(
         verbose_name='Содержание новости',
         max_length=NewsCfg.NEWS_MAX_LENGTH,

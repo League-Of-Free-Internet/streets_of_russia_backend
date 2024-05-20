@@ -23,7 +23,8 @@ class Events(models.Model):
     image = models.URLField(
         max_length=EventsCfg.MAX_LENGTH_DEFAULT,
         unique=True,
-        verbose_name='Ссылка на изображение с событием')
+        verbose_name='Ссылка на изображение с событием'
+    )
     date = models.DateTimeField(
         auto_now_add=True,
         verbose_name='Дата события'

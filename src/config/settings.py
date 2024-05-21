@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "news.apps.NewsConfig",
     "events.apps.EventsConfig",
     "sports.apps.SportsConfig",
+    "core.apps.CoreConfig"
 ]
 
 MIDDLEWARE = [

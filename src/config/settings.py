@@ -37,7 +37,6 @@ ALLOWED_HOSTS = json.loads(os.getenv("ALLOWED_HOSTS"))
 # Application definition
 
 INSTALLED_APPS = [
-    "users.apps.UsersConfig"
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -47,6 +46,8 @@ INSTALLED_APPS = [
     "news.apps.NewsConfig",
     "events.apps.EventsConfig",
     "sports.apps.SportsConfig",
+    "phonenumber_field",
+    "users.apps.UsersConfig",
 ]
 
 MIDDLEWARE = [
@@ -131,3 +132,5 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+AUTH_USER_MODEL = "users.CustomUser"

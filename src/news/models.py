@@ -10,19 +10,21 @@ class NewsCfg:
     NEWS_MAX_LENGHT = 5000
     HELP_MSG_NAME = 'Введите название Новости'
     HELP_MSG_TXT = f'Напишите текст новости до {NEWS_MAX_LENGHT} символов'
+    HELP_MSG_IMG = 'Добавьте ссылки на изображения'
 
 
 class News(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(
         max_length=NewsCfg.MAX_LENGTH_DEFAULT,
-        verbose_name='Новости',
+        verbose_name='Название новости',
         help_text=NewsCfg.HELP_MSG_NAME
     )
     images = models.ManyToManyField(
         'ImageURL',
         related_name='images',
-        verbose_name='Изображения'
+        verbose_name='Изображения',
+        help_text=NewsCfg.HELP_MSG_IMG
     )
     date = models.DateTimeField(
         auto_now_add=True,

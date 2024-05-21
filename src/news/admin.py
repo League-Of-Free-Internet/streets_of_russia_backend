@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.template.defaultfilters import truncatechars
 
-
 from .models import ImageURL, News
 
 

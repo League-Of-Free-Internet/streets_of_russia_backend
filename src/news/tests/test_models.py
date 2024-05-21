@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from news.models import ImageURL, News
+from ..models import ImageURL, News
 
 
 class NewsModelTest(TestCase):

@@ -48,7 +48,10 @@ class News(models.Model):
 
 class ImageURL(models.Model):
     news = models.ForeignKey(
-        "News", on_delete=models.CASCADE, related_name="news", verbose_name="Новость"
+        "News",
+        on_delete=models.CASCADE,
+        related_name="news",
+        verbose_name="Новость"
     )
     image = models.URLField(
         max_length=NewsCfg.MAX_LENGTH_DEFAULT,

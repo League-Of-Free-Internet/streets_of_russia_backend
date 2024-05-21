@@ -22,7 +22,9 @@ class NewsModelTest(TestCase):
         }
         for value, expected in field_verboses.items():
             with self.subTest(value=value):
-                self.assertEqual(news._meta.get_field(value).verbose_name, expected)
+                self.assertEqual(
+                    news._meta.get_field(value).verbose_name, expected
+                )
 
     def test_help_text(self):
         news = NewsModelTest.news
@@ -33,7 +35,9 @@ class NewsModelTest(TestCase):
         }
         for value, expected in field_help_texts.items():
             with self.subTest(value=value):
-                self.assertEqual(news._meta.get_field(value).help_text, expected)
+                self.assertEqual(
+                    news._meta.get_field(value).help_text, expected
+                )
 
 
 class ImageURLModelTest(TestCase):
@@ -58,7 +62,9 @@ class ImageURLModelTest(TestCase):
         }
         for value, expected in field_verboses.items():
             with self.subTest(value=value):
-                self.assertEqual(image._meta.get_field(value).verbose_name, expected)
+                self.assertEqual(
+                    image._meta.get_field(value).verbose_name, expected
+                )
 
     def test_help_text(self):
         image = ImageURLModelTest.image
@@ -68,7 +74,9 @@ class ImageURLModelTest(TestCase):
         }
         for value, expected in field_help_texts.items():
             with self.subTest(value=value):
-                self.assertEqual(image._meta.get_field(value).help_text, expected)
+                self.assertEqual(
+                    image._meta.get_field(value).help_text, expected
+                )
 
     def test_image_in_news(self):
         news = News.objects.get(pk=1)

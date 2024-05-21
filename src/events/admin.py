@@ -5,6 +5,11 @@ from .models import Events, EventsImageURL
 
 
 class EventsImageURLInline(admin.TabularInline):
+    """
+    Позволяет отображать и добавлять несколько URL-ссылок для событий
+    в виде горизонтального расположения.
+    """
+
     model = EventsImageURL
     extra = 1
     readonly_fields = (

@@ -5,6 +5,11 @@ from .models import Sports, SportsImageURL
 
 
 class SportsImageURLInline(admin.TabularInline):
+    """
+    Позволяет отображать и добавлять несколько URL-ссылок для видов спорта
+    в виде горизонтального расположения.
+    """
+
     model = SportsImageURL
     extra = 1
     readonly_fields = ("image_tag",)

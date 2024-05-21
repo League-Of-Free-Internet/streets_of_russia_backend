@@ -5,6 +5,11 @@ from .models import ImageURL, News
 
 
 class NewsImageURLInline(admin.TabularInline):
+    """
+    Позволяет отображать и добавлять несколько URL-ссылок для новостей
+    в виде горизонтального расположения.
+    """
+
     model = ImageURL
     extra = 1
     readonly_fields = (

@@ -4,12 +4,17 @@ from django.template.defaultfilters import truncatechars
 from .models import Events, EventsImageURL
 
 
-class ImageURLInline(admin.TabularInline):
+class EventsImageURLInline(admin.TabularInline):
+    """
+    Позволяет отображать и добавлять несколько URL-ссылок для событий
+    в виде горизонтального расположения.
+    """
+
     model = EventsImageURL
     extra = 1
     readonly_fields = (
         "id",
-        "image_tag",
+        "image_tag"
     )
     verbose_name = "Изображение о событии"
     verbose_name_plural = "Изображения о событии"
@@ -24,7 +29,7 @@ class EventsAdmin(admin.ModelAdmin):
     """
 
     exclude = ("image",)
-    inlines = (ImageURLInline,)
+    inlines = (EventsImageURLInline,)
     list_display = (
         "name",
         "date",

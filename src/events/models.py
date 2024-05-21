@@ -29,7 +29,10 @@ class Events(models.Model):
         verbose_name="Изображения для событий",
         help_text=EventsCfg.EVENTS_HELP_MSG_IMG,
     )
-    date = models.DateTimeField(auto_now_add=True, verbose_name="Дата события")
+    date = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="Дата события"
+    )
     text = models.TextField(
         verbose_name="Содержание события",
         max_length=EventsCfg.EVENTS_MAX_LENGTH,
@@ -55,8 +58,8 @@ class EventsImageURL(models.Model):
     image = models.URLField(
         max_length=EventsCfg.MAX_LENGTH_DEFAULT,
         unique=True,
-        verbose_name="Ссылка на изображение",
-        help_text="Укажите URL-адрес изображения",
+        verbose_name="Ссылка на изображение события",
+        help_text="Укажите URL-адрес изображения о событии",
     )
 
     def image_tag(self):

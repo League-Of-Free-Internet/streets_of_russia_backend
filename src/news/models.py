@@ -27,10 +27,7 @@ class News(models.Model):
         verbose_name="Изображения",
         help_text=NewsCfg.HELP_MSG_IMG,
     )
-    date = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name="Дата",
-    )
+    date = models.DateTimeField(auto_now_add=True, verbose_name="Дата")
     text = models.TextField(
         verbose_name="Содержание новости",
         max_length=NewsCfg.NEWS_MAX_LENGTH,

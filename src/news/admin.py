@@ -4,15 +4,20 @@ from django.template.defaultfilters import truncatechars
 from .models import ImageURL, News
 
 
-class ImageURLInline(admin.TabularInline):
+class NewsImageURLInline(admin.TabularInline):
+    """
+    Позволяет отображать и добавлять несколько URL-ссылок для новостей
+    в виде горизонтального расположения.
+    """
+
     model = ImageURL
     extra = 1
     readonly_fields = (
         "id",
         "image_tag",
     )
-    verbose_name = "Изображение"
-    verbose_name_plural = "Изображения"
+    verbose_name = "Изображение для новости"
+    verbose_name_plural = "Изображения для новостей"
     ImageURL.image_tag.short_description = "Миниатюра"
 
 
@@ -24,7 +29,7 @@ class NewsAdmin(admin.ModelAdmin):
     """
 
     exclude = ("image",)
-    inlines = (ImageURLInline,)
+    inlines = (NewsImageURLInline,)
     list_display = (
         "name",
         "date",

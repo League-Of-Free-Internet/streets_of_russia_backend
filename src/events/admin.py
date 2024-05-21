@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.template.defaultfilters import truncatechars
 
-from .models import EventsImageURL, Events
+from .models import Events, EventsImageURL
 
 
 class ImageURLInline(admin.TabularInline):

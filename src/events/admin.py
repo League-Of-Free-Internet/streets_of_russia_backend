@@ -19,7 +19,7 @@ class EventsAdmin(admin.ModelAdmin):
     Обеспечивает отображение, фильтрацию и возможности поиска
     в панели администратора для модели События.
     """
-    exclude = ('images',)
+    exclude = ('image',)
     inlines = (ImageURLInline,)
     list_display = (
         'name', 'date', 'short_text_preview',

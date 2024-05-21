@@ -1,20 +1,33 @@
 from django.contrib import admin
 from django.template.defaultfilters import truncatechars
 
-from .models import Sports
+from .models import Sports, SportsImageURL
+
+
+class SportsImageURLInline(admin.TabularInline):
+    model = SportsImageURL
+    extra = 1
+    readonly_fields = ("image_tag",)
+    verbose_name = "Изображение с видом спорта"
+    verbose_name_plural = "Изображения с видом спорта"
+    SportsImageURL.image_tag.short_description = "Миниатюра"
 
 
 @admin.register(Sports)
-class EventsAdmin(admin.ModelAdmin):
+class SportsAdmin(admin.ModelAdmin):
     """
     Обеспечивает отображение, фильтрацию и возможности поиска
     в панели администратора для модели Виды спорта.
     """
+
+    exclude = ("image",)
+    inlines = (SportsImageURLInline,)
     list_display = (
-        'name', 'short_text_preview'
+        "name",
+        "short_text_preview"
     )
-    list_filter = ('name', )
-    search_fields = ('name', )
+    list_filter = ("name",)
+    search_fields = ("name",)
 
     def short_text_preview(self, obj: Sports) -> str:
         """
@@ -29,4 +42,4 @@ class EventsAdmin(admin.ModelAdmin):
         """
         return truncatechars(obj.text, 50)
 
-    short_text_preview.short_description = 'Краткий текст'
+    short_text_preview.short_description = "Краткий текст"

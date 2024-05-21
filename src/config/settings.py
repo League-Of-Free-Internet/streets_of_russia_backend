@@ -37,6 +37,7 @@ ALLOWED_HOSTS = json.loads(os.getenv("ALLOWED_HOSTS"))
 # Application definition
 
 INSTALLED_APPS = [
+    "users.apps.UsersConfig"
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

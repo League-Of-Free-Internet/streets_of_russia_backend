@@ -1,7 +1,16 @@
 from django.contrib import admin
 from django.template.defaultfilters import truncatechars
 
-from .models import Events
+from .models import EventsImageURL, Events
+
+
+class ImageURLInline(admin.TabularInline):
+    model = EventsImageURL
+    extra = 1
+    readonly_fields = ('id', 'image_tag',)
+    verbose_name = 'Изображение о событии'
+    verbose_name_plural = 'Изображения о событии'
+    EventsImageURL.image_tag.short_description = 'Миниатюра'
 
 
 @admin.register(Events)
@@ -10,6 +19,8 @@ class EventsAdmin(admin.ModelAdmin):
     Обеспечивает отображение, фильтрацию и возможности поиска
     в панели администратора для модели События.
     """
+    exclude = ('images',)
+    inlines = (ImageURLInline,)
     list_display = (
         'name', 'date', 'short_text_preview',
     )

@@ -10,9 +10,7 @@ class NewsCfg:
     MAX_LENGTH_DEFAULT = 255
     NEWS_MAX_LENGTH = 5000
     HELP_MSG_NAME = "Введите название Новости"
-    HELP_MSG_TXT = (
-        f"Напишите текст новости до {NEWS_MAX_LENGTH} символов"
-    )
+    HELP_MSG_TXT = f"Напишите текст новости до {NEWS_MAX_LENGTH} символов"
     HELP_MSG_IMG = "Добавьте ссылки на изображения"
 
 
@@ -21,22 +19,19 @@ class News(models.Model):
     name = models.CharField(
         max_length=NewsCfg.MAX_LENGTH_DEFAULT,
         verbose_name="Название новости",
-        help_text=NewsCfg.HELP_MSG_NAME
+        help_text=NewsCfg.HELP_MSG_NAME,
     )
     image = models.ManyToManyField(
         "ImageURL",
         related_name="images",
         verbose_name="Изображения",
-        help_text=NewsCfg.HELP_MSG_IMG
+        help_text=NewsCfg.HELP_MSG_IMG,
     )
-    date = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name="Дата"
-    )
+    date = models.DateTimeField(auto_now_add=True, verbose_name="Дата")
     text = models.TextField(
         verbose_name="Содержание новости",
         max_length=NewsCfg.NEWS_MAX_LENGTH,
-        help_text=NewsCfg.HELP_MSG_TXT
+        help_text=NewsCfg.HELP_MSG_TXT,
     )
 
     class Meta:
@@ -59,7 +54,7 @@ class ImageURL(models.Model):
         max_length=NewsCfg.MAX_LENGTH_DEFAULT,
         unique=True,
         verbose_name="Ссылка на изображение",
-        help_text="Укажите URL-адрес изображения"
+        help_text="Укажите URL-адрес изображения",
     )
 
     def image_tag(self):

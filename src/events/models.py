@@ -11,13 +11,13 @@ class Events(models.Model):
         verbose_name="Событие",
         help_text=EventsCfg.EVENTS_HELP_MSG_NAME,
     )
-    image = models.ManyToManyField(
+    image_urls = models.ManyToManyField(
         "EventsImageURL",
         related_name="events_images",
         verbose_name="Изображения для событий",
         help_text=EventsCfg.EVENTS_HELP_MSG_IMG,
     )
-    date = models.DateTimeField(
+    pub_date = models.DateTimeField(
         auto_now_add=True,
         verbose_name="Дата события"
     )
@@ -43,7 +43,7 @@ class EventsImageURL(models.Model):
         related_name="events",
         verbose_name="События",
     )
-    image = models.URLField(
+    image_url = models.URLField(
         max_length=MAX_LENGTH_DEFAULT,
         unique=True,
         verbose_name="Ссылка на изображение события",
@@ -51,6 +51,6 @@ class EventsImageURL(models.Model):
     )
 
     def image_tag(self):
-        if self.image is not None:
-            return mark_safe(f'<img src="{self.image}" height="50"/>')
+        if self.image_url is not None:
+            return mark_safe(f'<img src="{self.image_url}" height="50"/>')
         return ""

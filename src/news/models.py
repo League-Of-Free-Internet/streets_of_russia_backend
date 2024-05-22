@@ -1,23 +1,13 @@
 from django.db import models
 from django.utils.safestring import mark_safe
 
-
-class NewsCfg:
-    """
-    Настройки для модели News.
-    """
-
-    MAX_LENGTH_DEFAULT = 255
-    NEWS_MAX_LENGTH = 5000
-    HELP_MSG_NAME = "Введите название Новости"
-    HELP_MSG_TXT = f"Напишите текст новости до {NEWS_MAX_LENGTH} символов"
-    HELP_MSG_IMG = "Добавьте ссылки на изображения"
+from core.constants import MAX_LENGTH_DEFAULT, NewsCfg, MAX_LENGTH
 
 
 class News(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(
-        max_length=NewsCfg.MAX_LENGTH_DEFAULT,
+        max_length=MAX_LENGTH_DEFAULT,
         verbose_name="Название новости",
         help_text=NewsCfg.HELP_MSG_NAME,
     )
@@ -30,7 +20,7 @@ class News(models.Model):
     date = models.DateTimeField(auto_now_add=True, verbose_name="Дата")
     text = models.TextField(
         verbose_name="Содержание новости",
-        max_length=NewsCfg.NEWS_MAX_LENGTH,
+        max_length=MAX_LENGTH,
         help_text=NewsCfg.HELP_MSG_TXT,
     )
 
@@ -51,7 +41,7 @@ class ImageURL(models.Model):
         verbose_name="Новость"
     )
     image = models.URLField(
-        max_length=NewsCfg.MAX_LENGTH_DEFAULT,
+        max_length=MAX_LENGTH_DEFAULT,
         unique=True,
         verbose_name="Ссылка на изображение",
         help_text="Укажите URL-адрес изображения",

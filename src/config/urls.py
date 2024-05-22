@@ -14,7 +14,7 @@ schema_view = get_schema_view(
         default_version='v1',
         description="Документация для приложений проекта empty_project",
         contact=openapi.Contact(email="admin@empty_project.ru"),
-        license=openapi.License(name="BSD License"),
+        license=openapi.License(name="MIT license"),
     ),
     public=True,
     permission_classes=[permissions.AllowAny]

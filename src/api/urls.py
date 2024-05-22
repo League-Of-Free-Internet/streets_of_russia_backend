@@ -6,9 +6,9 @@ from .views import NewsViewSet
 router_v1 = DefaultRouter()
 
 router_v1.register(
-    r"users",
+    r"news",
     NewsViewSet,
-    basename="users"
+    basename="news"
 )
 
 # registration_uls = [

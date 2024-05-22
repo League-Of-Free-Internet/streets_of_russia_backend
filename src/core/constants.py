@@ -34,3 +34,6 @@ class SportsCfg:
         f"Напишите описание вида спорта до {MAX_LENGTH} символов"
     )
     EVENTS_HELP_MSG_IMG = "Добавьте ссылки на изображения с видами спорта"
+    SPORTS_RULES_HELP_MSG_TXT = (
+        f"Напишите правила вида спорта до {MAX_LENGTH} символов"
+    )

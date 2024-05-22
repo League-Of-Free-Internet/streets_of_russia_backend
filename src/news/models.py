@@ -11,13 +11,13 @@ class News(models.Model):
         verbose_name="Название новости",
         help_text=NewsCfg.HELP_MSG_NAME,
     )
-    image = models.ManyToManyField(
+    image_urls = models.ManyToManyField(
         "ImageURL",
         related_name="images",
         verbose_name="Изображения",
         help_text=NewsCfg.HELP_MSG_IMG,
     )
-    date = models.DateTimeField(auto_now_add=True, verbose_name="Дата")
+    pub_date = models.DateTimeField(auto_now_add=True, verbose_name="Дата")
     text = models.TextField(
         verbose_name="Содержание новости",
         max_length=MAX_LENGTH,
@@ -25,7 +25,7 @@ class News(models.Model):
     )
 
     class Meta:
-        ordering = ("-date",)
+        ordering = ("-pub_date",)
         verbose_name = "Новость"
         verbose_name_plural = "Новости"
 
@@ -40,7 +40,7 @@ class ImageURL(models.Model):
         related_name="news",
         verbose_name="Новость"
     )
-    image = models.URLField(
+    image_url = models.URLField(
         max_length=MAX_LENGTH_DEFAULT,
         unique=True,
         verbose_name="Ссылка на изображение",
@@ -48,6 +48,6 @@ class ImageURL(models.Model):
     )
 
     def image_tag(self):
-        if self.image is not None:
-            return mark_safe(f'<img src="{self.image}" height="50"/>')
+        if self.image_url is not None:
+            return mark_safe(f'<img src="{self.image_url}" height="50"/>')
         return ""

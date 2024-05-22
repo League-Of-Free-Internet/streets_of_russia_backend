@@ -28,14 +28,14 @@ class NewsAdmin(admin.ModelAdmin):
     в панели администратора для модели Новости.
     """
 
-    exclude = ("image",)
+    exclude = ("image_urls",)
     inlines = (NewsImageURLInline,)
     list_display = (
         "name",
-        "date",
+        "pub_date",
         "short_text_preview",
     )
-    list_filter = ("date",)
+    list_filter = ("pub_date",)
     search_fields = ("name",)
 
     def short_text_preview(self, obj: News) -> str:

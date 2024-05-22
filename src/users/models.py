@@ -36,26 +36,30 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    """Специализированая модель пользователя с расширенными полями"""
+    """Специализированая модель пользователя с расширенными полями."""
     first_name = models.CharField(
-        _('name'),
+        verbose_name=_('name'),
         max_length=50,
     )
     last_name = models.CharField(
-        _('surname'),
+        verbose_name=_('Фамилия'),
         max_length=50,
     )
     phone_number = PhoneNumberField(
-        _('phone number'),
+        verbose_name=_("Номер телефона"),
         unique=True,
         null=False,
         blank=False)
     email = models.EmailField(
-        _('email'),
+        verbose_name=_('email'),
         unique=True,
     )
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(
+        verbose_name=_("Аккаунт активен"),
+        default=True)
+    is_staff = models.BooleanField(
+        verbose_name=_("является персоналом"),
+        default=False)
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'email'

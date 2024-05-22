@@ -28,7 +28,7 @@ class Events(models.Model):
     )
 
     class Meta:
-        ordering = ("date",)
+        ordering = ("-pub_date",)
         verbose_name = "Событие"
         verbose_name_plural = "События"
 

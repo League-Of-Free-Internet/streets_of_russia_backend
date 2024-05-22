@@ -10,16 +10,21 @@ class Sports(models.Model):
         verbose_name="Вид спорта",
         help_text=SportsCfg.SPORTS_HELP_MSG_NAME,
     )
-    image = models.ManyToManyField(
+    image_urls = models.ManyToManyField(
         "SportsImageURL",
         related_name="sports_images",
         verbose_name="Изображения для событий",
         help_text=SportsCfg.EVENTS_HELP_MSG_IMG,
     )
-    text = models.TextField(
+    description = models.TextField(
         verbose_name="Описание вида спорта",
         max_length=MAX_LENGTH,
         help_text=SportsCfg.SPORTS_HELP_MSG_TXT,
+    )
+    rules = models.TextField(
+        verbose_name="Правила вида спорта",
+        max_length=MAX_LENGTH,
+        help_text=SportsCfg.SPORTS_RULES_HELP_MSG_TXT,
     )
 
     class Meta:
@@ -38,7 +43,7 @@ class SportsImageURL(models.Model):
         related_name="sports",
         verbose_name="Виды спорта",
     )
-    image = models.URLField(
+    image_url = models.URLField(
         max_length=MAX_LENGTH_DEFAULT,
         unique=True,
         verbose_name="Ссылка на изображение с видом спорта",
@@ -46,6 +51,6 @@ class SportsImageURL(models.Model):
     )
 
     def image_tag(self):
-        if self.image is not None:
-            return mark_safe(f'<img src="{self.image}" height="50"/>')
+        if self.image_url is not None:
+            return mark_safe(f'<img src="{self.image_url}" height="50"/>')
         return ""

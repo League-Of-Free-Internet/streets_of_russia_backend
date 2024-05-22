@@ -25,7 +25,7 @@ class SportsAdmin(admin.ModelAdmin):
     в панели администратора для модели Виды спорта.
     """
 
-    exclude = ("image",)
+    exclude = ("image_urls",)
     inlines = (SportsImageURLInline,)
     list_display = (
         "name",

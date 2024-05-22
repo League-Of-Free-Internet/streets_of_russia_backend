@@ -37,3 +37,8 @@ class SportsCfg:
     SPORTS_RULES_HELP_MSG_TXT = (
         f"Напишите правила вида спорта до {MAX_LENGTH} символов"
     )
+
+
+class AboutCfg:
+    HELP_MSG_NAME = "Введите имя участника"
+    HELP_MSG_TXT = f"Укажите текст истории до {MAX_LENGTH} символов"

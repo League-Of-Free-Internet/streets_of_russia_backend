@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "sports.apps.SportsConfig",
     "core.apps.CoreConfig",
     "users.apps.UsersConfig",
+    "about.apps.AboutConfig",
     "rest_framework",
     "drf_yasg",
     "phonenumber_field",

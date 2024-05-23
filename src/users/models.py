@@ -4,6 +4,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from phonenumber_field.modelfields import PhoneNumberField
+from core.constants import CustomUserCfg
 
 
 class CustomUserManager(BaseUserManager):
@@ -42,21 +43,34 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     """
     first_name = models.CharField(
         verbose_name=_("Имя"),
-        max_length=50,
+        max_length=CustomUserCfg.MAX_LENGTH_NAME,
+        help_text=CustomUserCfg.HELP_MSG_FIRST,
     )
     last_name = models.CharField(
         verbose_name=_("Фамилия"),
-        max_length=50,
+        max_length=CustomUserCfg.MAX_LENGTH_NAME,
+        help_text=CustomUserCfg.HELP_MSG_LAST,
     )
     phone_number = PhoneNumberField(
         verbose_name=_("Номер телефона"),
         unique=True,
         null=False,
-        blank=False)
+        blank=False,
+        help_text=CustomUserCfg.HELP_MSG_PHONE)
     email = models.EmailField(
         verbose_name=_("email"),
         unique=True,
     )
+    role = models.ForeignKey(
+        "UserRole",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name="users",
+        verbose_name="Роль",
+        help_text=CustomUserCfg.HELP_MSG_ROLE,
+    )
+
     is_active = models.BooleanField(
         verbose_name=_("Аккаунт активен"),
         default=True)
@@ -78,3 +92,14 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         """
         full_name = f"{self.first_name} {self.last_name}".title()
         return full_name.strip()
+
+
+class UserRole(models.Model):
+    name_role = models.CharField(
+        verbose_name=_("Название роли"),
+        max_length=CustomUserCfg.MAX_LENGTH_NAME,
+        unique=True,
+        null=False,
+        blank=False,
+        default="Участник",
+    )

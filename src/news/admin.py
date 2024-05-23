@@ -49,6 +49,6 @@ class NewsAdmin(admin.ModelAdmin):
         :rtype: str.
 
         """
-        return truncatechars(obj.text, 50)
+        return truncatechars(obj.description, 50)
 
     short_text_preview.short_description = "Краткий текст"

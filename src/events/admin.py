@@ -32,10 +32,10 @@ class EventsAdmin(admin.ModelAdmin):
     inlines = (EventsImageURLInline,)
     list_display = (
         "name",
-        "pub_date",
+        "start_date",
         "short_text_preview",
     )
-    list_filter = ("pub_date",)
+    list_filter = ("start_date",)
     search_fields = ("name",)
 
     def short_text_preview(self, obj: Events) -> str:

@@ -1,3 +1,4 @@
+MAX_LIST_LENGTH = 15
 MAX_LENGTH_DEFAULT = 255
 MAX_LENGTH = 5000
 
@@ -64,5 +65,19 @@ class DisciplinesImageURLCfg:
 
 
 class AboutCfg:
+    HELP_MSG_VIDEO = "Укажите URL-адрес видео"
+    HELP_MSG_IMG = "Укажите URL-адрес изображения"
     HELP_MSG_NAME = "Введите имя участника"
     HELP_MSG_TXT = f"Укажите текст истории до {MAX_LENGTH} символов"
+    HELP_MSG_PARTNER = "Введите название партнера"
+    HELP_MSG_ROLE = "Название роли, к которой относится участник"
+    HELP_MSG_BRAND = "Укажите название"
+    MAX_LENGTH_NAME = 50
+
+
+class CustomUserCfg:
+    HELP_MSG_FIRST = "Введите имя"
+    HELP_MSG_LAST = "Введите фамилию"
+    HELP_MSG_PHONE = "Введите номер телефона в формате +7999 999 99 99"
+    HELP_MSG_ROLE = "Название роли, к которой относится пользователь"
+    MAX_LENGTH_NAME = 50

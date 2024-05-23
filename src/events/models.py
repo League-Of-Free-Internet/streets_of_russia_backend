@@ -1,7 +1,8 @@
 from django.db import models
 from django.utils.safestring import mark_safe
 
-from core.constants import MAX_LENGTH_DEFAULT, EventsCfg, EventsImageURLCfg, MAX_LENGTH
+from core.constants import (MAX_LENGTH, MAX_LENGTH_DEFAULT, EventsCfg,
+                            EventsImageURLCfg)
 
 
 class Events(models.Model):

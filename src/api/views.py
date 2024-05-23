@@ -1,5 +1,6 @@
-from news.models import News
 from rest_framework import viewsets
+
+from news.models import News
 
 
 class NewsViewSet(viewsets.ModelViewSet):

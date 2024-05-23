@@ -44,8 +44,6 @@ class EventsImageURLCfg:
     EVENTS_IMG_URL_HELP_MSG = "Укажите URL-адрес изображения о событии"
 
 
-
-
 class SportsCfg:
     """
     Настройки для модели Sports.

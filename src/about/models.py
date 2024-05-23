@@ -55,7 +55,7 @@ class OurMembers(models.Model):
 
 
 class MemberRole(models.Model):
-    name_role = models.CharField(
+    name = models.CharField(
         verbose_name="Название роли",
         max_length=AboutCfg.MAX_LENGTH_NAME,
         unique=True,
@@ -72,7 +72,7 @@ class MemberRole(models.Model):
         verbose_name_plural = "Роли"
 
     def __str__(self) -> str:
-        return self.name_role[:MAX_LIST_LENGTH]
+        return self.name[:MAX_LIST_LENGTH]
 
 
 class About(models.Model):
@@ -80,12 +80,10 @@ class About(models.Model):
     name = models.CharField(
         max_length=MAX_LENGTH_DEFAULT,
         verbose_name="Название",
-        help_text=...,
     )
     description = models.TextField(
         verbose_name="Подробное описание",
         max_length=MAX_LENGTH,
-        help_text=...,
     )
     image_url = models.URLField(
         max_length=MAX_LENGTH_DEFAULT,
@@ -118,6 +116,10 @@ class PartnerLogo(models.Model):
         help_text=AboutCfg.HELP_MSG_IMG,
     )
 
+    class Meta:
+        verbose_name = "Логотип партнера"
+        verbose_name_plural = "Логотипы партнеров"
+
 
 class BrandBook(models.Model):
     name = models.CharField(
@@ -131,8 +133,14 @@ class BrandBook(models.Model):
     file = models.FileField(
         upload_to='brandbook'
     )
+    pub_date = models.DateTimeField(auto_now_add=True,
+                                    verbose_name="Дата")
+    is_active = models.BooleanField(
+        verbose_name=("Брендбук активен"),
+        default=True)
 
     class Meta:
+        ordering = ("-pub_date",)
         verbose_name = "Брендбук"
         verbose_name_plural = "Брендбуки"
 

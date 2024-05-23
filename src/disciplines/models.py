@@ -8,32 +8,32 @@ from core.constants import (MAX_LENGTH, MAX_LENGTH_DEFAULT, DisciplinesCfg,
 class Disciplines(models.Model):
     name = models.CharField(
         max_length=MAX_LENGTH_DEFAULT,
-        verbose_name=DisciplinesCfg.DISCIPLINE_NAME_VERBOSE_NAME,
-        help_text=DisciplinesCfg.DISCIPLINE_NAME_HELP_MSG,
+        verbose_name=DisciplinesCfg.DISCIPLINES_NAME_VERBOSE_NAME,
+        help_text=DisciplinesCfg.DISCIPLINES_NAME_HELP_MSG,
         unique=True
     )
     description = models.TextField(
-        verbose_name=DisciplinesCfg.DISCIPLINE_DESCRIPTION_VERBOSE_NAME,
+        verbose_name=DisciplinesCfg.DISCIPLINES_DESCRIPTION_VERBOSE_NAME,
         max_length=MAX_LENGTH,
-        help_text=DisciplinesCfg.DISCIPLINE_DESCRIPTION_HELP_MSG,
+        help_text=DisciplinesCfg.DISCIPLINES_DESCRIPTION_HELP_MSG,
     )
     image_urls = models.ManyToManyField(
         DisciplinesImageURLCfg.DISCIPLINES_IMG_URL,
-        related_name=DisciplinesCfg.DISCIPLINE_IMG_URLS_RELATED_NAME,
-        verbose_name=DisciplinesCfg.DISCIPLINE_IMG_URLS_VERBOSE_NAME,
-        help_text=DisciplinesCfg.DISCIPLINE_IMG_URLS_HELP_MSG,
+        related_name=DisciplinesCfg.DISCIPLINES_IMG_URLS_RELATED_NAME,
+        verbose_name=DisciplinesCfg.DISCIPLINES_IMG_URLS_VERBOSE_NAME,
+        help_text=DisciplinesCfg.DISCIPLINES_IMG_URLS_HELP_MSG,
     )
     rules = models.TextField(
-        verbose_name=DisciplinesCfg.DISCIPLINE_RULES_VERBOSE_NAME,
+        verbose_name=DisciplinesCfg.DISCIPLINES_RULES_VERBOSE_NAME,
         max_length=MAX_LENGTH,
-        help_text=DisciplinesCfg.DISCIPLINE_RULES_HELP_MSG,
+        help_text=DisciplinesCfg.DISCIPLINES_RULES_HELP_MSG,
     )
 
     class Meta:
         ordering = ("name",)
-        verbose_name = DisciplinesCfg.DISCIPLINE_META_VERBOSE_NAME
+        verbose_name = DisciplinesCfg.DISCIPLINES_META_VERBOSE_NAME
         verbose_name_plural = (
-            DisciplinesCfg.DISCIPLINE_META_VERBOSE_NAME_PLURAL
+            DisciplinesCfg.DISCIPLINES_META_VERBOSE_NAME_PLURAL
         )
 
     def __str__(self) -> str:

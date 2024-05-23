@@ -30,23 +30,23 @@ class DisciplinesCfg:
     """
 
     DISCIPLINES = "Disciplines"
-    DISCIPLINE_NAME_VERBOSE_NAME = "Спортивная дисциплина"
-    DISCIPLINE_NAME_HELP_MSG = "Напишите название дисциплины"
-    DISCIPLINE_DESCRIPTION_VERBOSE_NAME = "Описание дисциплины"
-    DISCIPLINE_DESCRIPTION_HELP_MSG = (
+    DISCIPLINES_NAME_VERBOSE_NAME = "Спортивная дисциплина"
+    DISCIPLINES_NAME_HELP_MSG = "Напишите название дисциплины"
+    DISCIPLINES_DESCRIPTION_VERBOSE_NAME = "Описание дисциплины"
+    DISCIPLINES_DESCRIPTION_HELP_MSG = (
         f"Напишите описание дисциплины до {MAX_LENGTH} символов"
     )
-    DISCIPLINE_IMG_URLS_RELATED_NAME = "disciplines_images"
-    DISCIPLINE_IMG_URLS_VERBOSE_NAME = "Изображения для дисциплин"
-    DISCIPLINE_IMG_URLS_HELP_MSG = (
+    DISCIPLINES_IMG_URLS_RELATED_NAME = "disciplines_images"
+    DISCIPLINES_IMG_URLS_VERBOSE_NAME = "Изображения для дисциплин"
+    DISCIPLINES_IMG_URLS_HELP_MSG = (
         "Добавьте ссылки на изображения с дисциплиной"
     )
-    DISCIPLINE_RULES_VERBOSE_NAME = "Правила спортивных дисциплин"
-    DISCIPLINE_RULES_HELP_MSG = (
+    DISCIPLINES_RULES_VERBOSE_NAME = "Правила спортивных дисциплин"
+    DISCIPLINES_RULES_HELP_MSG = (
         f"Напишите правила дисциплины до {MAX_LENGTH} символов"
     )
-    DISCIPLINE_META_VERBOSE_NAME = "Спортивная дисциплина"
-    DISCIPLINE_META_VERBOSE_NAME_PLURAL = "Спортивные дисциплины"
+    DISCIPLINES_META_VERBOSE_NAME = "Спортивная дисциплина"
+    DISCIPLINES_META_VERBOSE_NAME_PLURAL = "Спортивные дисциплины"
 
 
 class DisciplinesImageURLCfg:

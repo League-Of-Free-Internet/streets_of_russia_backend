@@ -59,7 +59,7 @@ class DisciplinesImageURLCfg:
     DISCIPLINES_IMG_URL_FOREIGN_VERBOSE_NAME = "Спортивная дисциплина"
     DISCIPLINES_IMG_URL_VERBOSE_NAME = "Ссылка на изображение с дисциплиной"
     DISCIPLINES_IMG_URL_HELP_MSG = (
-        "Укажите URL-адрес изображения с видом спорта"
+        "Укажите URL-адрес изображения со спортивной дисциплиной"
     )
 
 

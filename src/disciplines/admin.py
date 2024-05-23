@@ -13,8 +13,8 @@ class DisciplinesImageURLInline(admin.TabularInline):
     model = DisciplinesImageURL
     extra = 1
     readonly_fields = ("image_tag",)
-    verbose_name = "Изображение с видом спорта"
-    verbose_name_plural = "Изображения с видом спорта"
+    verbose_name = "Изображение со спортивной дисциплиной"
+    verbose_name_plural = "Изображения со спортивной дисциплиной"
     DisciplinesImageURL.image_tag.short_description = "Миниатюра"
 
 

@@ -106,3 +106,10 @@ class UserRole(models.Model):
     is_active = models.BooleanField(
         verbose_name=_("Роль активна"),
         default=True)
+
+    class Meta:
+        verbose_name = _("Роль")
+        verbose_name_plural = _("Роли")
+
+    def __str__(self) -> str:
+        return self.name_role[:15]

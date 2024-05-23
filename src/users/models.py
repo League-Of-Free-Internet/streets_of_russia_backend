@@ -2,7 +2,8 @@ from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
                                         PermissionsMixin)
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from phonenumber_field.modelfields import PhoneNumberField
+
+# from phonenumber_field.modelfields import PhoneNumberField
 
 
 class CustomUserManager(BaseUserManager):
@@ -11,7 +12,7 @@ class CustomUserManager(BaseUserManager):
     def _create_user(self, email, password, **extra_fields):
         """
         Создает и сохраняет пользователя,
-        нормализуетет email и сохраняет пароль.
+        нормализуете email и сохраняет пароль.
         """
         if not email:
             raise ValueError('The Email field must be set')
@@ -36,7 +37,7 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    """Специализированая модель пользователя с расширенными полями."""
+    """Специализированная модель пользователя с расширенными полями."""
     first_name = models.CharField(
         verbose_name=_('name'),
         max_length=50,
@@ -45,11 +46,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         verbose_name=_('Фамилия'),
         max_length=50,
     )
-    phone_number = PhoneNumberField(
-        verbose_name=_("Номер телефона"),
-        unique=True,
-        null=False,
-        blank=False)
+    # phone_number = PhoneNumberField(
+    #     verbose_name=_("Номер телефона"),
+    #     unique=True,
+    #     null=False,
+    #     blank=False)
     email = models.EmailField(
         verbose_name=_('email'),
         unique=True,

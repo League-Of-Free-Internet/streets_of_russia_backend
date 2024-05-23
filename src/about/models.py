@@ -1,9 +1,6 @@
 from django.db import models
 
-from core.constants import (MAX_LENGTH_DEFAULT,
-                            AboutCfg,
-                            MAX_LENGTH,
-                            MAX_LENGTH_DEFAULT_MIN)
+from core.constants import MAX_LENGTH, MAX_LENGTH_DEFAULT, AboutCfg
 
 
 class BannerVideo(models.Model):
@@ -27,7 +24,7 @@ class OurMembers(models.Model):
     id = models.AutoField(primary_key=True)
     role = models.CharField(
         verbose_name='Роль',
-        max_length=MAX_LENGTH_DEFAULT_MIN,
+        max_length=MAX_LENGTH_DEFAULT,
         blank=False,
         choices=Role.choices,
         default=Role.MEMBER,

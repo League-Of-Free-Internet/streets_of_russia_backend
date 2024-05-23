@@ -13,13 +13,13 @@ class CustomUserAdmin(admin.ModelAdmin):
         "id",
         "email",
         "get_full_name",
-        "phone_number",
+        # "phone_number",
         "is_active",
         "is_staff",
     )
     list_filter = ("is_active",
                    "is_staff",)
     search_fields = ("get_full_name",
-                     "phone_number",
+                     # "phone_number",
                      "email")
     CustomUser.get_full_name.short_description = "Имя и Фамилия"

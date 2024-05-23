@@ -24,18 +24,42 @@ class EventsCfg:
     EVENTS_HELP_MSG_IMG = "Добавьте ссылки на изображения с событиями"
 
 
-class SportsCfg:
+class DisciplinesCfg:
     """
-    Настройки для модели Sports.
+    Настройки для модели Disciplines.
     """
 
-    SPORTS_HELP_MSG_NAME = "Введите название вида спорта"
-    SPORTS_HELP_MSG_TXT = (
-        f"Напишите описание вида спорта до {MAX_LENGTH} символов"
+    DISCIPLINES = "Disciplines"
+    DISCIPLINES_NAME_VERBOSE_NAME = "Спортивная дисциплина"
+    DISCIPLINES_NAME_HELP_MSG = "Напишите название дисциплины"
+    DISCIPLINES_DESCRIPTION_VERBOSE_NAME = "Описание дисциплины"
+    DISCIPLINES_DESCRIPTION_HELP_MSG = (
+        f"Напишите описание дисциплины до {MAX_LENGTH} символов"
     )
-    EVENTS_HELP_MSG_IMG = "Добавьте ссылки на изображения с видами спорта"
-    SPORTS_RULES_HELP_MSG_TXT = (
-        f"Напишите правила вида спорта до {MAX_LENGTH} символов"
+    DISCIPLINES_IMG_URLS_RELATED_NAME = "disciplines_images"
+    DISCIPLINES_IMG_URLS_VERBOSE_NAME = "Изображения для дисциплин"
+    DISCIPLINES_IMG_URLS_HELP_MSG = (
+        "Добавьте ссылки на изображения с дисциплиной"
+    )
+    DISCIPLINES_RULES_VERBOSE_NAME = "Правила спортивных дисциплин"
+    DISCIPLINES_RULES_HELP_MSG = (
+        f"Напишите правила дисциплины до {MAX_LENGTH} символов"
+    )
+    DISCIPLINES_META_VERBOSE_NAME = "Спортивная дисциплина"
+    DISCIPLINES_META_VERBOSE_NAME_PLURAL = "Спортивные дисциплины"
+
+
+class DisciplinesImageURLCfg:
+    """
+    Настройки для модели DisciplinesImageURL.
+    """
+
+    DISCIPLINES_IMG_URL = "DisciplinesImageURL"
+    DISCIPLINES_IMG_URL_FOREIGN_RELATED_NAME = "discipline"
+    DISCIPLINES_IMG_URL_FOREIGN_VERBOSE_NAME = "Спортивная дисциплина"
+    DISCIPLINES_IMG_URL_VERBOSE_NAME = "Ссылка на изображение с дисциплиной"
+    DISCIPLINES_IMG_URL_HELP_MSG = (
+        "Укажите URL-адрес изображения со спортивной дисциплиной"
     )
 
 

@@ -45,13 +45,13 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "news.apps.NewsConfig",
     "events.apps.EventsConfig",
-    "sports.apps.SportsConfig",
+    "disciplines.apps.DisciplinesConfig",
     "core.apps.CoreConfig",
-    "users.apps.UsersConfig",
+    # "users.apps.UsersConfig",
     "about.apps.AboutConfig",
     "rest_framework",
     "drf_yasg",
-    "phonenumber_field",
+    # "phonenumber_field",
 ]
 
 MIDDLEWARE = [
@@ -139,4 +139,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTH_USER_MODEL = "users.CustomUser"
+# AUTH_USER_MODEL = "users.User"

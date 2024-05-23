@@ -79,11 +79,11 @@ class About(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(
         max_length=MAX_LENGTH_DEFAULT,
-        verbose_name="название",
+        verbose_name="Название",
         help_text=...,
     )
     description = models.TextField(
-        verbose_name="Описание вида спорта",
+        verbose_name="Подробное описание",
         max_length=MAX_LENGTH,
         help_text=...,
     )
@@ -95,6 +95,13 @@ class About(models.Model):
         verbose_name="Ссылка на изображение",
         help_text=AboutCfg.HELP_MSG_IMG,
     )
+
+    class Meta:
+        verbose_name = "О нас"
+        verbose_name_plural = "О нас"
+
+    def __str__(self) -> str:
+        return self.name[:MAX_LIST_LENGTH]
 
 
 class PartnerLogo(models.Model):
@@ -110,3 +117,24 @@ class PartnerLogo(models.Model):
         verbose_name="Ссылка на изображение",
         help_text=AboutCfg.HELP_MSG_IMG,
     )
+
+
+class BrandBook(models.Model):
+    name = models.CharField(
+        max_length=MAX_LENGTH_DEFAULT,
+        verbose_name="Название",
+        unique=True,
+        blank=False,
+        null=False,
+        help_text=AboutCfg.HELP_MSG_BRAND,
+    )
+    file = models.FileField(
+        upload_to='brandbook'
+    )
+
+    class Meta:
+        verbose_name = "Брендбук"
+        verbose_name_plural = "Брендбуки"
+
+    def __str__(self) -> str:
+        return self.name[:MAX_LIST_LENGTH]

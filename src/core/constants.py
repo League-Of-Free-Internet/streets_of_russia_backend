@@ -72,4 +72,5 @@ class CustomUserCfg:
     HELP_MSG_FIRST = "Введите имя"
     HELP_MSG_LAST = "Введите фамилию"
     HELP_MSG_PHONE = "Введите номер телефона в формате +7999 999 99 99"
+    HELP_MSG_ROLE = "Название роли, к которой относится пользователь"
     MAX_LENGTH_NAME = 50

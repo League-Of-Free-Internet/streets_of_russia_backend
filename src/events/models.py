@@ -11,24 +11,23 @@ class Events(models.Model):
         verbose_name="Событие",
         help_text=EventsCfg.EVENTS_HELP_MSG_NAME,
     )
+    description = models.TextField(
+        verbose_name="Содержание события",
+        max_length=MAX_LENGTH,
+        help_text=EventsCfg.EVENTS_HELP_MSG_TXT,
+    )
+    start_date = models.DateTimeField(
+        verbose_name="Дата проведения события"
+    )
     image_urls = models.ManyToManyField(
         "EventsImageURL",
         related_name="events_images",
         verbose_name="Изображения для событий",
         help_text=EventsCfg.EVENTS_HELP_MSG_IMG,
     )
-    pub_date = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name="Дата события"
-    )
-    text = models.TextField(
-        verbose_name="Содержание события",
-        max_length=MAX_LENGTH,
-        help_text=EventsCfg.EVENTS_HELP_MSG_TXT,
-    )
 
     class Meta:
-        ordering = ("-pub_date",)
+        ordering = ("-start_date",)
         verbose_name = "Событие"
         verbose_name_plural = "События"
 

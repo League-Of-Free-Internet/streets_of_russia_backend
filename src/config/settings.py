@@ -45,13 +45,13 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "news.apps.NewsConfig",
     "events.apps.EventsConfig",
-    "sports.apps.SportsConfig",
+    "disciplines.apps.SportsConfig",
     "core.apps.CoreConfig",
     "users.apps.UsersConfig",
     "about.apps.AboutConfig",
     "rest_framework",
     "drf_yasg",
-    "phonenumber_field",
+    # "phonenumber_field",
 ]
 
 MIDDLEWARE = [

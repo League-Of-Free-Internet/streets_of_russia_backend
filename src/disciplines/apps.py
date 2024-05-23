@@ -1,7 +1,6 @@
 from django.apps import AppConfig
 
 
-class SportsConfig(AppConfig):
+class DisciplinesConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "sports"
-    verbose_name = "Вид спорта"
+    name = "disciplines"

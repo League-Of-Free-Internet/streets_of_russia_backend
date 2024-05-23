@@ -18,7 +18,7 @@ class News(models.Model):
         help_text=NewsCfg.HELP_MSG_IMG,
     )
     pub_date = models.DateTimeField(auto_now_add=True, verbose_name="Дата")
-    text = models.TextField(
+    description = models.TextField(
         verbose_name="Содержание новости",
         max_length=MAX_LENGTH,
         help_text=NewsCfg.HELP_MSG_TXT,

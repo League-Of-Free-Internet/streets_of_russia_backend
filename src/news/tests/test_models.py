@@ -9,7 +9,7 @@ class NewsModelTest(TestCase):
         super().setUpClass()
         cls.news = News.objects.create(
             name="Тестовая Новость",
-            text="Обычный текст",
+            description="Обычный текст",
         )
 
     def test_verbose_name(self):
@@ -18,7 +18,7 @@ class NewsModelTest(TestCase):
             "name": "Название новости",
             "pub_date": "Дата",
             "image_urls": "Изображения",
-            "text": "Содержание новости",
+            "description": "Содержание новости",
         }
         for value, expected in field_verboses.items():
             with self.subTest(value=value):
@@ -31,7 +31,7 @@ class NewsModelTest(TestCase):
         field_help_texts = {
             "name": "Введите название новости",
             "image_urls": "Добавьте ссылки на изображения",
-            "text": "Напишите текст новости до 5000 символов",
+            "description": "Напишите текст новости до 5000 символов",
         }
         for value, expected in field_help_texts.items():
             with self.subTest(value=value):
@@ -46,7 +46,7 @@ class ImageURLModelTest(TestCase):
         super().setUpClass()
         cls.news = News.objects.create(
             name="Тестовая Новость",
-            text="Обычный текст",
+            description="Обычный текст",
         )
         cls.image = ImageURL.objects.create(
             news=cls.news,

@@ -66,3 +66,10 @@ class DisciplinesImageURLCfg:
 class AboutCfg:
     HELP_MSG_NAME = "Введите имя участника"
     HELP_MSG_TXT = f"Укажите текст истории до {MAX_LENGTH} символов"
+
+
+class CustomUserCfg:
+    HELP_MSG_FIRST = "Введите имя"
+    HELP_MSG_LAST = "Введите фамилию"
+    HELP_MSG_PHONE = "Введите номер телефона в формате +7999 999 99 99"
+    MAX_LENGTH_NAME = 50

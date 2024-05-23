@@ -4,7 +4,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from phonenumber_field.modelfields import PhoneNumberField
-from core.constants import CustomUserCfg
+from core.constants import CustomUserCfg, MAX_LIST_LENGTH
 
 
 class CustomUserManager(BaseUserManager):
@@ -112,4 +112,4 @@ class UserRole(models.Model):
         verbose_name_plural = _("Роли")
 
     def __str__(self) -> str:
-        return self.name_role[:15]
+        return self.name_role[:MAX_LIST_LENGTH]

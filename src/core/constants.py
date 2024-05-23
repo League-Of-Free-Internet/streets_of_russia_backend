@@ -65,8 +65,11 @@ class DisciplinesImageURLCfg:
 
 
 class AboutCfg:
+    HELP_MSG_VIDEO = "Укажите URL-адрес видео"
+    HELP_MSG_IMG = "Укажите URL-адрес изображения"
     HELP_MSG_NAME = "Введите имя участника"
     HELP_MSG_TXT = f"Укажите текст истории до {MAX_LENGTH} символов"
+    HELP_MSG_PARTNER = "Введите название партнера"
 
 
 class CustomUserCfg:

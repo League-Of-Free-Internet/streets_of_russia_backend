@@ -31,8 +31,8 @@ class CustomUserAdmin(admin.ModelAdmin):
 class UserRoleAdmin(admin.ModelAdmin):
     list_display = (
         "id",
-        "name",
+        "name_role",
         "is_active",
     )
-    search_fields = ("name",)
+    search_fields = ("name_role",)
     list_filter = ("is_active",)

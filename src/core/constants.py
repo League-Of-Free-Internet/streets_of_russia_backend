@@ -70,6 +70,8 @@ class AboutCfg:
     HELP_MSG_NAME = "Введите имя участника"
     HELP_MSG_TXT = f"Укажите текст истории до {MAX_LENGTH} символов"
     HELP_MSG_PARTNER = "Введите название партнера"
+    HELP_MSG_ROLE = "Название роли, к которой относится участник"
+    MAX_LENGTH_NAME = 50
 
 
 class CustomUserCfg:

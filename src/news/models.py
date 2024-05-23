@@ -1,7 +1,8 @@
 from django.db import models
 from django.utils.safestring import mark_safe
 
-from core.constants import MAX_LENGTH, MAX_LENGTH_DEFAULT, NewsCfg
+from core.constants import (MAX_LENGTH, MAX_LENGTH_DEFAULT,
+                            NewsCfg, MAX_LIST_LENGTH)
 
 
 class News(models.Model):
@@ -30,7 +31,7 @@ class News(models.Model):
         verbose_name_plural = "Новости"
 
     def __str__(self) -> str:
-        return self.name[:25]
+        return self.name[:MAX_LIST_LENGTH]
 
 
 class ImageURL(models.Model):

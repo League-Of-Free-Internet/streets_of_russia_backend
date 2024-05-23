@@ -103,3 +103,6 @@ class UserRole(models.Model):
         blank=False,
         default="Участник",
     )
+    is_active = models.BooleanField(
+        verbose_name=_("Роль активна"),
+        default=True)

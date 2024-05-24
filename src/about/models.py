@@ -1,7 +1,7 @@
 from django.db import models
 
-from core.constants import (MAX_LENGTH, MAX_LENGTH_DEFAULT,
-                            AboutCfg, MAX_LIST_LENGTH)
+from core.constants import (MAX_LENGTH, MAX_LENGTH_DEFAULT, MAX_LIST_LENGTH,
+                            AboutCfg)
 
 
 class BannerVideo(models.Model):
@@ -136,7 +136,7 @@ class BrandBook(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True,
                                     verbose_name="Дата")
     is_active = models.BooleanField(
-        verbose_name=("Брендбук активен"),
+        verbose_name="Брендбук активен",
         default=True)
 
     class Meta:

@@ -30,7 +30,7 @@ class Disciplines(models.Model):
     )
 
     class Meta:
-        ordering = ("name",)
+        ordering = (DisciplinesCfg.DISCIPLINES_META_ORDERING_FIELD,)
         verbose_name = DisciplinesCfg.DISCIPLINES_META_VERBOSE_NAME
         verbose_name_plural = (
             DisciplinesCfg.DISCIPLINES_META_VERBOSE_NAME_PLURAL

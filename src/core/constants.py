@@ -24,11 +24,11 @@ class EventsCfg:
     EVENTS_DESCRIPTION_HELP_MSG = (
         f"Напишите текст о событии до {MAX_LENGTH} символов"
     )
+    EVENTS_PUB_DATE_VERBOSE_NAME = "Дата события"
+    EVENTS_PUB_DATE_HELP_MSG = "Выберите дату события"
     EVENTS_IMG_RELATED_NAME = "events_images"
     EVENTS_IMG_URLS_VERBOSE_NAME = "Изображения для события"
     EVENTS_IMG_URLS_HELP_MSG = "Добавьте ссылки на изображения с событиями"
-    EVENTS_PUB_DATE_VERBOSE_NAME = "Дата события"
-    EVENTS_PUB_DATE_HELP_MSG = "Выберите дату события"
     EVENTS_PLACE_VERBOSE_NAME = "Место события"
     EVENTS_PLACE_HELP_MSG = "Введите название места события"
     EVENTS_DISCIPLINE_VERBOSE_NAME = "Дисциплина для события"
@@ -66,6 +66,7 @@ class DisciplinesCfg:
     DISCIPLINES_RULES_HELP_MSG = (
         f"Напишите правила дисциплины до {MAX_LENGTH} символов"
     )
+    DISCIPLINES_META_ORDERING_FIELD = "name"
     DISCIPLINES_META_VERBOSE_NAME = "Спортивная дисциплина"
     DISCIPLINES_META_VERBOSE_NAME_PLURAL = "Спортивные дисциплины"
 

@@ -1,7 +1,8 @@
 from django.db import models
 from django.utils.safestring import mark_safe
 
-from core.constants import (MAX_LENGTH, MAX_LENGTH_DEFAULT, EventsCfg,
+from core.constants import (MAX_LENGTH, MAX_LENGTH_DEFAULT, MAX_LIST_LENGTH,
+                            EventsCfg,
                             EventsImageURLCfg)
 
 
@@ -33,7 +34,7 @@ class Events(models.Model):
         verbose_name_plural = "События"
 
     def __str__(self) -> str:
-        return self.name[:25]
+        return self.name[:MAX_LIST_LENGTH]
 
 
 class EventsImageURL(models.Model):

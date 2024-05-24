@@ -1,7 +1,7 @@
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
-from .views import NewsViewSet
+from .views import NewsViewSet, UserViewSet
 
 router_v1 = DefaultRouter()
 
@@ -10,14 +10,10 @@ router_v1.register(
     NewsViewSet,
     basename="news"
 )
-
-# registration_uls = [
-#     path('signup/', SignUpView.as_view()),
-#     path('token/', GetTokenView.as_view()),
-# ]
-#
+router_v1.register(r"users",
+                   UserViewSet,
+                   basename="users")
 
 urlpatterns = [
-    path('v1/', include(router_v1.urls)),
-    # path('v1/auth/', include(registration_uls)),
+    path("v1/", include(router_v1.urls)),
 ]

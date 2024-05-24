@@ -17,33 +17,20 @@ class Events(models.Model):
         max_length=MAX_LENGTH,
         help_text=EventsCfg.EVENTS_DESCRIPTION_HELP_MSG,
     )
+    start_date = models.DateTimeField(
+        verbose_name="Дата проведения события"
+    )
     image_urls = models.ManyToManyField(
         EventsImageURLCfg.EVENTS_IMAGE_URL,
         related_name=EventsCfg.EVENTS_IMG_RELATED_NAME,
         verbose_name=EventsCfg.EVENTS_IMG_URLS_VERBOSE_NAME,
         help_text=EventsCfg.EVENTS_IMG_URLS_HELP_MSG,
     )
-    pub_date = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name=EventsCfg.EVENTS_PUB_DATE_VERBOSE_NAME,
-        help_text=EventsCfg.EVENTS_PUB_DATE_HELP_MSG
-    )
-    place = models.CharField(
-        verbose_name=EventsCfg.EVENTS_PLACE_VERBOSE_NAME,
-        max_length=MAX_LENGTH,
-        help_text=EventsCfg.EVENTS_PLACE_HELP_MSG
-    )
-
-    # discipline = models.ForeignKey(
-    #   "Disciplines",
-    #   verbose_name=EventsCfg.EVENTS_DISCIPLINE_VERBOSE_NAME,
-    #   help_text=EventsCfg.EVENTS_DISCIPLINE_HELP_MSG
-    # )
 
     class Meta:
-        ordering = ("-pub_date",)
-        verbose_name = EventsCfg.EVENTS_META_VERBOSE_NAME
-        verbose_name_plural = EventsCfg.EVENTS_META_VERBOSE_NAME_PLURAL
+        ordering = ("-start_date",)
+        verbose_name = "Событие"
+        verbose_name_plural = "События"
 
     def __str__(self) -> str:
         return self.name[:25]

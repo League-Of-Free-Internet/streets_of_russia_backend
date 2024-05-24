@@ -1,6 +1,6 @@
-MAX_LIST_LENGTH = 15
 MAX_LENGTH_DEFAULT = 255
 MAX_LENGTH = 5000
+MAX_LIST_LENGTH = 15
 
 
 class NewsCfg:
@@ -17,12 +17,41 @@ class EventsCfg:
     """
     Настройки для модели Events.
     """
-
-    EVENTS_HELP_MSG_NAME = "Введите название события"
-    EVENTS_HELP_MSG_TXT = (
+    EVENTS = "Events"
+    EVENTS_NAME_VERBOSE_NAME = "Название события"
+    EVENTS_NAME_HELP_MSG = "Введите название события"
+    EVENTS_DESCRIPTION_VERBOSE_NAME = "Описание события"
+    EVENTS_DESCRIPTION_HELP_MSG = (
         f"Напишите текст о событии до {MAX_LENGTH} символов"
     )
-    EVENTS_HELP_MSG_IMG = "Добавьте ссылки на изображения с событиями"
+    EVENTS_IMG_RELATED_NAME = "events_images"
+    EVENTS_IMG_URLS_VERBOSE_NAME = "Изображения для события"
+    EVENTS_IMG_URLS_HELP_MSG = "Добавьте ссылки на изображения с событиями"
+    EVENTS_START_DATE_VERBOSE_NAME = "Дата проведения события"
+    EVENTS_START_DATE_HELP_MSG = "Выберите дату проведения события"
+    EVENTS_PLACE_VERBOSE_NAME = "Место события"
+    EVENTS_PLACE_HELP_MSG = "Введите название места события"
+    EVENTS_RULES_VERBOSE_NAME = "Правила проведения события"
+    EVENTS_RULES_HELP_MSG = "Напишите правила проведения события"
+    EVENTS_DEADLINE_REG_VERBOSE_NAME = "Дата окончания регистрации на событие"
+    EVENTS_DEADLINE_REG_HELP_MSG = (
+        "Выберите дату окончания регистрации на событие"
+    )
+    EVENTS_DISCIPLINE_FOREIGN_KEY = "disciplines.Disciplines"
+    EVENTS_DISCIPLINE_RELATED_NAME = "event_discipline"
+    EVENTS_DISCIPLINE_VERBOSE_NAME = "Дисциплина для события"
+    EVENTS_DISCIPLINE_HELP_MSG = "Выберите дисциплину для события"
+    EVENTS_META_ORDERING_FIELD = "-" + "start_date"
+    EVENTS_META_VERBOSE_NAME = "Событие"
+    EVENTS_META_VERBOSE_NAME_PLURAL = "События"
+
+
+class EventsImageURLCfg:
+    EVENTS_IMAGE_URL = "EventsImageURL"
+    EVENTS_IMG_URL_FOREIGN_RELATED_NAME = "event"
+    EVENTS_IMG_URL_FOREIGN_VERBOSE_NAME = "Событие"
+    EVENTS_IMG_URL_VERBOSE_NAME = "Ссылка на изображение события"
+    EVENTS_IMG_URL_HELP_MSG = "Укажите URL-адрес изображения о событии"
 
 
 class DisciplinesCfg:
@@ -46,6 +75,7 @@ class DisciplinesCfg:
     DISCIPLINES_RULES_HELP_MSG = (
         f"Напишите правила дисциплины до {MAX_LENGTH} символов"
     )
+    DISCIPLINES_META_ORDERING_FIELD = "name"
     DISCIPLINES_META_VERBOSE_NAME = "Спортивная дисциплина"
     DISCIPLINES_META_VERBOSE_NAME_PLURAL = "Спортивные дисциплины"
 

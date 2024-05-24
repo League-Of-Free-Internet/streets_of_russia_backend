@@ -1,8 +1,8 @@
 from django.db import models
 from django.utils.safestring import mark_safe
 
-from core.constants import (MAX_LENGTH, MAX_LENGTH_DEFAULT,
-                            NewsCfg, MAX_LIST_LENGTH)
+from core.constants import (MAX_LENGTH, MAX_LENGTH_DEFAULT, MAX_LIST_LENGTH,
+                            NewsCfg)
 
 
 class News(models.Model):

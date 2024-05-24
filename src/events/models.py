@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.safestring import mark_safe
 
 from core.constants import (MAX_LENGTH, MAX_LENGTH_DEFAULT, MAX_LIST_LENGTH,
-                            DisciplinesCfg, EventsCfg, EventsImageURLCfg)
+                            EventsCfg, EventsImageURLCfg)
 
 
 class Events(models.Model):
@@ -42,14 +42,15 @@ class Events(models.Model):
         help_text=EventsCfg.EVENTS_DEADLINE_REG_HELP_MSG
     )
     discipline = models.ForeignKey(
-        DisciplinesCfg.DISCIPLINES,
-        on_delete=models.SET_NULL,
-        related_name=EventsCfg.EVENTS_DISCIPLINE_VERBOSE_NAME,
-        verbose_name=EventsCfg.EVENTS_DISCIPLINE_HELP_MSG,
+        EventsCfg.EVENTS_DISCIPLINE_FOREIGN_KEY,
+        on_delete=models.CASCADE,
+        related_name=EventsCfg.EVENTS_DISCIPLINE_RELATED_NAME,
+        verbose_name=EventsCfg.EVENTS_DISCIPLINE_VERBOSE_NAME,
+        help_text=EventsCfg.EVENTS_DISCIPLINE_HELP_MSG,
     )
 
     class Meta:
-        ordering = (EventsCfg.EVENTS_META_VERBOSE_NAME,)
+        ordering = (EventsCfg.EVENTS_META_ORDERING_FIELD,)
         verbose_name = EventsCfg.EVENTS_META_VERBOSE_NAME
         verbose_name_plural = EventsCfg.EVENTS_META_VERBOSE_NAME_PLURAL
 

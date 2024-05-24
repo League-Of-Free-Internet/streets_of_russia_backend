@@ -37,6 +37,8 @@ class EventsCfg:
     EVENTS_DEADLINE_REG_HELP_MSG = (
         "Выберите дату окончания регистрации на событие"
     )
+    EVENTS_DISCIPLINE_FOREIGN_KEY = "disciplines.Disciplines"
+    EVENTS_DISCIPLINE_RELATED_NAME = "event_discipline"
     EVENTS_DISCIPLINE_VERBOSE_NAME = "Дисциплина для события"
     EVENTS_DISCIPLINE_HELP_MSG = "Выберите дисциплину для события"
     EVENTS_META_ORDERING_FIELD = "-" + "start_date"

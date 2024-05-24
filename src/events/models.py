@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.utils.safestring import mark_safe
 
 from core.constants import (MAX_LENGTH, MAX_LENGTH_DEFAULT, MAX_LIST_LENGTH,
@@ -25,7 +26,8 @@ class Events(models.Model):
     )
     start_date = models.DateTimeField(
         verbose_name=EventsCfg.EVENTS_START_DATE_VERBOSE_NAME,
-        help_text=EventsCfg.EVENTS_START_DATE_HELP_MSG
+        help_text=EventsCfg.EVENTS_START_DATE_HELP_MSG,
+        default=timezone.now,
     )
     place = models.CharField(
         max_length=MAX_LENGTH_DEFAULT,
@@ -38,6 +40,7 @@ class Events(models.Model):
         help_text=EventsCfg.EVENTS_RULES_HELP_MSG,
     )
     deadline_registration_date = models.DateTimeField(
+        default=timezone.now,
         verbose_name=EventsCfg.EVENTS_DEADLINE_REG_VERBOSE_NAME,
         help_text=EventsCfg.EVENTS_DEADLINE_REG_HELP_MSG
     )

@@ -28,7 +28,7 @@ class EventsAdmin(admin.ModelAdmin):
     в панели администратора для модели События.
     """
 
-    exclude = ("image",)
+    exclude = ("image_urls",)
     inlines = (EventsImageURLInline,)
     list_display = (
         "name",
@@ -49,6 +49,6 @@ class EventsAdmin(admin.ModelAdmin):
         :rtype: str
 
         """
-        return truncatechars(obj.text, 50)
+        return truncatechars(obj.description, 50)
 
     short_text_preview.short_description = "Краткий текст"

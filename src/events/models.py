@@ -2,9 +2,7 @@ from django.db import models
 from django.utils.safestring import mark_safe
 
 from core.constants import (MAX_LENGTH, MAX_LENGTH_DEFAULT, MAX_LIST_LENGTH,
-                            EventsCfg,
-                            EventsImageURLCfg,
-                            DisciplinesCfg)
+                            DisciplinesCfg, EventsCfg, EventsImageURLCfg)
 
 
 class Events(models.Model):
@@ -49,7 +47,6 @@ class Events(models.Model):
         related_name=EventsCfg.EVENTS_DISCIPLINE_VERBOSE_NAME,
         verbose_name=EventsCfg.EVENTS_DISCIPLINE_HELP_MSG,
     )
-
 
     class Meta:
         ordering = (EventsCfg.EVENTS_META_VERBOSE_NAME,)

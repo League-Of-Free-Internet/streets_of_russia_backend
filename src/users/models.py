@@ -2,9 +2,9 @@ from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
                                         PermissionsMixin)
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-
 from phonenumber_field.modelfields import PhoneNumberField
-from core.constants import CustomUserCfg, MAX_LIST_LENGTH
+
+from core.constants import MAX_LIST_LENGTH, CustomUserCfg
 
 
 class CustomUserManager(BaseUserManager):
@@ -38,8 +38,9 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    """Специализированная модель пользователя с расширенными полями.
-    phone_number: вводить в таком формете +7999 999 99 99
+    """
+    Специализированная модель пользователя с расширенными полями.
+    Поле phone_number вводить в таком формате +7999 999 99 99
     """
     first_name = models.CharField(
         verbose_name=_("Имя"),

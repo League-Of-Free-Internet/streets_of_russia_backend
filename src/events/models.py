@@ -3,7 +3,8 @@ from django.utils.safestring import mark_safe
 
 from core.constants import (MAX_LENGTH, MAX_LENGTH_DEFAULT, MAX_LIST_LENGTH,
                             EventsCfg,
-                            EventsImageURLCfg)
+                            EventsImageURLCfg,
+                            DisciplinesCfg)
 
 
 class Events(models.Model):
@@ -18,20 +19,42 @@ class Events(models.Model):
         max_length=MAX_LENGTH,
         help_text=EventsCfg.EVENTS_DESCRIPTION_HELP_MSG,
     )
-    start_date = models.DateTimeField(
-        verbose_name="Дата проведения события"
-    )
     image_urls = models.ManyToManyField(
         EventsImageURLCfg.EVENTS_IMAGE_URL,
         related_name=EventsCfg.EVENTS_IMG_RELATED_NAME,
         verbose_name=EventsCfg.EVENTS_IMG_URLS_VERBOSE_NAME,
         help_text=EventsCfg.EVENTS_IMG_URLS_HELP_MSG,
     )
+    start_date = models.DateTimeField(
+        verbose_name=EventsCfg.EVENTS_START_DATE_VERBOSE_NAME,
+        help_text=EventsCfg.EVENTS_START_DATE_HELP_MSG
+    )
+    place = models.CharField(
+        max_length=MAX_LENGTH_DEFAULT,
+        verbose_name=EventsCfg.EVENTS_PLACE_VERBOSE_NAME,
+        help_text=EventsCfg.EVENTS_PLACE_HELP_MSG,
+    )
+    rules = models.CharField(
+        max_length=MAX_LENGTH_DEFAULT,
+        verbose_name=EventsCfg.EVENTS_RULES_VERBOSE_NAME,
+        help_text=EventsCfg.EVENTS_RULES_HELP_MSG,
+    )
+    deadline_registration_date = models.DateTimeField(
+        verbose_name=EventsCfg.EVENTS_DEADLINE_REG_VERBOSE_NAME,
+        help_text=EventsCfg.EVENTS_DEADLINE_REG_HELP_MSG
+    )
+    discipline = models.ForeignKey(
+        DisciplinesCfg.DISCIPLINES,
+        on_delete=models.SET_NULL,
+        related_name=EventsCfg.EVENTS_DISCIPLINE_VERBOSE_NAME,
+        verbose_name=EventsCfg.EVENTS_DISCIPLINE_HELP_MSG,
+    )
+
 
     class Meta:
-        ordering = ("-start_date",)
-        verbose_name = "Событие"
-        verbose_name_plural = "События"
+        ordering = (EventsCfg.EVENTS_META_VERBOSE_NAME,)
+        verbose_name = EventsCfg.EVENTS_META_VERBOSE_NAME
+        verbose_name_plural = EventsCfg.EVENTS_META_VERBOSE_NAME_PLURAL
 
     def __str__(self) -> str:
         return self.name[:MAX_LIST_LENGTH]

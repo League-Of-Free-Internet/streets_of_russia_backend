@@ -14,7 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ImageURLSerializer(serializers.ModelSerializer):
-    """Сериализатор для url-ссылок изображений для новостей."""
+    """Сериализатор url-ссылок изображений для новостей."""
 
     class Meta:
         fields = ("image_url",)
@@ -32,7 +32,7 @@ class NewsSerializer(serializers.ModelSerializer):
 
 
 class EventsImageURLSerializer(serializers.ModelSerializer):
-    """Сериализатор для url-ссылок изображений для событий."""
+    """Сериализатор url-ссылок изображений для событий."""
 
     class Meta:
         model = EventsImageURL

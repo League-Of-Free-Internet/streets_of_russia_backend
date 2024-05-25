@@ -16,8 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
-        user = CustomUser.objects.create_user(**validated_data)
-        return user
+        return CustomUser.objects.create_user(**validated_data)
 
 
 class ImageURLSerializer(serializers.ModelSerializer):

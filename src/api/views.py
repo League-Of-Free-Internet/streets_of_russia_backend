@@ -32,7 +32,7 @@ class UserViewSet(viewsets.ModelViewSet):
                           permissions.IsAdminUser)
     lookup_field = "email"
     search_fields = ("email", "phone_number", "first_name", "last_name")
-    http_method_names = ("get", "post", "patch", "delete")
+    http_method_names = ("post",)
 
 
 class EventsViewSet(viewsets.ModelViewSet):

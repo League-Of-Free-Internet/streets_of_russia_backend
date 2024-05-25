@@ -1,11 +1,14 @@
 from rest_framework import serializers
 
+from news.models import News, NewsImageURL
 from users.models import CustomUser
-from news.models import News, ImageURL
 
 
 class UserSerializer(serializers.ModelSerializer):
-    """Сериализатор пользователей"""
+    """
+    Сериализатор пользователей.
+    """
+
     class Meta:
         fields = "__all__"
         model = CustomUser
@@ -14,7 +17,7 @@ class UserSerializer(serializers.ModelSerializer):
 class ImageURLSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ("image_url", )
-        model = ImageURL
+        model = NewsImageURL
 
 
 class NewsSerializer(serializers.ModelSerializer):

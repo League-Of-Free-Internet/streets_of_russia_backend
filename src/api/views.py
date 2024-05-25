@@ -1,7 +1,6 @@
-from rest_framework import viewsets, permissions
+from rest_framework import permissions, viewsets
 
-from api.serializers import UserSerializer, NewsSerializer
-
+from api.serializers import NewsSerializer, UserSerializer
 from news.models import News
 from users.models import CustomUser
 

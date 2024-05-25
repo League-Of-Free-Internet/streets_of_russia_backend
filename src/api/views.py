@@ -31,17 +31,8 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,
                           permissions.IsAdminUser)
     lookup_field = "email"
-    search_fields = (
-        "email",
-        "phone_number",
-        "first_name",
-        "last_name"
-    )
+    search_fields = ("email", "phone_number", "first_name", "last_name")
     http_method_names = ("get", "post", "patch", "delete")
-
-
-class SignUpViewSet():
-    ...
 
 
 class EventsViewSet(viewsets.ModelViewSet):
@@ -55,9 +46,6 @@ class EventsViewSet(viewsets.ModelViewSet):
                           permissions.IsAdminUser)
     lookup_field = "email"
     search_fields = (
-        "name",
-        "start_date",
-        "place",
-        "deadline_registration_date"
+        "name", "start_date", "place", "deadline_registration_date"
     )
     http_method_names = ("get", "post", "patch", "delete")

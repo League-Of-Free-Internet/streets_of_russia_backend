@@ -1,5 +1,6 @@
 from rest_framework import permissions, viewsets
 
+from api.pagination import EventsPagination, NewsPagination
 from api.serializers import EventsSerializer, NewsSerializer, UserSerializer
 from events.models import Events
 from news.models import News
@@ -16,6 +17,7 @@ class NewsViewSet(viewsets.ModelViewSet):
     """
     queryset = News.objects.all()
     serializer_class = NewsSerializer
+    pagination_class = NewsPagination
     http_method_names = ("get", "post", "patch", "delete")
     search_fields = ("name",)
     lookup_field = "name"
@@ -37,13 +39,14 @@ class UserViewSet(viewsets.ModelViewSet):
 
 class EventsViewSet(viewsets.ModelViewSet):
     """
-    Работа с пользователями. Только для администратора.
+    Работа с событиями. Только для администратора.
     """
 
     queryset = Events.objects.all()
     serializer_class = EventsSerializer
-    permission_classes = (permissions.IsAuthenticated,
-                          permissions.IsAdminUser)
+    pagination_class = EventsPagination
+    # permission_classes = (permissions.IsAuthenticated,
+    #                       permissions.IsAdminUser)
     lookup_field = "email"
     search_fields = (
         "name", "start_date", "place", "deadline_registration_date"

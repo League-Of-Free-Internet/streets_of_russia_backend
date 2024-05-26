@@ -7,10 +7,17 @@ class NewsCfg:
     """
     Настройки для модели News.
     """
-
+    IMAGE_URLS_RELATED_NAME = "images"
+    NAME_VERBOSE_NAME = "Название новости"
+    IMAGE_URLS_VERBOSE_NAME = "Изображения"
+    PUB_DATE_VERBOSE_NAME = "Дата"
+    DESCRIPTION_VERBOSE_NAME = "Содержание новости"
     HELP_MSG_NAME = "Введите название новости"
     HELP_MSG_TXT = f"Напишите текст новости до {MAX_LENGTH} символов"
     HELP_MSG_IMG = "Добавьте ссылки на изображения"
+    ORDERING = ("-pub_date",)
+    NEWS_VERBOSE_NAME = "Новость"
+    NEWS_VERBOSE_NAME_PLURAL = "Новости"
 
 
 class EventsCfg:

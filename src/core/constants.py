@@ -107,7 +107,6 @@ class AboutCfg:
     """
     HELP_MSG_IMG = "Укажите URL-адрес изображения"
     HELP_MSG_NAME = "Введите имя участника"
-    HELP_MSG_TXT = f"Укажите текст истории до {MAX_LENGTH} символов"
     HELP_MSG_PARTNER = "Введите название партнера"
     HELP_MSG_ROLE = "Название роли, к которой относится участник"
     HELP_MSG_BRAND = "Укажите название"
@@ -164,3 +163,16 @@ class BannerVideoCfg:
     HELP_MSG_VIDEO = "Укажите URL-адрес видео"
     BANNER_VIDEO_VERBOSE_NAME = "Промо видео"
     BANNER_VIDEO_VERBOSE_NAME_PLURAL = "Промо видео"
+
+
+class OurMemberCfg:
+    ROLE_MODEL = "MemberRole"
+    ROLE_RELATED_NAME = "members"
+    ROLE_VERBOSE_NAME = "Роль"
+    IMAGE_URL_VERBOSE_NAME = "Ссылка на изображение"
+    IMAGE_URL_HELP_TEXT = "Укажите URL-адрес изображения"
+    NAME_VERBOSE_NAME = "Имя"
+    TEXT_VERBOSE_NAME = "История участника"
+    TEXT_HELP_MSG = f"Укажите текст истории до {MAX_LENGTH} символов"
+    OUR_MEMBERS_VERBOSE_NAME = "Наш участник"
+    OUR_MEMBERS_VERBOSE_NAME_PLURAL = "Наши участники"

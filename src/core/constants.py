@@ -95,6 +95,9 @@ class DisciplinesImageURLCfg:
 
 
 class AboutCfg:
+    """
+    Настройки для модели About.
+    """
     HELP_MSG_VIDEO = "Укажите URL-адрес видео"
     HELP_MSG_IMG = "Укажите URL-адрес изображения"
     HELP_MSG_NAME = "Введите имя участника"
@@ -106,6 +109,9 @@ class AboutCfg:
 
 
 class CustomUserCfg:
+    """
+    Настройки для модели CustomUser.
+    """
     REQUIRED_FIELDS = ("phone_number", )
     USERNAME_FIELD = "email"
     USER_ROLE = "UserRole"
@@ -127,6 +133,9 @@ class CustomUserCfg:
 
 
 class UserRoleCfg:
+    """
+    Настройки для модели UserRole.
+    """
     NAME_ROLE_DEFAULT = "Участник"
     NAME_ROLE_VERBOSE_NAME = "Название роли"
     IS_ACTIVE_VERBOSE_NAME = "Роль активна"
@@ -135,6 +144,9 @@ class UserRoleCfg:
 
 
 class CustomUserManagerCfg:
+    """
+    Настройки для модели CustomUserManager.
+    """
     ERR_MSG_EMAIL = "The Email field must be set"
     ERR_MSG_SUPERUSER = "Superuser must have is_superuser=True."
     IS_SUPERUSER = "is_superuser"

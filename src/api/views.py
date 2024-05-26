@@ -15,6 +15,7 @@ class NewsViewSet(viewsets.ModelViewSet):
     - редактирование новости;
     - удаление новости.
     """
+
     queryset = News.objects.all()
     serializer_class = NewsSerializer
     pagination_class = NewsPagination

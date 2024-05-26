@@ -1,8 +1,8 @@
 from django.db import models
 
 from core.constants import (MAX_LENGTH, MAX_LENGTH_DEFAULT, MAX_LIST_LENGTH,
-                            AboutCfg, BannerVideoCfg, OurMemberCfg,
-                            MemberRoleCfg, PartnerLogoCfg, BrandBookCfg)
+                            AboutCfg, BannerVideoCfg, BrandBookCfg,
+                            MemberRoleCfg, OurMemberCfg, PartnerLogoCfg)
 
 
 class BannerVideo(models.Model):

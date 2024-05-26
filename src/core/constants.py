@@ -7,23 +7,36 @@ class NewsCfg:
     """
     Настройки для модели News.
     """
-    IMAGE_URLS_RELATED_NAME = "images"
-    NAME_VERBOSE_NAME = "Название новости"
-    IMAGE_URLS_VERBOSE_NAME = "Изображения"
-    PUB_DATE_VERBOSE_NAME = "Дата"
-    DESCRIPTION_VERBOSE_NAME = "Содержание новости"
-    HELP_MSG_NAME = "Введите название новости"
-    HELP_MSG_TXT = f"Напишите текст новости до {MAX_LENGTH} символов"
-    HELP_MSG_IMG = "Добавьте ссылки на изображения"
-    ORDERING = ("-pub_date",)
-    NEWS_VERBOSE_NAME = "Новость"
-    NEWS_VERBOSE_NAME_PLURAL = "Новости"
+
+    NEWS = "News"
+    NEWS_NAME_VERBOSE_NAME = "Название новости"
+    NEWS_NAME_HELP_MSG = "Введите название новости"
+    NEWS_IMG_URLS_RELATED_NAME = "images"
+    NEWS_IMG_URLS_VERBOSE_NAME = "Добавьте ссылки на изображения"
+    NEWS_IMG_URLS_HELP_MSG = "Добавьте ссылки на изображения"
+    NEWS_PUB_DATE_VERBOSE_NAME = "Дата публикации новости"
+    NEWS_DESCRIPTION_VERBOSE_NAME = "Содержание новости"
+    NEWS_DESCRIPTION_HELP_MSG = (
+        f"Напишите текст новости до {MAX_LENGTH} символов"
+    )
+    NEWS_META_ORDERING_FIELD = "-" + "pub_date"
+    NEWS_META_VERBOSE_NAME = "Новость"
+    NEWS_META_VERBOSE_NAME_PLURAL = "Новости"
+
+
+class NewsImageURLCfg:
+    NEWS_IMAGE_URL = "NewsImageURL"
+    NEWS_IMG_URL_FOREIGN_RELATED_NAME = "news"
+    NEWS_IMG_URL_FOREIGN_VERBOSE_NAME = "Новость"
+    NEWS_IMG_URL_VERBOSE_NAME = "Ссылка на изображение для новости"
+    NEWS_IMG_URL_HELP_MSG = "Укажите URL-адрес изображения о новости"
 
 
 class EventsCfg:
     """
     Настройки для модели Events.
     """
+
     EVENTS = "Events"
     EVENTS_NAME_VERBOSE_NAME = "Название события"
     EVENTS_NAME_HELP_MSG = "Введите название события"
@@ -121,6 +134,7 @@ class CustomUserCfg:
     """
     Настройки для модели CustomUser.
     """
+
     REQUIRED_FIELDS = ("phone_number", )
     USERNAME_FIELD = "email"
     USER_ROLE = "UserRole"
@@ -145,6 +159,7 @@ class UserRoleCfg:
     """
     Настройки для модели UserRole.
     """
+
     NAME_ROLE_DEFAULT = "Участник"
     NAME_ROLE_VERBOSE_NAME = "Название роли"
     IS_ACTIVE_VERBOSE_NAME = "Роль активна"

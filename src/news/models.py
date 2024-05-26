@@ -2,34 +2,36 @@ from django.db import models
 from django.utils.safestring import mark_safe
 
 from core.constants import (MAX_LENGTH, MAX_LENGTH_DEFAULT, MAX_LIST_LENGTH,
-                            NewsCfg)
+                            NewsCfg, NewsImageURLCfg)
 
 
 class News(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(
         max_length=MAX_LENGTH_DEFAULT,
-        verbose_name=NewsCfg.NAME_VERBOSE_NAME,
-        help_text=NewsCfg.HELP_MSG_NAME,
+        verbose_name=NewsCfg.NEWS_NAME_VERBOSE_NAME,
+        help_text=NewsCfg.NEWS_NAME_HELP_MSG,
     )
     image_urls = models.ManyToManyField(
-        "NewsImageURL",
-        related_name=NewsCfg.IMAGE_URLS_RELATED_NAME,
-        verbose_name=NewsCfg.IMAGE_URLS_VERBOSE_NAME,
-        help_text=NewsCfg.HELP_MSG_IMG,
+        NewsImageURLCfg.NEWS_IMAGE_URL,
+        related_name=NewsCfg.NEWS_IMG_URLS_RELATED_NAME,
+        verbose_name=NewsCfg.NEWS_IMG_URLS_VERBOSE_NAME,
+        help_text=NewsCfg.NEWS_IMG_URLS_HELP_MSG,
     )
-    pub_date = models.DateTimeField(auto_now_add=True,
-                                    verbose_name=NewsCfg.PUB_DATE_VERBOSE_NAME)
+    pub_date = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name=NewsCfg.NEWS_PUB_DATE_VERBOSE_NAME
+    )
     description = models.TextField(
-        verbose_name=NewsCfg.DESCRIPTION_VERBOSE_NAME,
+        verbose_name=NewsCfg.NEWS_DESCRIPTION_VERBOSE_NAME,
         max_length=MAX_LENGTH,
-        help_text=NewsCfg.HELP_MSG_TXT,
+        help_text=NewsCfg.NEWS_DESCRIPTION_HELP_MSG,
     )
 
     class Meta:
-        ordering = NewsCfg.ORDERING
-        verbose_name = NewsCfg.NEWS_VERBOSE_NAME
-        verbose_name_plural = NewsCfg.NEWS_VERBOSE_NAME_PLURAL
+        ordering = (NewsCfg.NEWS_META_ORDERING_FIELD,)
+        verbose_name = NewsCfg.NEWS_META_VERBOSE_NAME
+        verbose_name_plural = NewsCfg.NEWS_META_VERBOSE_NAME_PLURAL
 
     def __str__(self) -> str:
         return self.name[:MAX_LIST_LENGTH]
@@ -59,4 +61,4 @@ class NewsImageURL(models.Model):
         verbose_name_plural = "Ссылки на новости"
 
     def __str__(self) -> str:
-        return self.image_url
+        return str(self.image_url)

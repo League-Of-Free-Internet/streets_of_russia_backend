@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from events.models import Events, EventsImageURL
-from news.models import NewsImageURL, News
+from news.models import News, NewsImageURL
 from users.models import CustomUser
 
 

@@ -105,7 +105,6 @@ class AboutCfg:
     """
     Настройки для модели About.
     """
-    HELP_MSG_VIDEO = "Укажите URL-адрес видео"
     HELP_MSG_IMG = "Укажите URL-адрес изображения"
     HELP_MSG_NAME = "Введите имя участника"
     HELP_MSG_TXT = f"Укажите текст истории до {MAX_LENGTH} символов"
@@ -158,3 +157,10 @@ class CustomUserManagerCfg:
     ERR_MSG_SUPERUSER = "Superuser must have is_superuser=True."
     IS_SUPERUSER = "is_superuser"
     IS_STAFF = "is_staff"
+
+
+class BannerVideoCfg:
+    VIDEO_URL_VERBOSE_NAME = "Ссылка на видео"
+    HELP_MSG_VIDEO = "Укажите URL-адрес видео"
+    BANNER_VIDEO_VERBOSE_NAME = "Промо видео"
+    BANNER_VIDEO_VERBOSE_NAME_PLURAL = "Промо видео"

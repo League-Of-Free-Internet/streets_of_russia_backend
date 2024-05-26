@@ -106,11 +106,23 @@ class AboutCfg:
 
 
 class CustomUserCfg:
+    USERNAME_FIELD = "email"
+    USER_ROLE = "UserRole"
+    FIRST_NAME_VERBOSE_NAME = "Имя"
+    LAST_NAME_VERBOSE_NAME = "Фамилия"
+    PHONE_NUMBER_VERBOSE_NAME = "Номер телефона"
+    EMAIL_VERBOSE_NAME = "email"
+    ROLE_VERBOSE_NAME = "Роль"
+    ROLE_RELATED_NAME = "users"
+    IS_ACTIVE_VERBOSE_NAME = "Аккаунт активен"
+    IS_STAFF_VERBOSE_NAME = "Является персоналом"
     HELP_MSG_FIRST = "Введите имя"
     HELP_MSG_LAST = "Введите фамилию"
     HELP_MSG_PHONE = "Введите номер телефона в формате +7999 999 99 99"
     HELP_MSG_ROLE = "Название роли, к которой относится пользователь"
     MAX_LENGTH_NAME = 50
+    CUSTOM_USER_VERBOSE_NAME = "user"
+    CUSTOM_USER_VERBOSE_NAME_PLURAL = "users"
 
 
 class CustomUserManagerCfg:

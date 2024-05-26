@@ -4,7 +4,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
 
-from core.constants import MAX_LIST_LENGTH, CustomUserCfg
+from core.constants import MAX_LIST_LENGTH, CustomUserCfg, CustomUserManagerCfg
 
 
 class CustomUserManager(BaseUserManager):
@@ -16,7 +16,7 @@ class CustomUserManager(BaseUserManager):
         нормализует email и сохраняет пароль.
         """
         if not email:
-            raise ValueError("The Email field must be set")
+            raise ValueError(CustomUserManagerCfg.ERR_MSG_EMAIL)
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
@@ -24,15 +24,15 @@ class CustomUserManager(BaseUserManager):
         return user
 
     def create_user(self, email, password=None, **extra_fields):
-        extra_fields.setdefault("is_superuser", False)
+        extra_fields.setdefault(CustomUserManagerCfg.IS_SUPERUSER, False)
         return self._create_user(email, password, **extra_fields)
 
     def create_superuser(self, email, password, **extra_fields):
-        extra_fields.setdefault("is_staff", True)
-        extra_fields.setdefault("is_superuser", True)
+        extra_fields.setdefault(CustomUserManagerCfg.IS_STAFF, True)
+        extra_fields.setdefault(CustomUserManagerCfg.IS_SUPERUSER, True)
 
-        if extra_fields.get("is_superuser") is not True:
-            raise ValueError("Superuser must have is_superuser=True.")
+        if extra_fields.get(CustomUserManagerCfg.IS_SUPERUSER) is not True:
+            raise ValueError(CustomUserManagerCfg.ERR_MSG_SUPERUSER)
 
         return self._create_user(email, password, **extra_fields)
 

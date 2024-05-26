@@ -115,19 +115,125 @@ class DisciplinesImageURLCfg:
 
 
 class AboutCfg:
-    HELP_MSG_VIDEO = "Укажите URL-адрес видео"
+    """
+    Настройки для модели About.
+    """
+    NAME_VERBOSE_NAME = "Название"
+    DESCRIPTION_VERBOSE_NAME = "Подробное описание"
+    IMAGE_URL_VERBOSE_NAME = "Ссылка на изображение"
     HELP_MSG_IMG = "Укажите URL-адрес изображения"
     HELP_MSG_NAME = "Введите имя участника"
-    HELP_MSG_TXT = f"Укажите текст истории до {MAX_LENGTH} символов"
-    HELP_MSG_PARTNER = "Введите название партнера"
     HELP_MSG_ROLE = "Название роли, к которой относится участник"
     HELP_MSG_BRAND = "Укажите название"
     MAX_LENGTH_NAME = 50
+    ABOUT_VERBOSE_NAME = "О нас"
+    ABOUT_VERBOSE_NAME_PLURAL = ABOUT_VERBOSE_NAME
 
 
 class CustomUserCfg:
+    """
+    Настройки для модели CustomUser.
+    """
+
+    REQUIRED_FIELDS = ("phone_number", )
+    USERNAME_FIELD = "email"
+    USER_ROLE = "UserRole"
+    FIRST_NAME_VERBOSE_NAME = "Имя"
+    LAST_NAME_VERBOSE_NAME = "Фамилия"
+    PHONE_NUMBER_VERBOSE_NAME = "Номер телефона"
+    EMAIL_VERBOSE_NAME = "email"
+    ROLE_VERBOSE_NAME = "Роль"
+    ROLE_RELATED_NAME = "users"
+    IS_ACTIVE_VERBOSE_NAME = "Аккаунт активен"
+    IS_STAFF_VERBOSE_NAME = "Является персоналом"
     HELP_MSG_FIRST = "Введите имя"
     HELP_MSG_LAST = "Введите фамилию"
     HELP_MSG_PHONE = "Введите номер телефона в формате +7999 999 99 99"
     HELP_MSG_ROLE = "Название роли, к которой относится пользователь"
     MAX_LENGTH_NAME = 50
+    CUSTOM_USER_VERBOSE_NAME = "user"
+    CUSTOM_USER_VERBOSE_NAME_PLURAL = "users"
+
+
+class UserRoleCfg:
+    """
+    Настройки для модели UserRole.
+    """
+
+    NAME_ROLE_DEFAULT = "Участник"
+    NAME_ROLE_VERBOSE_NAME = "Название роли"
+    IS_ACTIVE_VERBOSE_NAME = "Роль активна"
+    USER_ROLE_VERBOSE_NAME = "Роль"
+    USER_ROLE_VERBOSE_NAME_PLURAL = "Роли"
+
+
+class CustomUserManagerCfg:
+    """
+    Настройки для модели CustomUserManager.
+    """
+    ERR_MSG_EMAIL = "The Email field must be set"
+    ERR_MSG_SUPERUSER = "Superuser must have is_superuser=True."
+    IS_SUPERUSER = "is_superuser"
+    IS_STAFF = "is_staff"
+
+
+class BannerVideoCfg:
+    """
+    Настройки для модели BannerVideo.
+    """
+    VIDEO_URL_VERBOSE_NAME = "Ссылка на видео"
+    HELP_MSG_VIDEO = "Укажите URL-адрес видео"
+    BANNER_VIDEO_VERBOSE_NAME = "Промо видео"
+    BANNER_VIDEO_VERBOSE_NAME_PLURAL = "Промо видео"
+
+
+class OurMemberCfg:
+    """
+    Настройки для модели OurMember.
+    """
+    ROLE_MODEL = "MemberRole"
+    ROLE_RELATED_NAME = "members"
+    ROLE_VERBOSE_NAME = "Роль"
+    IMAGE_URL_VERBOSE_NAME = "Ссылка на изображение"
+    IMAGE_URL_HELP_TEXT = "Укажите URL-адрес изображения"
+    NAME_VERBOSE_NAME = "Имя"
+    TEXT_VERBOSE_NAME = "История участника"
+    TEXT_HELP_MSG = f"Укажите текст истории до {MAX_LENGTH} символов"
+    OUR_MEMBERS_VERBOSE_NAME = "Наш участник"
+    OUR_MEMBERS_VERBOSE_NAME_PLURAL = "Наши участники"
+
+
+class MemberRoleCfg:
+    """
+    Настройки для модели MemberRole.
+    """
+    NAME_VERBOSE_NAME = "Название роли"
+    NAME_DEFAULT = "Общественный деятель"
+    IS_ACTIVE_VERBOSE_NAME = "Роль активна",
+    MEMBER_ROLE_VERBOSE_NAME = "Роль"
+    MEMBER_ROLE_VERBOSE_NAME_PLURAL = "Роли"
+
+
+class PartnerLogoCfg:
+    """
+    Настройки для модели PartnerLogo.
+    """
+    NAME_VERBOSE_NAME = "Название"
+    PARTNER_HELP_MSG = "Введите название партнера"
+    IMAGE_URL_VERBOSE_NAME = "Ссылка на изображение"
+    PARTNER_LOGO_VERBOSE_NAME = "Логотип партнера"
+    PARTNER_LOGO_VERBOSE_NAME_PLURAL = "Логотипы партнеров"
+
+
+class BrandBookCfg:
+    """
+    Настройки для модели BrandBook.
+    """
+    ORDERING = ("-pub_date",)
+    NAME_VERBOSE_NAME = "Название"
+    UPLOAD_TO = "brandbook"
+    FILE_VERBOSE_NAME = "Файл брендбука"
+    PUB_DATE_VERBOSE_NAME = "Дата"
+    IS_ACTIVE_VERBOSE_NAME = "Брендбук активен"
+    BRANDBOOK_VERBOSE_NAME = "Брендбук"
+    BRANDBOOK_VERBOSE_NAME_PLURAL = "Брендбуки"

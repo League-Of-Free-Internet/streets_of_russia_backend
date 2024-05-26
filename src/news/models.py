@@ -39,19 +39,26 @@ class News(models.Model):
 
 class NewsImageURL(models.Model):
     news = models.ForeignKey(
-        NewsCfg.NEWS,
+        "News",
         on_delete=models.CASCADE,
-        related_name=NewsImageURLCfg.NEWS_IMG_URL_FOREIGN_RELATED_NAME,
-        verbose_name=NewsImageURLCfg.NEWS_IMG_URL_FOREIGN_VERBOSE_NAME
+        related_name="news",
+        verbose_name="Новость"
     )
     image_url = models.URLField(
         max_length=MAX_LENGTH_DEFAULT,
         unique=True,
-        verbose_name=NewsImageURLCfg.NEWS_IMG_URL_VERBOSE_NAME,
-        help_text=NewsImageURLCfg.NEWS_IMG_URL_HELP_MSG,
+        verbose_name="Ссылка на изображение",
+        help_text="Укажите URL-адрес изображения",
     )
 
     def image_tag(self):
         if self.image_url is not None:
             return mark_safe(f'<img src="{self.image_url}" height="50"/>')
         return ""
+
+    class Meta:
+        verbose_name = "Ссылка на новость"
+        verbose_name_plural = "Ссылки на новости"
+
+    def __str__(self) -> str:
+        return str(self.image_url)

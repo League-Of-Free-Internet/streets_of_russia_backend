@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.template.defaultfilters import truncatechars
 
-from .models import ImageURL, News
+from .models import NewsImageURL, News
 
 
 class NewsImageURLInline(admin.TabularInline):
@@ -10,7 +10,7 @@ class NewsImageURLInline(admin.TabularInline):
     в виде горизонтального расположения.
     """
 
-    model = ImageURL
+    model = NewsImageURL
     extra = 1
     readonly_fields = (
         "id",
@@ -18,7 +18,7 @@ class NewsImageURLInline(admin.TabularInline):
     )
     verbose_name = "Изображение для новости"
     verbose_name_plural = "Изображения для новостей"
-    ImageURL.image_tag.short_description = "Миниатюра"
+    NewsImageURL.image_tag.short_description = "Миниатюра"
 
 
 @admin.register(News)

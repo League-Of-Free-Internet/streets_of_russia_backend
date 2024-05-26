@@ -208,3 +208,17 @@ class PartnerLogoCfg:
     IMAGE_URL_VERBOSE_NAME = "Ссылка на изображение"
     PARTNER_LOGO_VERBOSE_NAME = "Логотип партнера"
     PARTNER_LOGO_VERBOSE_NAME_PLURAL = "Логотипы партнеров"
+
+
+class BrandBookCfg:
+    """
+    Настройки для модели BrandBook.
+    """
+    ORDERING = ("-pub_date",)
+    NAME_VERBOSE_NAME = "Название"
+    UPLOAD_TO = "brandbook"
+    FILE_VERBOSE_NAME = "Файл брендбука"
+    PUB_DATE_VERBOSE_NAME = "Дата"
+    IS_ACTIVE_VERBOSE_NAME = "Брендбук активен"
+    BRANDBOOK_VERBOSE_NAME = "Брендбук"
+    BRANDBOOK_VERBOSE_NAME_PLURAL = "Брендбуки"

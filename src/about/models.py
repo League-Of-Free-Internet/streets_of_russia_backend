@@ -2,7 +2,7 @@ from django.db import models
 
 from core.constants import (MAX_LENGTH, MAX_LENGTH_DEFAULT, MAX_LIST_LENGTH,
                             AboutCfg, BannerVideoCfg, OurMemberCfg,
-                            MemberRoleCfg)
+                            MemberRoleCfg, PartnerLogoCfg)
 
 
 class BannerVideo(models.Model):
@@ -107,19 +107,19 @@ class PartnerLogo(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(
         max_length=MAX_LENGTH_DEFAULT,
-        verbose_name="Название",
-        help_text=AboutCfg.HELP_MSG_PARTNER,
+        verbose_name=PartnerLogoCfg.NAME_VERBOSE_NAME,
+        help_text=PartnerLogoCfg.PARTNER_HELP_MSG,
     )
     image_url = models.URLField(
         max_length=MAX_LENGTH_DEFAULT,
         unique=True,
-        verbose_name="Ссылка на изображение",
+        verbose_name=PartnerLogoCfg.IMAGE_URL_VERBOSE_NAME,
         help_text=AboutCfg.HELP_MSG_IMG,
     )
 
     class Meta:
-        verbose_name = "Логотип партнера"
-        verbose_name_plural = "Логотипы партнеров"
+        verbose_name = PartnerLogoCfg.PARTNER_LOGO_VERBOSE_NAME
+        verbose_name_plural = PartnerLogoCfg.PARTNER_LOGO_VERBOSE_NAME_PLURAL
 
 
 class BrandBook(models.Model):

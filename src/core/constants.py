@@ -176,3 +176,11 @@ class OurMemberCfg:
     TEXT_HELP_MSG = f"Укажите текст истории до {MAX_LENGTH} символов"
     OUR_MEMBERS_VERBOSE_NAME = "Наш участник"
     OUR_MEMBERS_VERBOSE_NAME_PLURAL = "Наши участники"
+
+
+class MemberRoleCfg:
+    NAME_VERBOSE_NAME = "Название роли"
+    NAME_DEFAULT = "Общественный деятель"
+    IS_ACTIVE_VERBOSE_NAME = "Роль активна",
+    MEMBER_ROLE_VERBOSE_NAME = "Роль"
+    MEMBER_ROLE_VERBOSE_NAME_PLURAL = "Роли"

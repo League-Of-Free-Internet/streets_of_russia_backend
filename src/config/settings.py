@@ -80,6 +80,7 @@ DATABASES = {
 }
 DATABASES["default"] = DATABASES["develop mode" if DEBUG else "product mode"]
 
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",

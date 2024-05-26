@@ -20,24 +20,28 @@ class UserSerializer(serializers.ModelSerializer):
         return CustomUser.objects.create_user(**validated_data)
 
 
-class NewsImageURLSerializer(serializers.PrimaryKeyRelatedField,
-                             serializers.ModelSerializer):
-    """Сериализатор url-ссылок изображений для новостей."""
-
-    class Meta:
-        fields = ("image_url",)
-        model = NewsImageURL
+# class NewsImageURLSerializer(serializers.ModelSerializer):
+#     """Сериализатор url-ссылок изображений для новостей."""
+#
+#     class Meta:
+#         fields = ("image_url",)
+#         model = NewsImageURL
 
 
 class NewsSerializer(serializers.ModelSerializer):
     """Сериализатор новостей."""
 
-    image_urls = NewsImageURLSerializer(many=True,
-                                        queryset=NewsImageURL.objects.all())
+    image_urls = serializers.SerializerMethodField()
 
     class Meta:
         model = News
         fields = ("id", "name", "description", "image_urls")
+
+    @staticmethod
+    def get_image_urls(obj):
+        image_urls = NewsImageURL.objects.all()
+        return [url.image_url for url in image_urls]
+
 
 
 class EventsImageURLSerializer(serializers.PrimaryKeyRelatedField,
@@ -69,12 +73,15 @@ class EventsSerializer(serializers.ModelSerializer):
         )
 
 
-class DisciplinesSerializer(serializers.ModelSerializer):
-    """Сериализатор для названий спортивных дисциплин."""
+class DisciplinesNamesListSerializer(serializers.Serializer):
+    """Сериализатор для вывода списка названий спортивных дисциплин."""
 
-    class Meta:
-        model = Disciplines
-        fields = ("name",)
+    names = serializers.SerializerMethodField()
+
+    @staticmethod
+    def get_names(obj: Disciplines) -> list[str]:
+        disciplines = Disciplines.objects.all()
+        return [discipline.name for discipline in disciplines]
 
 
 class ShortDisciplinesSerializer(serializers.ModelSerializer):

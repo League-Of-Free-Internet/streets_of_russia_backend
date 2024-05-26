@@ -13,7 +13,7 @@ class News(models.Model):
         help_text=NewsCfg.HELP_MSG_NAME,
     )
     image_urls = models.ManyToManyField(
-        "ImageURL",
+        "NewsImageURL",
         related_name="images",
         verbose_name="Изображения",
         help_text=NewsCfg.HELP_MSG_IMG,
@@ -34,7 +34,7 @@ class News(models.Model):
         return self.name[:MAX_LIST_LENGTH]
 
 
-class ImageURL(models.Model):
+class NewsImageURL(models.Model):
     news = models.ForeignKey(
         "News",
         on_delete=models.CASCADE,
@@ -52,3 +52,10 @@ class ImageURL(models.Model):
         if self.image_url is not None:
             return mark_safe(f'<img src="{self.image_url}" height="50"/>')
         return ""
+
+    class Meta:
+        verbose_name = "Ссылка на новость"
+        verbose_name_plural = "Ссылки на новости"
+
+    def __str__(self) -> str:
+        return self.image_url

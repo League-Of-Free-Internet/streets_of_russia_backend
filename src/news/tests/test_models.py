@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from ..models import ImageURL, News
+from ..models import NewsImageURL, News
 
 
 class NewsModelTest(TestCase):
@@ -40,7 +40,7 @@ class NewsModelTest(TestCase):
                 )
 
 
-class ImageURLModelTest(TestCase):
+class NewsImageURLModelTest(TestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -48,14 +48,14 @@ class ImageURLModelTest(TestCase):
             name="Тестовая Новость",
             description="Обычный текст",
         )
-        cls.image = ImageURL.objects.create(
+        cls.image = NewsImageURL.objects.create(
             news=cls.news,
             image_url="https://clck.ru/3AjpaT",
         )
         cls.news.image_urls.add(cls.image)
 
     def test_verbose_name(self):
-        image = ImageURLModelTest.image
+        image = NewsImageURLModelTest.image
         field_verboses = {
             "news": "Новость",
             "image_url": "Ссылка на изображение",
@@ -67,7 +67,7 @@ class ImageURLModelTest(TestCase):
                 )
 
     def test_help_text(self):
-        image = ImageURLModelTest.image
+        image = NewsImageURLModelTest.image
         field_help_texts = {
             "news": "",
             "image_url": "Укажите URL-адрес изображения",
@@ -80,5 +80,5 @@ class ImageURLModelTest(TestCase):
 
     def test_image_in_news(self):
         news = News.objects.get(pk=1)
-        image = ImageURL.objects.get(pk=1)
+        image = NewsImageURL.objects.get(pk=1)
         self.assertEqual(image, news.image_urls.all()[0])

@@ -105,13 +105,17 @@ class AboutCfg:
     """
     Настройки для модели About.
     """
-
+    NAME_VERBOSE_NAME = "Название"
+    DESCRIPTION_VERBOSE_NAME = "Подробное описание"
+    IMAGE_URL_VERBOSE_NAME = "Ссылка на изображение"
     HELP_MSG_IMG = "Укажите URL-адрес изображения"
     HELP_MSG_NAME = "Введите имя участника"
     HELP_MSG_PARTNER = "Введите название партнера"
     HELP_MSG_ROLE = "Название роли, к которой относится участник"
     HELP_MSG_BRAND = "Укажите название"
     MAX_LENGTH_NAME = 50
+    ABOUT_VERBOSE_NAME = "О нас"
+    ABOUT_VERBOSE_NAME_PLURAL = ABOUT_VERBOSE_NAME
 
 
 class CustomUserCfg:

@@ -80,10 +80,10 @@ class About(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(
         max_length=MAX_LENGTH_DEFAULT,
-        verbose_name="Название",
+        verbose_name=AboutCfg.NAME_VERBOSE_NAME,
     )
     description = models.TextField(
-        verbose_name="Подробное описание",
+        verbose_name=AboutCfg.DESCRIPTION_VERBOSE_NAME,
         max_length=MAX_LENGTH,
     )
     image_url = models.URLField(
@@ -91,13 +91,13 @@ class About(models.Model):
         unique=True,
         blank=True,
         null=True,
-        verbose_name="Ссылка на изображение",
+        verbose_name=AboutCfg.IMAGE_URL_VERBOSE_NAME,
         help_text=AboutCfg.HELP_MSG_IMG,
     )
 
     class Meta:
-        verbose_name = "О нас"
-        verbose_name_plural = "О нас"
+        verbose_name = AboutCfg.ABOUT_VERBOSE_NAME
+        verbose_name_plural = AboutCfg.ABOUT_VERBOSE_NAME_PLURAL
 
     def __str__(self) -> str:
         return self.name[:MAX_LIST_LENGTH]

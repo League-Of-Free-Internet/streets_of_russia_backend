@@ -9,26 +9,27 @@ class News(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(
         max_length=MAX_LENGTH_DEFAULT,
-        verbose_name="Название новости",
+        verbose_name=NewsCfg.NAME_VERBOSE_NAME,
         help_text=NewsCfg.HELP_MSG_NAME,
     )
     image_urls = models.ManyToManyField(
         "ImageURL",
-        related_name="images",
-        verbose_name="Изображения",
+        related_name=NewsCfg.IMAGE_URLS_RELATED_NAME,
+        verbose_name=NewsCfg.IMAGE_URLS_VERBOSE_NAME,
         help_text=NewsCfg.HELP_MSG_IMG,
     )
-    pub_date = models.DateTimeField(auto_now_add=True, verbose_name="Дата")
+    pub_date = models.DateTimeField(auto_now_add=True,
+                                    verbose_name=NewsCfg.PUB_DATE_VERBOSE_NAME)
     description = models.TextField(
-        verbose_name="Содержание новости",
+        verbose_name=NewsCfg.DESCRIPTION_VERBOSE_NAME,
         max_length=MAX_LENGTH,
         help_text=NewsCfg.HELP_MSG_TXT,
     )
 
     class Meta:
-        ordering = ("-pub_date",)
-        verbose_name = "Новость"
-        verbose_name_plural = "Новости"
+        ordering = NewsCfg.ORDERING
+        verbose_name = NewsCfg.NEWS_VERBOSE_NAME
+        verbose_name_plural = NewsCfg.NEWS_VERBOSE_NAME_PLURAL
 
     def __str__(self) -> str:
         return self.name[:MAX_LIST_LENGTH]

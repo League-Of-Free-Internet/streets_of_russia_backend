@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.template.defaultfilters import truncatechars
 
-from .models import NewsImageURL, News
+from .models import News, NewsImageURL
 
 
 class NewsImageURLInline(admin.TabularInline):

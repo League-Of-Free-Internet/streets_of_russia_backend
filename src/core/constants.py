@@ -114,6 +114,10 @@ class DisciplinesImageURLCfg:
     DISCIPLINES_IMG_URL_HELP_MSG = (
         "Укажите URL-адрес изображения со спортивной дисциплиной"
     )
+    DISCIPLINES_IMG_URL_META_VERBOSE_NAME = "Ссылка на спортивную дисциплину"
+    DISCIPLINES_IMG_URL_META_VERBOSE_NAME_PLURAL = (
+        "Ссылки на спортивную дисциплину"
+    )
 
 
 class AboutCfg:

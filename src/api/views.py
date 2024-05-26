@@ -2,8 +2,10 @@ from rest_framework import permissions, viewsets
 
 from api.pagination import EventsPagination, NewsPagination
 from api.serializers import EventsSerializer, NewsSerializer, UserSerializer
+from api.serializers import DisciplinesSerializer
 from events.models import Events
 from news.models import News
+from disciplines.models import Disciplines
 from users.models import CustomUser
 
 
@@ -53,3 +55,15 @@ class EventsViewSet(viewsets.ModelViewSet):
         "name", "start_date", "place", "deadline_registration_date"
     )
     http_method_names = ("get", "post", "patch", "delete")
+
+
+class DisciplinesViewSet(viewsets.ModelViewSet):
+    """
+    Работа с событиями. Только для администратора.
+    """
+
+    queryset = Disciplines.objects.all()
+    serializer_class = DisciplinesSerializer
+    lookup_field = "email"
+    search_fields = ("name",)
+    http_method_names = ("get",)

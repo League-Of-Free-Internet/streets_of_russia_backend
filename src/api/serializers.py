@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from disciplines.models import Disciplines
 from events.models import Events, EventsImageURL
 from news.models import News, NewsImageURL
 from users.models import CustomUser
@@ -65,4 +66,35 @@ class EventsSerializer(serializers.ModelSerializer):
             "place",
             "rules",
             "deadline_registration_date"
+        )
+
+
+class DisciplinesSerializer(serializers.ModelSerializer):
+    """Сериализатор для названий спортивных дисциплин."""
+
+    class Meta:
+        model = Disciplines
+        fields = ("name",)
+
+
+class ShortDisciplinesSerializer(serializers.ModelSerializer):
+    """Сериализатор для вывода краткого содержания спортивных дисциплин."""
+
+    class Meta:
+        model = Disciplines
+        fields = (
+            "image_urls",
+            "description"
+        )
+
+
+class FullDisciplinesSerializer(serializers.ModelSerializer):
+    """Сериализатор для вывода полного содержания спортивных дисциплин."""
+
+    class Meta:
+        model = Disciplines
+        fields = (
+            "image_urls",
+            "description",
+            "rules"
         )

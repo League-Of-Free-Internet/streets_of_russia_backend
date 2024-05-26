@@ -3,7 +3,7 @@ from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import (TokenObtainPairView,
                                             TokenRefreshView)
 
-from .views import EventsViewSet, NewsViewSet, UserViewSet, DisciplinesViewSet
+from .views import DisciplinesViewSet, EventsViewSet, NewsViewSet, UserViewSet
 
 router_v1 = DefaultRouter()
 

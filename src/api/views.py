@@ -1,11 +1,11 @@
 from rest_framework import permissions, viewsets
 
 from api.pagination import EventsPagination, NewsPagination
-from api.serializers import EventsSerializer, NewsSerializer, UserSerializer
-from api.serializers import DisciplinesSerializer
+from api.serializers import (DisciplinesSerializer, EventsSerializer,
+                             NewsSerializer, UserSerializer)
+from disciplines.models import Disciplines
 from events.models import Events
 from news.models import News
-from disciplines.models import Disciplines
 from users.models import CustomUser
 
 

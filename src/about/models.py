@@ -1,7 +1,7 @@
 from django.db import models
 
 from core.constants import (MAX_LENGTH, MAX_LENGTH_DEFAULT, MAX_LIST_LENGTH,
-                            AboutCfg)
+                            AboutCfg, BannerVideoCfg)
 
 
 class BannerVideo(models.Model):
@@ -9,13 +9,13 @@ class BannerVideo(models.Model):
     video_url = models.URLField(
         max_length=MAX_LENGTH_DEFAULT,
         unique=True,
-        verbose_name="Ссылка на видео",
-        help_text=AboutCfg.HELP_MSG_VIDEO,
+        verbose_name=BannerVideoCfg.VIDEO_URL_VERBOSE_NAME,
+        help_text=BannerVideoCfg.HELP_MSG_VIDEO,
     )
 
     class Meta:
-        verbose_name = "Промо видео"
-        verbose_name_plural = "Промо видео"
+        verbose_name = BannerVideoCfg.BANNER_VIDEO_VERBOSE_NAME
+        verbose_name_plural = BannerVideoCfg.BANNER_VIDEO_VERBOSE_NAME_PLURAL
 
 
 class OurMembers(models.Model):

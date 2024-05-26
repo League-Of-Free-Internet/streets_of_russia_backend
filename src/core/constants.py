@@ -74,6 +74,8 @@ class EventsImageURLCfg:
     EVENTS_IMG_URL_FOREIGN_VERBOSE_NAME = "Событие"
     EVENTS_IMG_URL_VERBOSE_NAME = "Ссылка на изображение события"
     EVENTS_IMG_URL_HELP_MSG = "Укажите URL-адрес изображения о событии"
+    EVENTS_IMG_URL_META_VERBOSE_NAME = "Ссылка на событие"
+    EVENTS_IMG_URL_META_VERBOSE_NAME_PLURAL = "Ссылки на событие"
 
 
 class DisciplinesCfg:

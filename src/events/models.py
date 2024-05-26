@@ -79,3 +79,12 @@ class EventsImageURL(models.Model):
         if self.image_url is not None:
             return mark_safe(f'<img src="{self.image_url}" height="50"/>')
         return ""
+
+    class Meta:
+        verbose_name = EventsImageURLCfg.EVENTS_IMG_URL_META_VERBOSE_NAME
+        verbose_name_plural = (
+            EventsImageURLCfg.EVENTS_IMG_URL_META_VERBOSE_NAME_PLURAL
+        )
+
+    def __str__(self) -> str:
+        return str(self.image_url)

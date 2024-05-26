@@ -2,7 +2,7 @@ from django.db import models
 
 from core.constants import (MAX_LENGTH, MAX_LENGTH_DEFAULT, MAX_LIST_LENGTH,
                             AboutCfg, BannerVideoCfg, OurMemberCfg,
-                            MemberRoleCfg, PartnerLogoCfg)
+                            MemberRoleCfg, PartnerLogoCfg, BrandBookCfg)
 
 
 class BannerVideo(models.Model):
@@ -125,25 +125,27 @@ class PartnerLogo(models.Model):
 class BrandBook(models.Model):
     name = models.CharField(
         max_length=MAX_LENGTH_DEFAULT,
-        verbose_name="Название",
+        verbose_name=BrandBookCfg.NAME_VERBOSE_NAME,
         unique=True,
         blank=False,
         null=False,
         help_text=AboutCfg.HELP_MSG_BRAND,
     )
     file = models.FileField(
-        upload_to='brandbook'
+        upload_to=BrandBookCfg.UPLOAD_TO,
+        verbose_name=BrandBookCfg.FILE_VERBOSE_NAME
     )
-    pub_date = models.DateTimeField(auto_now_add=True,
-                                    verbose_name="Дата")
+    pub_date = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name=BrandBookCfg.PUB_DATE_VERBOSE_NAME)
     is_active = models.BooleanField(
-        verbose_name="Брендбук активен",
+        verbose_name=BrandBookCfg.IS_ACTIVE_VERBOSE_NAME,
         default=True)
 
     class Meta:
-        ordering = ("-pub_date",)
-        verbose_name = "Брендбук"
-        verbose_name_plural = "Брендбуки"
+        ordering = BrandBookCfg.ORDERING
+        verbose_name = BrandBookCfg.BRANDBOOK_VERBOSE_NAME
+        verbose_name_plural = BrandBookCfg.BRANDBOOK_VERBOSE_NAME_PLURAL
 
     def __str__(self) -> str:
         return self.name[:MAX_LIST_LENGTH]

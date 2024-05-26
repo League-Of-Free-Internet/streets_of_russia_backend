@@ -1,7 +1,8 @@
 from django.db import models
 
 from core.constants import (MAX_LENGTH, MAX_LENGTH_DEFAULT, MAX_LIST_LENGTH,
-                            AboutCfg, BannerVideoCfg, OurMemberCfg)
+                            AboutCfg, BannerVideoCfg, OurMemberCfg,
+                            MemberRoleCfg)
 
 
 class BannerVideo(models.Model):
@@ -56,20 +57,20 @@ class OurMembers(models.Model):
 
 class MemberRole(models.Model):
     name = models.CharField(
-        verbose_name="Название роли",
+        verbose_name=MemberRoleCfg.NAME_VERBOSE_NAME,
         max_length=AboutCfg.MAX_LENGTH_NAME,
         unique=True,
         null=False,
         blank=False,
-        default="Общественный деятель",
+        default=MemberRoleCfg.NAME_DEFAULT,
     )
     is_active = models.BooleanField(
-        verbose_name="Роль активна",
+        verbose_name=MemberRoleCfg.IS_ACTIVE_VERBOSE_NAME,
         default=True)
 
     class Meta:
-        verbose_name = "Роль"
-        verbose_name_plural = "Роли"
+        verbose_name = MemberRoleCfg.MEMBER_ROLE_VERBOSE_NAME
+        verbose_name_plural = MemberRoleCfg.MEMBER_ROLE_VERBOSE_NAME_PLURAL
 
     def __str__(self) -> str:
         return self.name[:MAX_LIST_LENGTH]

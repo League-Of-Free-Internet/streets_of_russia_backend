@@ -4,7 +4,8 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
 
-from core.constants import MAX_LIST_LENGTH, CustomUserCfg, CustomUserManagerCfg
+from core.constants import (MAX_LIST_LENGTH, CustomUserCfg,
+                            CustomUserManagerCfg, UserRoleCfg)
 
 
 class CustomUserManager(BaseUserManager):
@@ -43,49 +44,49 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     Поле phone_number вводить в таком формате +7999 999 99 99
     """
     first_name = models.CharField(
-        verbose_name=_("Имя"),
+        verbose_name=_(CustomUserCfg.FIRST_NAME_VERBOSE_NAME),
         max_length=CustomUserCfg.MAX_LENGTH_NAME,
         help_text=CustomUserCfg.HELP_MSG_FIRST,
     )
     last_name = models.CharField(
-        verbose_name=_("Фамилия"),
+        verbose_name=_(CustomUserCfg.LAST_NAME_VERBOSE_NAME),
         max_length=CustomUserCfg.MAX_LENGTH_NAME,
         help_text=CustomUserCfg.HELP_MSG_LAST,
     )
     phone_number = PhoneNumberField(
-        verbose_name=_("Номер телефона"),
+        verbose_name=_(CustomUserCfg.PHONE_NUMBER_VERBOSE_NAME),
         unique=True,
         null=False,
         blank=False,
         help_text=CustomUserCfg.HELP_MSG_PHONE)
     email = models.EmailField(
-        verbose_name=_("email"),
+        verbose_name=_(CustomUserCfg.EMAIL_VERBOSE_NAME),
         unique=True,
     )
     role = models.ForeignKey(
-        "UserRole",
+        CustomUserCfg.USER_ROLE,
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
-        related_name="users",
-        verbose_name="Роль",
+        related_name=CustomUserCfg.ROLE_RELATED_NAME,
+        verbose_name=CustomUserCfg.ROLE_VERBOSE_NAME,
         help_text=CustomUserCfg.HELP_MSG_ROLE,
     )
 
     is_active = models.BooleanField(
-        verbose_name=_("Аккаунт активен"),
+        verbose_name=_(CustomUserCfg.IS_ACTIVE_VERBOSE_NAME),
         default=True)
     is_staff = models.BooleanField(
-        verbose_name=_("Является персоналом"),
+        verbose_name=_(CustomUserCfg.IS_STAFF_VERBOSE_NAME),
         default=False)
     objects = CustomUserManager()
 
-    USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ("phone_number", )
+    USERNAME_FIELD = CustomUserCfg.USERNAME_FIELD
+    REQUIRED_FIELDS = CustomUserCfg.REQUIRED_FIELDS
 
     class Meta:
-        verbose_name = _("user")
-        verbose_name_plural = _("users")
+        verbose_name = _(CustomUserCfg.CUSTOM_USER_VERBOSE_NAME)
+        verbose_name_plural = _(CustomUserCfg.CUSTOM_USER_VERBOSE_NAME_PLURAL)
 
     def get_full_name(self):
         """
@@ -97,20 +98,20 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 class UserRole(models.Model):
     name_role = models.CharField(
-        verbose_name=_("Название роли"),
+        verbose_name=_(UserRoleCfg.NAME_ROLE_VERBOSE_NAME),
         max_length=CustomUserCfg.MAX_LENGTH_NAME,
         unique=True,
         null=False,
         blank=False,
-        default="Участник",
+        default=UserRoleCfg.NAME_ROLE_DEFAULT,
     )
     is_active = models.BooleanField(
-        verbose_name=_("Роль активна"),
+        verbose_name=_(UserRoleCfg.IS_ACTIVE_VERBOSE_NAME),
         default=True)
 
     class Meta:
-        verbose_name = _("Роль")
-        verbose_name_plural = _("Роли")
+        verbose_name = _(UserRoleCfg.USER_ROLE_VERBOSE_NAME)
+        verbose_name_plural = _(UserRoleCfg.USER_ROLE_VERBOSE_NAME_PLURAL)
 
     def __str__(self) -> str:
         return self.name_role[:MAX_LIST_LENGTH]

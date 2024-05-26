@@ -30,6 +30,8 @@ class NewsImageURLCfg:
     NEWS_IMG_URL_FOREIGN_VERBOSE_NAME = "Новость"
     NEWS_IMG_URL_VERBOSE_NAME = "Ссылка на изображение для новости"
     NEWS_IMG_URL_HELP_MSG = "Укажите URL-адрес изображения о новости"
+    NEWS_IMG_URL_META_VERBOSE_NAME = "Ссылка на новость"
+    NEWS_IMG_URL_META_VERBOSE_NAME_PLURAL = "Ссылки на новости"
 
 
 class EventsCfg:

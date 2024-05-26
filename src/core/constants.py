@@ -105,6 +105,7 @@ class AboutCfg:
     """
     Настройки для модели About.
     """
+
     HELP_MSG_IMG = "Укажите URL-адрес изображения"
     HELP_MSG_NAME = "Введите имя участника"
     HELP_MSG_PARTNER = "Введите название партнера"
@@ -159,6 +160,9 @@ class CustomUserManagerCfg:
 
 
 class BannerVideoCfg:
+    """
+    Настройки для модели BannerVideo.
+    """
     VIDEO_URL_VERBOSE_NAME = "Ссылка на видео"
     HELP_MSG_VIDEO = "Укажите URL-адрес видео"
     BANNER_VIDEO_VERBOSE_NAME = "Промо видео"
@@ -166,6 +170,9 @@ class BannerVideoCfg:
 
 
 class OurMemberCfg:
+    """
+    Настройки для модели OurMember.
+    """
     ROLE_MODEL = "MemberRole"
     ROLE_RELATED_NAME = "members"
     ROLE_VERBOSE_NAME = "Роль"
@@ -179,6 +186,9 @@ class OurMemberCfg:
 
 
 class MemberRoleCfg:
+    """
+    Настройки для модели MemberRole.
+    """
     NAME_VERBOSE_NAME = "Название роли"
     NAME_DEFAULT = "Общественный деятель"
     IS_ACTIVE_VERBOSE_NAME = "Роль активна",

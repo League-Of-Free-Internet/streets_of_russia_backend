@@ -110,7 +110,6 @@ class AboutCfg:
     IMAGE_URL_VERBOSE_NAME = "Ссылка на изображение"
     HELP_MSG_IMG = "Укажите URL-адрес изображения"
     HELP_MSG_NAME = "Введите имя участника"
-    HELP_MSG_PARTNER = "Введите название партнера"
     HELP_MSG_ROLE = "Название роли, к которой относится участник"
     HELP_MSG_BRAND = "Укажите название"
     MAX_LENGTH_NAME = 50
@@ -198,3 +197,14 @@ class MemberRoleCfg:
     IS_ACTIVE_VERBOSE_NAME = "Роль активна",
     MEMBER_ROLE_VERBOSE_NAME = "Роль"
     MEMBER_ROLE_VERBOSE_NAME_PLURAL = "Роли"
+
+
+class PartnerLogoCfg:
+    """
+    Настройки для модели PartnerLogo.
+    """
+    NAME_VERBOSE_NAME = "Название"
+    PARTNER_HELP_MSG = "Введите название партнера"
+    IMAGE_URL_VERBOSE_NAME = "Ссылка на изображение"
+    PARTNER_LOGO_VERBOSE_NAME = "Логотип партнера"
+    PARTNER_LOGO_VERBOSE_NAME_PLURAL = "Логотипы партнеров"

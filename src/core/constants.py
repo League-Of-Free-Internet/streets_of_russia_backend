@@ -106,6 +106,7 @@ class AboutCfg:
 
 
 class CustomUserCfg:
+    REQUIRED_FIELDS = ("phone_number", )
     USERNAME_FIELD = "email"
     USER_ROLE = "UserRole"
     FIRST_NAME_VERBOSE_NAME = "Имя"
@@ -123,6 +124,14 @@ class CustomUserCfg:
     MAX_LENGTH_NAME = 50
     CUSTOM_USER_VERBOSE_NAME = "user"
     CUSTOM_USER_VERBOSE_NAME_PLURAL = "users"
+
+
+class UserRoleCfg:
+    NAME_ROLE_DEFAULT = "Участник"
+    NAME_ROLE_VERBOSE_NAME = "Название роли"
+    IS_ACTIVE_VERBOSE_NAME = "Роль активна"
+    USER_ROLE_VERBOSE_NAME = "Роль"
+    USER_ROLE_VERBOSE_NAME_PLURAL = "Роли"
 
 
 class CustomUserManagerCfg:

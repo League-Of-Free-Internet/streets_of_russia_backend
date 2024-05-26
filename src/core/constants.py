@@ -111,3 +111,10 @@ class CustomUserCfg:
     HELP_MSG_PHONE = "Введите номер телефона в формате +7999 999 99 99"
     HELP_MSG_ROLE = "Название роли, к которой относится пользователь"
     MAX_LENGTH_NAME = 50
+
+
+class CustomUserManagerCfg:
+    ERR_MSG_EMAIL = "The Email field must be set"
+    ERR_MSG_SUPERUSER = "Superuser must have is_superuser=True."
+    IS_SUPERUSER = "is_superuser"
+    IS_STAFF = "is_staff"

@@ -1,31 +1,51 @@
+from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 
 from disciplines.models import Disciplines
 from events.models import Events, EventsImageURL
 from news.models import News, NewsImageURL
-from users.models import CustomUser
+from users.models import CustomUser, UserRole
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.Serializer):
     """Сериализатор пользователей."""
 
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
+    password1 = serializers.CharField(write_only=True)
+    password2 = serializers.CharField(write_only=True)
+    email = serializers.EmailField()
+    phone_number = serializers.CharField()
+    role = serializers.PrimaryKeyRelatedField(
+        queryset=UserRole.objects.all(),
+        many=False
+    )
+
     class Meta:
-        fields = "__all__"
+        fields = (
+            "first_name",
+            "last_name",
+            "password1",
+            "password2",
+            "email",
+            "phone_number",
+            "role",
+        )
         model = CustomUser
-        extra_kwargs = {
-            'password': {'write_only': True}
-        }
+
+    @staticmethod
+    def validate_passwords(attrs):
+        password_1 = attrs.get("password1")
+        password_2 = attrs.pop("password2")
+        if password_1 != password_2:
+            raise serializers.ValidationError("Пароли не совпадают.")
+        return attrs
 
     def create(self, validated_data):
-        return CustomUser.objects.create_user(**validated_data)
-
-
-# class NewsImageURLSerializer(serializers.ModelSerializer):
-#     """Сериализатор url-ссылок изображений для новостей."""
-#
-#     class Meta:
-#         fields = ("image_url",)
-#         model = NewsImageURL
+        return CustomUser.objects.create_user(
+            password=make_password(validated_data.pop("password1")),
+            **validated_data
+        )
 
 
 class NewsSerializer(serializers.ModelSerializer):
@@ -41,7 +61,6 @@ class NewsSerializer(serializers.ModelSerializer):
     def get_image_urls(obj):
         image_urls = NewsImageURL.objects.all()
         return [url.image_url for url in image_urls]
-
 
 
 class EventsImageURLSerializer(serializers.PrimaryKeyRelatedField,

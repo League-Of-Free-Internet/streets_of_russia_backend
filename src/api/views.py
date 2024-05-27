@@ -1,4 +1,4 @@
-from rest_framework import permissions, viewsets, response
+from rest_framework import permissions, response, viewsets
 
 from api.pagination import EventsPagination, NewsPagination
 from api.serializers import (DisciplinesNamesListSerializer, EventsSerializer,
@@ -28,15 +28,11 @@ class NewsViewSet(viewsets.ModelViewSet):
 
 class UserViewSet(viewsets.ModelViewSet):
     """
-    Работа с пользователями. Только для администратора.
+    Работа с пользователями.
     """
 
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (permissions.IsAuthenticated,
-                          permissions.IsAdminUser)
-    lookup_field = "email"
-    search_fields = ("email", "phone_number", "first_name", "last_name")
     http_method_names = ("post",)
 
 

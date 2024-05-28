@@ -1,7 +1,12 @@
-from rest_framework import permissions, viewsets
+from rest_framework import permissions, serializers, status, viewsets
+from rest_framework.response import Response
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from api.pagination import EventsPagination, NewsPagination
-from api.serializers import EventsSerializer, NewsSerializer, UserSerializer
+from api.serializers import (DisciplinesNamesListSerializer, EventsSerializer,
+                             NewsSerializer, UserSerializer)
+from disciplines.models import Disciplines
 from events.models import Events
 from news.models import News
 from users.models import CustomUser
@@ -21,20 +26,16 @@ class NewsViewSet(viewsets.ModelViewSet):
     pagination_class = NewsPagination
     http_method_names = ("get", "post", "patch", "delete")
     search_fields = ("name",)
-    lookup_field = "name"
+    lookup_field = "id"
 
 
 class UserViewSet(viewsets.ModelViewSet):
     """
-    Работа с пользователями. Только для администратора.
+    Работа с пользователями.
     """
 
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (permissions.IsAuthenticated,
-                          permissions.IsAdminUser)
-    lookup_field = "email"
-    search_fields = ("email", "phone_number", "first_name", "last_name")
     http_method_names = ("post",)
 
 
@@ -46,10 +47,25 @@ class EventsViewSet(viewsets.ModelViewSet):
     queryset = Events.objects.all()
     serializer_class = EventsSerializer
     pagination_class = EventsPagination
-    # permission_classes = (permissions.IsAuthenticated,
-    #                       permissions.IsAdminUser)
-    lookup_field = "email"
+    permission_classes = (permissions.IsAuthenticated,
+                          permissions.IsAdminUser)
     search_fields = (
         "name", "start_date", "place", "deadline_registration_date"
     )
-    http_method_names = ("get", "post", "patch", "delete")
+    http_method_names = ("get", "post")
+    lookup_field = "id"
+
+
+class DisciplinesViewSet(viewsets.ViewSet):
+    """
+    Работа со спортивными дисциплинами.
+    """
+
+    def list(self, request):
+        disciplines = Disciplines.objects.all()
+        names = [discipline.name for discipline in disciplines]
+        serializer = DisciplinesNamesListSerializer(
+            data={"names": names}
+        )
+        serializer.is_valid(raise_exception=True)
+        return Response(serializer.data)

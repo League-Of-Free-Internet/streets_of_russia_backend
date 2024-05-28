@@ -1,42 +1,66 @@
+from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 
+from disciplines.models import Disciplines
 from events.models import Events, EventsImageURL
 from news.models import News, NewsImageURL
-from users.models import CustomUser
+from users.models import CustomUser, UserRole
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.Serializer):
     """Сериализатор пользователей."""
 
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
+    password1 = serializers.CharField(write_only=True)
+    password2 = serializers.CharField(write_only=True)
+    email = serializers.EmailField()
+    phone_number = serializers.CharField()
+    role = serializers.PrimaryKeyRelatedField(
+        queryset=UserRole.objects.all(),
+        many=False
+    )
+
     class Meta:
-        fields = "__all__"
+        fields = (
+            "first_name",
+            "last_name",
+            "password1",
+            "password2",
+            "email",
+            "phone_number",
+            "role",
+        )
         model = CustomUser
-        extra_kwargs = {
-            'password': {'write_only': True}
-        }
+
+    @staticmethod
+    def validate_passwords(attrs):
+        password_1 = attrs.get("password1")
+        password_2 = attrs.pop("password2")
+        if password_1 != password_2:
+            raise serializers.ValidationError("Пароли не совпадают.")
+        return attrs
 
     def create(self, validated_data):
-        return CustomUser.objects.create_user(**validated_data)
-
-
-class NewsImageURLSerializer(serializers.PrimaryKeyRelatedField,
-                             serializers.ModelSerializer):
-    """Сериализатор url-ссылок изображений для новостей."""
-
-    class Meta:
-        fields = ("image_url",)
-        model = NewsImageURL
+        return CustomUser.objects.create_user(
+            password=make_password(validated_data.pop("password1")),
+            **validated_data
+        )
 
 
 class NewsSerializer(serializers.ModelSerializer):
     """Сериализатор новостей."""
 
-    image_urls = NewsImageURLSerializer(many=True,
-                                        queryset=NewsImageURL.objects.all())
+    image_urls = serializers.SerializerMethodField()
 
     class Meta:
         model = News
         fields = ("id", "name", "description", "image_urls")
+
+    @staticmethod
+    def get_image_urls(obj):
+        image_urls = NewsImageURL.objects.all()
+        return [url.image_url for url in image_urls]
 
 
 class EventsImageURLSerializer(serializers.PrimaryKeyRelatedField,
@@ -65,4 +89,38 @@ class EventsSerializer(serializers.ModelSerializer):
             "place",
             "rules",
             "deadline_registration_date"
+        )
+
+
+class DisciplinesNamesListSerializer(serializers.Serializer):
+    """Сериализатор для вывода списка названий спортивных дисциплин."""
+
+    names = serializers.SerializerMethodField()
+
+    @staticmethod
+    def get_names(obj: Disciplines) -> list[str]:
+        disciplines = Disciplines.objects.all()
+        return [discipline.name for discipline in disciplines]
+
+
+class ShortDisciplinesSerializer(serializers.ModelSerializer):
+    """Сериализатор для вывода краткого содержания спортивных дисциплин."""
+
+    class Meta:
+        model = Disciplines
+        fields = (
+            "image_urls",
+            "description"
+        )
+
+
+class FullDisciplinesSerializer(serializers.ModelSerializer):
+    """Сериализатор для вывода полного содержания спортивных дисциплин."""
+
+    class Meta:
+        model = Disciplines
+        fields = (
+            "image_urls",
+            "description",
+            "rules"
         )

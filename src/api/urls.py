@@ -3,13 +3,16 @@ from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import (TokenObtainPairView,
                                             TokenRefreshView)
 
-from .views import EventsViewSet, NewsViewSet, UserViewSet
+from .views import DisciplinesViewSet, EventsViewSet, NewsViewSet, UserViewSet
 
 router_v1 = DefaultRouter()
 
 router_v1.register(r"events", EventsViewSet, basename="users")
 router_v1.register(r"news", NewsViewSet, basename="news")
 router_v1.register(r"users", UserViewSet, basename="events")
+router_v1.register(
+    r"disciplines", DisciplinesViewSet, basename="disciplines"
+)
 
 registration_uls = [
     path('token/', TokenObtainPairView.as_view(),

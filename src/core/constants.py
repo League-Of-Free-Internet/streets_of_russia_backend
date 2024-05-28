@@ -30,6 +30,8 @@ class NewsImageURLCfg:
     NEWS_IMG_URL_FOREIGN_VERBOSE_NAME = "Новость"
     NEWS_IMG_URL_VERBOSE_NAME = "Ссылка на изображение для новости"
     NEWS_IMG_URL_HELP_MSG = "Укажите URL-адрес изображения о новости"
+    NEWS_IMG_URL_META_VERBOSE_NAME = "Ссылка на новость"
+    NEWS_IMG_URL_META_VERBOSE_NAME_PLURAL = "Ссылки на новости"
 
 
 class EventsCfg:
@@ -72,6 +74,8 @@ class EventsImageURLCfg:
     EVENTS_IMG_URL_FOREIGN_VERBOSE_NAME = "Событие"
     EVENTS_IMG_URL_VERBOSE_NAME = "Ссылка на изображение события"
     EVENTS_IMG_URL_HELP_MSG = "Укажите URL-адрес изображения о событии"
+    EVENTS_IMG_URL_META_VERBOSE_NAME = "Ссылка на событие"
+    EVENTS_IMG_URL_META_VERBOSE_NAME_PLURAL = "Ссылки на событие"
 
 
 class DisciplinesCfg:
@@ -111,6 +115,10 @@ class DisciplinesImageURLCfg:
     DISCIPLINES_IMG_URL_VERBOSE_NAME = "Ссылка на изображение с дисциплиной"
     DISCIPLINES_IMG_URL_HELP_MSG = (
         "Укажите URL-адрес изображения со спортивной дисциплиной"
+    )
+    DISCIPLINES_IMG_URL_META_VERBOSE_NAME = "Ссылка на спортивную дисциплину"
+    DISCIPLINES_IMG_URL_META_VERBOSE_NAME_PLURAL = (
+        "Ссылки на спортивную дисциплину"
     )
 
 
@@ -210,8 +218,8 @@ class MemberRoleCfg:
     NAME_VERBOSE_NAME = "Название роли"
     NAME_DEFAULT = "Общественный деятель"
     IS_ACTIVE_VERBOSE_NAME = "Роль активна",
-    MEMBER_ROLE_VERBOSE_NAME = "Роль"
-    MEMBER_ROLE_VERBOSE_NAME_PLURAL = "Роли"
+    MEMBER_ROLE_VERBOSE_NAME = "Роль участника"
+    MEMBER_ROLE_VERBOSE_NAME_PLURAL = "Роли участников"
 
 
 class PartnerLogoCfg:

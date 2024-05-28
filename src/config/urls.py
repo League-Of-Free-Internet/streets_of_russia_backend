@@ -1,12 +1,8 @@
-from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
-from rest_framework_simplejwt.authentication import JWTAuthentication
-
-from config import settings
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -17,8 +13,7 @@ schema_view = get_schema_view(
         license=openapi.License(name="MIT license"),
     ),
     public=True,
-    authentication_classes=[JWTAuthentication],
-    permission_classes=[permissions.AllowAny]
+    permission_classes=[permissions.AllowAny],
 )
 
 urlpatterns = [
@@ -40,9 +35,3 @@ urlpatterns = [
         name="schema-redoc",
     )
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL,
-                          document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)

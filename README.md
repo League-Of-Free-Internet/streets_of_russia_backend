@@ -5,7 +5,7 @@
   <a href="https://github.com/League-Of-Free-Internet">
     <img src="https://avatars.githubusercontent.com/u/156543782?s=400&u=7125039f153801ba2b620fd12b655afd690cb7aa&v=4" height="250">
   </a>
-  <h1><a href="https://github.com/League-Of-Free-Internet/empty_project">Empty Project</a> - Python for Every One</h1>
+  <h1><a href="https://streetrussia.ru/">Улицы России</a> - начинаются с тебя</h1>
 <!-- Labels: -->
   <!-- First row: -->
   <a href="https://github.com/League-Of-Free-Internet/empty_project">
@@ -33,7 +33,10 @@
 
 > На стадии разработки.
 
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.
+Улицы России это проект единственной общероссийской организации в такой сфере, которая способствует
+развитию уличных культур: воркаут, паркур, граффити, хип хоп и другие.
+Улицы России ломают стереотипы о том, что это агрессивный и травмоопасный спорт
+И доказывают, что этим может заниматься любой.
 
 ## Документация для работы в команде над проектом
 
@@ -53,6 +56,7 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula 
 ### Общая структура проекта:
 ```
 ├──.github/                 # Файлы и настройки, связанные с GitHub/Github actions
+├──infra/                   # Директория с docker compose
 ├──requrements/             # Директория с файлами зависимостей
 │   ├── develop.txt         # Файл со списком зависимостей для разработки
 │   └── production.txt      # Файл со списком зависимостей для продуктовой версии

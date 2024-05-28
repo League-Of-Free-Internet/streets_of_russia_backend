@@ -1,4 +1,7 @@
-from rest_framework import permissions, response, viewsets
+from rest_framework import permissions, serializers, status, viewsets
+from rest_framework.response import Response
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from api.pagination import EventsPagination, NewsPagination
 from api.serializers import (DisciplinesNamesListSerializer, EventsSerializer,
@@ -65,4 +68,4 @@ class DisciplinesViewSet(viewsets.ViewSet):
             data={"names": names}
         )
         serializer.is_valid(raise_exception=True)
-        return response.Response(serializer.data)
+        return Response(serializer.data)

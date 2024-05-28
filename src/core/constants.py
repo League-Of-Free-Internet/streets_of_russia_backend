@@ -218,8 +218,8 @@ class MemberRoleCfg:
     NAME_VERBOSE_NAME = "Название роли"
     NAME_DEFAULT = "Общественный деятель"
     IS_ACTIVE_VERBOSE_NAME = "Роль активна",
-    MEMBER_ROLE_VERBOSE_NAME = "Роль"
-    MEMBER_ROLE_VERBOSE_NAME_PLURAL = "Роли"
+    MEMBER_ROLE_VERBOSE_NAME = "Роль участника"
+    MEMBER_ROLE_VERBOSE_NAME_PLURAL = "Роли участников"
 
 
 class PartnerLogoCfg:

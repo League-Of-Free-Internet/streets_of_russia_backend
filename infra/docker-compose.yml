@@ -12,10 +12,7 @@ services:
       - pg_data_production:/var/lib/postgresql/data
 
   backend:
-#    image: chemisto/street_russia_backend:v1.0.1
-    build:
-      context: ../
-      dockerfile: Dockerfile
+    image: chemisto/street_russia_backend:v1.0.1
     env_file: ../.env
     volumes:
       - static:/app/static

@@ -3,7 +3,7 @@ import requests
 from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
 from rest_framework import status
-from constants import MediaValidatorCfg
+from core.constants import MediaValidatorCfg
 
 
 def validate_image_url(url):

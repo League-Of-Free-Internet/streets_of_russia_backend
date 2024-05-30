@@ -3,7 +3,7 @@ from django.db import models
 from core.constants import (MAX_LENGTH, MAX_LENGTH_DEFAULT, MAX_LIST_LENGTH,
                             AboutCfg, BannerVideoCfg, BrandBookCfg,
                             MemberRoleCfg, OurMemberCfg, PartnerLogoCfg)
-from core.validators import validate_image_url
+from core.validators import validate_image_url, validate_url_video
 
 
 class BannerVideo(models.Model):
@@ -13,6 +13,7 @@ class BannerVideo(models.Model):
         unique=True,
         verbose_name=BannerVideoCfg.VIDEO_URL_VERBOSE_NAME,
         help_text=BannerVideoCfg.HELP_MSG_VIDEO,
+        validators=(validate_url_video,)
     )
 
     class Meta:

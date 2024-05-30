@@ -3,6 +3,7 @@ from django.utils.safestring import mark_safe
 
 from core.constants import (MAX_LENGTH, MAX_LENGTH_DEFAULT, MAX_LIST_LENGTH,
                             NewsCfg, NewsImageURLCfg)
+from core.validators import validate_image_url
 
 
 class News(models.Model):
@@ -49,6 +50,7 @@ class NewsImageURL(models.Model):
         unique=True,
         verbose_name=NewsImageURLCfg.NEWS_IMG_URL_VERBOSE_NAME,
         help_text=NewsImageURLCfg.NEWS_IMG_URL_HELP_MSG,
+        validators=[validate_image_url],
     )
 
     def image_tag(self):

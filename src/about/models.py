@@ -3,6 +3,7 @@ from django.db import models
 from core.constants import (MAX_LENGTH, MAX_LENGTH_DEFAULT, MAX_LIST_LENGTH,
                             AboutCfg, BannerVideoCfg, BrandBookCfg,
                             MemberRoleCfg, OurMemberCfg, PartnerLogoCfg)
+from core.validators import validate_image_url
 
 
 class BannerVideo(models.Model):
@@ -35,6 +36,7 @@ class OurMembers(models.Model):
         unique=True,
         verbose_name=OurMemberCfg.IMAGE_URL_VERBOSE_NAME,
         help_text=OurMemberCfg.IMAGE_URL_HELP_TEXT,
+        validators=(validate_image_url,)
     )
     name = models.CharField(
         max_length=MAX_LENGTH_DEFAULT,
@@ -93,6 +95,7 @@ class About(models.Model):
         null=True,
         verbose_name=AboutCfg.IMAGE_URL_VERBOSE_NAME,
         help_text=AboutCfg.HELP_MSG_IMG,
+        validators=(validate_image_url,)
     )
 
     class Meta:
@@ -115,6 +118,7 @@ class PartnerLogo(models.Model):
         unique=True,
         verbose_name=PartnerLogoCfg.IMAGE_URL_VERBOSE_NAME,
         help_text=AboutCfg.HELP_MSG_IMG,
+        validators=(validate_image_url, )
     )
 
     class Meta:

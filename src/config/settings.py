@@ -78,7 +78,7 @@ else:
             "ENGINE": os.getenv(
                 "DB_ENGINE", default="django.db.backends.postgresql"
             ),
-            "POSTGRES_NAME": os.getenv(
+            "NAME": os.getenv(
                 "DB_NAME", default="default_db_name"
             ),
             "POSTGRES_USER": os.getenv(

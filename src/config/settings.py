@@ -84,7 +84,7 @@ else:
             "USER": os.getenv(
                 "POSTGRES_USER", default="default_db_user"
             ),
-            "PASSWORD": os.getenv(
+            "POSTGRES_PASSWORD": os.getenv(
                 "POSTGRES_PASSWORD", default="default_db_password"
             ),
             "HOST": os.getenv(

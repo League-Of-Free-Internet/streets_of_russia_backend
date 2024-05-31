@@ -14,16 +14,8 @@ env:
   DB_PORT: ${{ secrets.DB_PORT }}
 
 jobs:
-  tests:
-    name: Test project
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.10", "3.11", "3.12"]
-    defaults:
-      run:
-        working-directory: ./src
   build:
+    name: Build Postgres Database for tests
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -39,6 +31,16 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+
+  tests:
+    name: Test project
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+    defaults:
+      run:
+        working-directory: ./src
     steps:
     - name: Checkout code
       uses: actions/checkout@v4

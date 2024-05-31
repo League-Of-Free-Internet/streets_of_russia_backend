@@ -3,6 +3,24 @@ MAX_LENGTH = 5000
 MAX_LIST_LENGTH = 15
 
 
+class MediaValidatorCfg:
+    """
+    Настройки для валидации ссылок
+    на изображения и видео.
+    """
+    IMAGE = "image"
+    VIDEO = "video"
+    TEXT = "text"
+    CONTENT_TYPE = "content-type"
+    URL_ERR_MSG = "Укажите корректный URL-адрес"
+    URL_ERR_IMG = "URL-адрес не указывает на изображение"
+    URL_ERR_VID = "URL-адрес не указывает на видео"
+    ACCESS_ERR_MSG = "Не удалось получить доступ к ссылке. "
+    YT_REGEX = (r"(https?://)?(www\.)?"
+                r"(youtube|youtu|youtube-nocookie)\.(com|be)/"
+                r"(watch\?v=|embed/|v/|.+\?v=)?([^&=%\?]{11})")
+
+
 class NewsCfg:
     """
     Настройки для модели News.

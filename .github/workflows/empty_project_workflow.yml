@@ -3,7 +3,7 @@ name: App code style workflow
 on: [push]
 
 env:
-  DEBUG: ${{ secrets.ALLOWED_HOSTS }}
+  DEBUG: ${{ secrets.DEBUG }}
   ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
   SECRET_KEY: ${{ secrets.SECRET_KEY }}
   DB_ENGINE: ${{ secrets.DB_ENGINE }}

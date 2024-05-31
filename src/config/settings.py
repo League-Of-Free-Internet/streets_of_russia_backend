@@ -1,4 +1,3 @@
-import json
 import os
 from datetime import timedelta
 from distutils.util import strtobool
@@ -10,12 +9,12 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY", default="0123456789")
 
-DEBUG = os.getenv("DEBUG")
+DEBUG = os.getenv("DEBUG", default="True")
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS',
-                          default='127.0.0.1, localhost').split(', ')
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS",
+                          default="127.0.0.1, localhost").split(", ")
 
 INSTALLED_APPS = [
     "django.contrib.admin",

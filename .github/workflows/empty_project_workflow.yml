@@ -1,6 +1,6 @@
 name: App code style workflow
 
-on: [push]
+on: [ push ]
 
 env:
   DEBUG: ${{ secrets.DEBUG }}
@@ -17,6 +17,9 @@ jobs:
   build:
     name: Build Postgres Database for tests
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [ "3.10", "3.11", "3.12" ]
     services:
       postgres:
         image: postgres:latest
@@ -31,34 +34,44 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: pip install -r ../requirements/develop.txt
+
+      - name: Set up database
+        run: |
+          python manage.py migrate
 
   tests:
     name: Test project
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.10", "3.11", "3.12"]
-    defaults:
-      run:
-        working-directory: ./src
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
 
-    - name: Install dependencies
-      run: pip install -r ../requirements/develop.txt
+      - name: Install dependencies
+        run: pip install -r ../requirements/develop.txt
 
-    - name: Test with flake8
-      run: flake8
+      - name: Test with flake8
+        run: flake8
 
-    - name: Test with black
-      run: black .
+      - name: Test with black
+        run: black .
 
-    - name: Django Unit Test
-      run: |
-        python manage.py test
+      - name: Django Unit Test
+        run: |
+          python manage.py test

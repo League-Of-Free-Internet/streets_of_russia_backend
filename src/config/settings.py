@@ -75,12 +75,12 @@ if strtobool(os.getenv("DEBUG", default="True")):
 else:
     DATABASES = {
         "default": {
-            "ENGINE": os.getenv('DB_ENGINE'),
-            "NAME": os.getenv('POSTGRES_DB'),
-            "USER": os.getenv('POSTGRES_USER'),
-            "PASSWORD": os.getenv('POSTGRES_PASSWORD'),
-            "HOST": os.getenv('DB_HOST'),
-            "PORT": os.getenv('DB_PORT')
+            "ENGINE": os.getenv("DB_ENGINE"),
+            "NAME": os.getenv("POSTGRES_DB"),
+            "USER": os.getenv("POSTGRES_USER"),
+            "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
+            "HOST": os.getenv("DB_HOST"),
+            "PORT": os.getenv("DB_PORT")
         }
     }
 

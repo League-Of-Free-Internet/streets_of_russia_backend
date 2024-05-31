@@ -30,7 +30,6 @@ jobs:
     - name: Test with black
       run: black .
 
-    - name: Django Test
+    - name: Django Unit Test
       run: |
-        cd src/
         python manage.py test

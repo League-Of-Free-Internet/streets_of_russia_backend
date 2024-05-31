@@ -2,6 +2,17 @@ name: App code style workflow
 
 on: [push]
 
+env:
+  DEBUG: ${{ secrets.ALLOWED_HOSTS }}
+  ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+  SECRET_KEY: ${{ secrets.SECRET_KEY }}
+  DB_ENGINE: ${{ secrets.DB_ENGINE }}
+  DB_NAME: ${{ secrets.DB_NAME }}
+  POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+  POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+  DB_HOST: ${{ secrets.DB_HOST }}
+  DB_PORT: ${{ secrets.DB_PORT }}
+
 jobs:
   tests:
     name: Test project
@@ -30,9 +41,6 @@ jobs:
     - name: Test with black
       run: black .
 
-    - name: Set environment variables and Django Unit Test
+    - name: Django Unit Test
       run: |
-        touch .env
-        echo DEBUG=${{ secrets.DEBUG }} >> .env
-        echo ALLOWED_HOSTS=${{ secrets.ALLOWED_HOSTS }} >> .env
         python manage.py test

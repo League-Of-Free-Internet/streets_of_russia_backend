@@ -65,7 +65,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-if strtobool(os.getenv('DEBUG')):
+if strtobool(os.getenv('DEBUG', default="True")):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',

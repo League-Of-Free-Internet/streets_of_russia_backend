@@ -30,6 +30,12 @@ jobs:
     - name: Test with black
       run: black .
 
+    - name: Set environment variables
+      run:
+        touch .env
+        echo DEBUG=${{ secrets.DEBUG }} >> .env
+        echo ALLOWED_HOSTS=${{ secrets.ALLOWED_HOSTS }} >> .env
+
     - name: Django Unit Test
       run: |
         python manage.py test

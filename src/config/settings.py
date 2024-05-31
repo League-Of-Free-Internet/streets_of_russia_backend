@@ -14,7 +14,8 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = os.getenv("DEBUG")
 
-ALLOWED_HOSTS = json.loads(os.getenv("ALLOWED_HOSTS"))
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS',
+                          default='127.0.0.1, localhost').split(', ')
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -84,7 +85,6 @@ else:
         }
     }
 
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -110,7 +110,6 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "static"
-
 
 MEDIA_URL = "/assets/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")

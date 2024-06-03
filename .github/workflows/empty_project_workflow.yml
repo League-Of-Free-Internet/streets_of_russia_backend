@@ -61,7 +61,7 @@ jobs:
 
       - name: Set up database
         run: |
-          python ../empty_project/src/manage.py makemigrations
+          python ../empty_project/src/manage.py makemigrations users
           python ../empty_project/src/manage.py migrate
 
       - name: Django Unit Test

@@ -50,7 +50,7 @@ jobs:
 
       - name: Set up database
         run: |
-          cd ../
+          cd ../empty_project/
           ls -a
           python manage.py migrate
 

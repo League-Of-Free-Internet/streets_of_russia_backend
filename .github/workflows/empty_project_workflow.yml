@@ -15,7 +15,7 @@ env:
 
 jobs:
   build:
-    name: Build Postgres Database for tests
+    name: Test Project
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -49,22 +49,6 @@ jobs:
       - name: Set up database
         run: |
           python manage.py migrate
-
-  tests:
-    name: Test project
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Install dependencies
-        run: pip install -r ../requirements/develop.txt
 
       - name: Test with flake8
         run: flake8

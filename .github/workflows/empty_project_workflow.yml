@@ -44,7 +44,9 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install dependencies
-        run: pip install -r ../requirements/develop.txt
+        run: |
+          pwd
+          pip install -r ../requirements/develop.txt
 
       - name: Set up database
         run: |

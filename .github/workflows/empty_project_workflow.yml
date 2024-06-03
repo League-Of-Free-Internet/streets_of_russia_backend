@@ -50,7 +50,7 @@ jobs:
 
       - name: Set up database
         run: |
-          cd ../src/
+          pwd
           python manage.py migrate
 
       - name: Test with flake8

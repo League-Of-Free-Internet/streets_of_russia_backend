@@ -4,6 +4,7 @@ on: [ push ]
 
 jobs:
   build:
+    name: Test Project ${{ matrix.python-version }}
     runs-on: ubuntu-latest
     env:
       DEBUG: ${{ secrets.DEBUG }}
@@ -15,6 +16,7 @@ jobs:
       POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
       DB_HOST: ${{ secrets.DB_HOST }}
       DB_PORT: ${{ secrets.DB_PORT }}
+      GITHUB_WORKFLOW: True
     services:
       postgres:
         image: postgres:latest

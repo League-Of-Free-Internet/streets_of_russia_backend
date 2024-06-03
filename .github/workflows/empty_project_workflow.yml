@@ -45,8 +45,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd ..
-          cd empty_project/requirements/
+          cd ../empty_project/requirements/
           pip install -r develop.txt
 
       - name: Set up database

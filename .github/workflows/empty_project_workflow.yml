@@ -65,4 +65,4 @@ jobs:
           python ../empty_project/src/manage.py migrate
 
       - name: Django Unit Test
-        run: python manage.py test
+        run: python ../empty_project/src/manage.py test

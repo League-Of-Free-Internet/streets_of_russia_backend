@@ -45,7 +45,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pwd
+          cd ..
+          ls -a
           pip install -r ../requirements/develop.txt
 
       - name: Set up database

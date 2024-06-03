@@ -50,8 +50,7 @@ jobs:
 
       - name: Set up database
         run: |
-          cd ../empty_project/
-          ls -a
+          cd ../empty_project/src/
           python manage.py migrate
 
       - name: Test with flake8

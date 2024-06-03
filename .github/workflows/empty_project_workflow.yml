@@ -46,10 +46,14 @@ jobs:
       - name: Install dependencies
         run: |
           cd ../empty_project/requirements/
+          python -m pip install --upgrade pip
           pip install -r develop.txt
 
       - name: Set up database
         run: |
+          echo "Waiting for PostgreSQL..."
+          while ! nc -z localhost 5432; do sleep 1; done
+          echo "PostgreSQL started"
           cd ../empty_project/src/
           python manage.py migrate
 

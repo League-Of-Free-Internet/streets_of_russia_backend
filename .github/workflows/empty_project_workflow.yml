@@ -45,7 +45,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd ../requirements/
+          cd ..
+          cd empty_project/
           ls -a
           pip install -r develop.txt
 

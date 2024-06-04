@@ -76,7 +76,7 @@ jobs:
           python ${{ env.PROJECT_FOLDER }}/src/manage.py migrate
 
       - name: Django Unit Test
-        run: python /src/manage.py test
+        run: python ${{ env.PROJECT_FOLDER }}/src/manage.py test
 
   build_and_push_to_docker_hub:
     name: Push Docker image to Docker Hub

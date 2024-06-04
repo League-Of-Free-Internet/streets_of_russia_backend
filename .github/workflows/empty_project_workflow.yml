@@ -118,7 +118,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
-            cd ${{ env.PROJECT_FOLDER }}
+            cd ${{ env.SERVER_PROJECT_FOLDER }}
             docker compose down
             docker compose pull
             touch .env

@@ -119,6 +119,7 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
             cd ${{ env.SERVER_PROJECT_FOLDER }}
+            ls -a
             docker compose down
             docker compose pull
             touch .env

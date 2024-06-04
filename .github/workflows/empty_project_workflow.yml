@@ -43,9 +43,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          ls -a
-          cd ../empty_project/
-          pip install -r requirements/develop.txt
+          pip install -r {{ env.PROJECT_FOLDER }}/requirements/develop.txt
 
       - name: Test with flake8
         run: flake8
@@ -74,11 +72,11 @@ jobs:
 
       - name: Set up database
         run: |
-          python PROJECT_FOLDER/src/manage.py makemigrations users
-          python PROJECT_FOLDER/src/manage.py migrate
+          python {{ env.PROJECT_FOLDER }}/src/manage.py makemigrations users
+          python {{ env.PROJECT_FOLDER }}/src/manage.py migrate
 
       - name: Django Unit Test
-        run: python PROJECT_FOLDER/src/manage.py test
+        run: python {{ env.PROJECT_FOLDER }}/src/manage.py test
 
   build_and_push_to_docker_hub:
     name: Push Docker image to Docker Hub
@@ -102,7 +100,7 @@ jobs:
       - name: Push to Docker Hub
         uses: docker/build-push-action@v3
         with:
-          file: PROJECT_FOLDER/Dockerfile
+          file: {{ env.PROJECT_FOLDER }}/Dockerfile
           push: true
           tags: chemisto/street_russia_backend:latest
 

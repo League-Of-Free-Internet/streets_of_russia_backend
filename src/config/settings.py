@@ -1,4 +1,3 @@
-import json
 import os
 from datetime import timedelta
 from distutils.util import strtobool
@@ -10,11 +9,12 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY", default="0123456789")
 
-DEBUG = os.getenv("DEBUG")
+DEBUG = os.getenv("DEBUG", default="True")
 
-ALLOWED_HOSTS = json.loads(os.getenv("ALLOWED_HOSTS"))
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS",
+                          default="127.0.0.1, localhost").split(", ")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -65,25 +65,48 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-if strtobool(os.getenv('DEBUG')):
+if strtobool(os.getenv("DEBUG", default="True")):
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        "default": {
+            "ENGINE": 'django.db.backends.sqlite3',
+            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
         }
     }
 else:
     DATABASES = {
-        'default': {
-            'ENGINE': os.getenv('DB_ENGINE'),
-            'NAME': os.getenv('POSTGRES_DB'),
-            'USER': os.getenv('POSTGRES_USER'),
-            'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-            'HOST': os.getenv('DB_HOST'),
-            'PORT': os.getenv('DB_PORT')
+        "default": {
+            "ENGINE": os.getenv(
+                "DB_ENGINE", default="django.db.backends.postgresql"
+            ),
+            "NAME": os.getenv(
+                "DB_NAME", default="default_db_name"
+            ),
+            "POSTGRES_USER": os.getenv(
+                "POSTGRES_USER", default="default_db_user"
+            ),
+            "POSTGRES_PASSWORD": os.getenv(
+                "POSTGRES_PASSWORD", default="default_db_password"
+            ),
+            "POSTGRES_HOST": os.getenv(
+                "DB_HOST", default="localhost"
+            ),
+            "POSTGRES_PORT": os.getenv(
+                "DB_PORT", default="5432"
+            )
         }
     }
 
+if os.environ.get('GITHUB_WORKFLOW'):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'github_action_db',
+            'USER': 'postgres',
+            'PASSWORD': 'postgres',
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
+        }
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -110,7 +133,6 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "static"
-
 
 MEDIA_URL = "/assets/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")

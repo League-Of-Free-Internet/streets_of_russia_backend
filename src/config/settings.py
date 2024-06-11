@@ -71,7 +71,7 @@ if os.environ.get('DEBUG').lower() == 'true':
             "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
         }
     }
-elif os.environ.get('GITHUB_WORKFLOW').lower() == 'true':
+elif os.environ.get('GITHUB_WORKFLOW'):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',

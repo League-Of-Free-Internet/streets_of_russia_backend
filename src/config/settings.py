@@ -71,6 +71,17 @@ if os.environ.get('DEBUG') == 'True':
             "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
         }
     }
+elif os.environ.get('GITHUB_WORKFLOW') == 'True':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'github_action_db',
+            'USER': 'postgres',
+            'PASSWORD': 'postgres',
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
+        }
+    }
 else:
     DATABASES = {
         "default": {
@@ -92,18 +103,6 @@ else:
             "PORT": os.getenv(
                 "DB_PORT", default="5432"
             )
-        }
-    }
-
-if os.environ.get('GITHUB_WORKFLOW') == 'True':
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'github_action_db',
-            'USER': 'postgres',
-            'PASSWORD': 'postgres',
-            'HOST': '127.0.0.1',
-            'PORT': '5432',
         }
     }
 

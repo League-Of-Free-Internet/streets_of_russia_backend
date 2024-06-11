@@ -8,6 +8,6 @@ RUN pip3 install --upgrade pip
 
 RUN pip3 install -r ./requirements/production.txt --no-cache-dir
 
-RUN apt-get update && apt-get install -y nano
+COPY src/ .
 
-COPY src .
+RUN apt-get update && apt-get install -y nano

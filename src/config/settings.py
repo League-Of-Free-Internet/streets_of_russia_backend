@@ -64,14 +64,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-if os.environ.get('DEBUG') == 'True':
+if os.environ.get('DEBUG').lower() == 'true':
     DATABASES = {
         "default": {
             "ENGINE": 'django.db.backends.sqlite3',
             "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
         }
     }
-elif os.environ.get('GITHUB_WORKFLOW') == 'True':
+elif os.environ.get('GITHUB_WORKFLOW').lower() == 'true':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',

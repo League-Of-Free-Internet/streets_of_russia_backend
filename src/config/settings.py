@@ -1,6 +1,5 @@
 import os
 from datetime import timedelta
-from distutils.util import strtobool
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -65,7 +64,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-if strtobool(os.getenv("DEBUG", default="True")):
+if os.environ.get('DEBUG') == 'True':
     DATABASES = {
         "default": {
             "ENGINE": 'django.db.backends.sqlite3',
@@ -81,16 +80,16 @@ else:
             "NAME": os.getenv(
                 "DB_NAME", default="default_db_name"
             ),
-            "POSTGRES_USER": os.getenv(
+            "USER": os.getenv(
                 "POSTGRES_USER", default="default_db_user"
             ),
-            "POSTGRES_PASSWORD": os.getenv(
+            "PASSWORD": os.getenv(
                 "POSTGRES_PASSWORD", default="default_db_password"
             ),
-            "POSTGRES_HOST": os.getenv(
+            "HOST": os.getenv(
                 "DB_HOST", default="localhost"
             ),
-            "POSTGRES_PORT": os.getenv(
+            "PORT": os.getenv(
                 "DB_PORT", default="5432"
             )
         }

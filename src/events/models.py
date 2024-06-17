@@ -4,6 +4,7 @@ from django.utils.safestring import mark_safe
 
 from core.constants import (MAX_LENGTH, MAX_LENGTH_DEFAULT, MAX_LIST_LENGTH,
                             EventsCfg, EventsImageURLCfg)
+from core.validators import validate_image_url
 
 
 class Events(models.Model):
@@ -73,6 +74,7 @@ class EventsImageURL(models.Model):
         unique=True,
         verbose_name=EventsImageURLCfg.EVENTS_IMG_URL_VERBOSE_NAME,
         help_text=EventsImageURLCfg.EVENTS_IMG_URL_HELP_MSG,
+        validators=(validate_image_url,)
     )
 
     def image_tag(self):

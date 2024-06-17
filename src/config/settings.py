@@ -1,7 +1,5 @@
-import json
 import os
 from datetime import timedelta
-from distutils.util import strtobool
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -10,11 +8,12 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY", default="0123456789")
 
-DEBUG = os.getenv("DEBUG")
+DEBUG = os.getenv("DEBUG", default="True")
 
-ALLOWED_HOSTS = json.loads(os.getenv("ALLOWED_HOSTS"))
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS",
+                          default="127.0.0.1, localhost").split(", ")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -65,25 +64,47 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-if strtobool(os.getenv('DEBUG')):
+if os.environ.get('DEBUG').lower() == 'true':
+    DATABASES = {
+        "default": {
+            "ENGINE": 'django.db.backends.sqlite3',
+            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        }
+    }
+elif os.environ.get('GITHUB_WORKFLOW'):
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'github_action_db',
+            'USER': 'postgres',
+            'PASSWORD': 'postgres',
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
         }
     }
 else:
     DATABASES = {
-        'default': {
-            'ENGINE': os.getenv('DB_ENGINE'),
-            'NAME': os.getenv('POSTGRES_DB'),
-            'USER': os.getenv('POSTGRES_USER'),
-            'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-            'HOST': os.getenv('DB_HOST'),
-            'PORT': os.getenv('DB_PORT')
+        "default": {
+            "ENGINE": os.getenv(
+                "DB_ENGINE", default="django.db.backends.postgresql"
+            ),
+            "NAME": os.getenv(
+                "DB_NAME", default="default_db_name"
+            ),
+            "USER": os.getenv(
+                "POSTGRES_USER", default="default_db_user"
+            ),
+            "PASSWORD": os.getenv(
+                "POSTGRES_PASSWORD", default="default_db_password"
+            ),
+            "HOST": os.getenv(
+                "DB_HOST", default="localhost"
+            ),
+            "PORT": os.getenv(
+                "DB_PORT", default="5432"
+            )
         }
     }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -111,10 +132,6 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "static"
 
-
-MEDIA_URL = "/assets/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
-
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.CustomUser"
@@ -137,25 +154,4 @@ SIMPLE_JWT = {
 DJOSER = {
     'LOGIN_FIELD': 'email',
     'HIDE_USERS': False,
-}
-
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "handlers": {
-        "console": {
-            "class": "logging.StreamHandler",
-        },
-    },
-    "root": {
-        "handlers": ["console"],
-        "level": "WARNING",
-    },
-    "loggers": {
-        "django": {
-            "handlers": ["console"],
-            "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"),
-            "propagate": False,
-        },
-    },
 }

@@ -16,8 +16,8 @@ class NewsModelTest(TestCase):
         news = NewsModelTest.news
         field_verboses = {
             "name": "Название новости",
-            "pub_date": "Дата",
-            "image_urls": "Изображения",
+            "pub_date": "Дата публикации новости",
+            "image_urls": "Добавьте ссылки на изображения",
             "description": "Содержание новости",
         }
         for value, expected in field_verboses.items():
@@ -58,7 +58,7 @@ class NewsImageURLModelTest(TestCase):
         image = NewsImageURLModelTest.image
         field_verboses = {
             "news": "Новость",
-            "image_url": "Ссылка на изображение",
+            "image_url": "Ссылка на изображение для новости",
         }
         for value, expected in field_verboses.items():
             with self.subTest(value=value):
@@ -70,7 +70,7 @@ class NewsImageURLModelTest(TestCase):
         image = NewsImageURLModelTest.image
         field_help_texts = {
             "news": "",
-            "image_url": "Укажите URL-адрес изображения",
+            "image_url": "Укажите URL-адрес изображения о новости",
         }
         for value, expected in field_help_texts.items():
             with self.subTest(value=value):

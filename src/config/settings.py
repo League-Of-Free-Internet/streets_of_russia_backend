@@ -2,9 +2,13 @@ import os
 from datetime import timedelta
 from pathlib import Path
 
-from dotenv import load_dotenv
+from dotenv import find_dotenv, load_dotenv
 
-load_dotenv()
+dotenv_path = find_dotenv('.env')
+load_dotenv(dotenv_path)
+
+dotenv_db_path = find_dotenv('.env.db')
+load_dotenv(dotenv_db_path)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 

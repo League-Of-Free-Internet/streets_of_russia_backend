@@ -4,17 +4,17 @@ from pathlib import Path
 
 from dotenv import find_dotenv, load_dotenv
 
-dotenv_path = find_dotenv('.env')
+dotenv_path = find_dotenv(".env")
 load_dotenv(dotenv_path)
 
-dotenv_db_path = find_dotenv('.env.db')
+dotenv_db_path = find_dotenv(".env.db")
 load_dotenv(dotenv_db_path)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("SECRET_KEY", default="0123456789")
 
-DEBUG = os.getenv("DEBUG", default="True")
+DEBUG = os.getenv("DEBUG", default="True").lower() == "true"
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS",
                           default="127.0.0.1, localhost").split(", ")
@@ -68,22 +68,22 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-if os.environ.get('DEBUG').lower() == 'true':
+if os.environ.get("DEBUG").lower() == "true":
     DATABASES = {
         "default": {
-            "ENGINE": 'django.db.backends.sqlite3',
+            "ENGINE": "django.db.backends.sqlite3",
             "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
         }
     }
-elif os.environ.get('GITHUB_WORKFLOW'):
+elif os.environ.get("GITHUB_WORKFLOW"):
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'github_action_db',
-            'USER': 'postgres',
-            'PASSWORD': 'postgres',
-            'HOST': '127.0.0.1',
-            'PORT': '5432',
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "github_action_db",
+            "USER": "postgres",
+            "PASSWORD": "postgres",
+            "HOST": "127.0.0.1",
+            "PORT": "5432",
         }
     }
 else:
@@ -147,8 +147,8 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 100
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "PAGE_SIZE": 100
 }
 
 SIMPLE_JWT = {
@@ -156,6 +156,6 @@ SIMPLE_JWT = {
 }
 
 DJOSER = {
-    'LOGIN_FIELD': 'email',
-    'HIDE_USERS': False,
+    "LOGIN_FIELD": "email",
+    "HIDE_USERS": False,
 }

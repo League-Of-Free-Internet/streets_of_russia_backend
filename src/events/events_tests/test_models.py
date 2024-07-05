@@ -1,7 +1,7 @@
 from django.test import TestCase
 
-from events.models import Events, EventsImageURL
 from disciplines.models import Disciplines
+from events.models import Events, EventsImageURL
 
 
 class EventsModelTest(TestCase):
@@ -26,7 +26,9 @@ class EventsModelTest(TestCase):
             "description": "Описание события",
             "place": "Место события",
             "rules": "Правила проведения события",
-            "deadline_registration_date": "Дата окончания регистрации на событие",
+            "deadline_registration_date": (
+                "Дата окончания регистрации на событие"
+            ),
             "discipline": "Дисциплина для события"
         }
         for value, expected in field_verboses.items():

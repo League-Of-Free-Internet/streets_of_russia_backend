@@ -113,7 +113,7 @@ class DisciplinesCfg:
     DISCIPLINES_IMG_URLS_HELP_MSG = (
         "Добавьте ссылки на изображения с дисциплиной"
     )
-    DISCIPLINES_RULES_VERBOSE_NAME = "Правила спортивных дисциплин"
+    DISCIPLINES_RULES_VERBOSE_NAME = "Правила спортивной дисциплины"
     DISCIPLINES_RULES_HELP_MSG = (
         f"Напишите правила дисциплины до {MAX_LENGTH} символов"
     )

@@ -67,7 +67,7 @@ class EventsImageURL(models.Model):
         EventsCfg.EVENTS,
         on_delete=models.CASCADE,
         related_name=EventsImageURLCfg.EVENTS_IMG_URL_FOREIGN_RELATED_NAME,
-        verbose_name=EventsImageURLCfg.EVENTS_IMG_URL_VERBOSE_NAME,
+        verbose_name=EventsImageURLCfg.EVENTS_IMG_URL_FOREIGN_VERBOSE_NAME,
     )
     image_url = models.URLField(
         max_length=MAX_LENGTH_DEFAULT,

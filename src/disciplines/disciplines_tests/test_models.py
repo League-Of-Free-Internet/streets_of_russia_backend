@@ -78,7 +78,7 @@ class DisciplinesImageURLModelTest(TestCase):
                     self.image._meta.get_field(value).help_text, expected
                 )
 
-    def test_image_in_news(self):
+    def test_image_in_disciplines(self):
         news = Disciplines.objects.get(pk=1)
         image = DisciplinesImageURL.objects.get(pk=1)
         self.assertEqual(image, news.image_urls.all()[0])

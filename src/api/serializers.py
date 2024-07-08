@@ -1,7 +1,7 @@
 from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 
-from disciplines.models import Disciplines
+from disciplines.models import Disciplines, DisciplinesImageURL
 from events.models import Events, EventsImageURL
 from news.models import News, NewsImageURL
 from users.models import CustomUser, UserRole
@@ -95,16 +95,13 @@ class EventsSerializer(serializers.ModelSerializer):
 class DisciplinesNamesListSerializer(serializers.Serializer):
     """Сериализатор для вывода списка названий спортивных дисциплин."""
 
-    names = serializers.SerializerMethodField()
-
-    @staticmethod
-    def get_names(obj: Disciplines) -> list[str]:
-        disciplines = Disciplines.objects.all()
-        return [discipline.name for discipline in disciplines]
+    names = serializers.ListField(child=serializers.CharField())
 
 
-class ShortDisciplinesSerializer(serializers.ModelSerializer):
+class DisciplinesShortSerializer(serializers.ModelSerializer):
     """Сериализатор для вывода краткого содержания спортивных дисциплин."""
+
+    image_urls = serializers.SerializerMethodField()
 
     class Meta:
         model = Disciplines
@@ -112,6 +109,11 @@ class ShortDisciplinesSerializer(serializers.ModelSerializer):
             "image_urls",
             "description"
         )
+
+    @staticmethod
+    def get_image_urls(obj):
+        image_urls = DisciplinesImageURL.objects.filter(name=obj.id)
+        return [url.image_url for url in image_urls]
 
 
 class FullDisciplinesSerializer(serializers.ModelSerializer):

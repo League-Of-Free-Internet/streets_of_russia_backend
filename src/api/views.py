@@ -1,10 +1,11 @@
-from rest_framework import permissions, serializers, status, viewsets
+from drf_yasg.utils import swagger_auto_schema
+from rest_framework import mixins, permissions, viewsets
+from rest_framework.exceptions import MethodNotAllowed
 from rest_framework.response import Response
-from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework_simplejwt.views import TokenObtainPairView
 
 from api.pagination import EventsPagination, NewsPagination
-from api.serializers import (DisciplinesNamesListSerializer, EventsSerializer,
+from api.serializers import (DisciplinesNamesListSerializer,
+                             DisciplinesShortSerializer, EventsSerializer,
                              NewsSerializer, UserSerializer)
 from disciplines.models import Disciplines
 from events.models import Events
@@ -56,16 +57,37 @@ class EventsViewSet(viewsets.ModelViewSet):
     lookup_field = "id"
 
 
-class DisciplinesViewSet(viewsets.ViewSet):
+class DisciplinesViewSet(viewsets.ReadOnlyModelViewSet):
     """
-    Работа со спортивными дисциплинами.
+    Получение списка имён всех спортивных дисциплин.
     """
 
-    def list(self, request):
-        disciplines = Disciplines.objects.all()
+    queryset = Disciplines.objects.all()
+    serializer_class = DisciplinesNamesListSerializer
+
+    def list(self, request, *args, **kwargs):
+        disciplines = self.get_queryset()
         names = [discipline.name for discipline in disciplines]
-        serializer = DisciplinesNamesListSerializer(
-            data={"names": names}
-        )
+        serializer = DisciplinesNamesListSerializer(data={"names": names})
         serializer.is_valid(raise_exception=True)
         return Response(serializer.data)
+
+    @swagger_auto_schema(auto_schema=None)
+    def retrieve(self, request, *args, **kwargs):
+        raise MethodNotAllowed('GET')
+
+
+class DisciplinesShortViewSet(mixins.RetrieveModelMixin,
+                              viewsets.GenericViewSet):
+    """
+    Получение краткой информации о спортивной дисциплине
+    по названию дисциплины.
+    """
+
+    queryset = Disciplines.objects.all()
+    serializer_class = DisciplinesShortSerializer
+    lookup_field = 'name'
+
+    @swagger_auto_schema(auto_schema=None)
+    def list(self, request, *args, **kwargs):
+        raise MethodNotAllowed('GET')

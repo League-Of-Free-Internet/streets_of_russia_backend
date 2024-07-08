@@ -1,5 +1,6 @@
 from django.test import TestCase
 
+from core.constants import PK
 from disciplines.models import Disciplines, DisciplinesImageURL
 
 
@@ -79,6 +80,25 @@ class DisciplinesImageURLModelTest(TestCase):
                 )
 
     def test_image_in_disciplines(self):
-        news = Disciplines.objects.get(pk=1)
-        image = DisciplinesImageURL.objects.get(pk=1)
-        self.assertEqual(image, news.image_urls.all()[0])
+        """
+        Тест проверяет, что изображение присутствует
+        в списке изображений спортивной дисциплины.
+        """
+        try:
+            news = Disciplines.objects.get(pk=PK)
+            image = DisciplinesImageURL.objects.get(pk=PK)
+        except Disciplines.DoesNotExist:
+            self.fail(
+                f"Спортивной дисциплины с первичным ключом {PK} не существует"
+            )
+        except DisciplinesImageURL.DoesNotExist:
+            self.fail(
+                f"Объекта с изображением спортивной дисциплины с первичным"
+                f"ключом {PK} не существует"
+            )
+
+        self.assertIn(
+            image, news.image_urls.all(),
+            "Изображения нет в списке всех изображений"
+            "спортивных дисциплин"
+        )

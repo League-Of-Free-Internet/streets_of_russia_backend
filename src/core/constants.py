@@ -1,6 +1,7 @@
 MAX_LENGTH_DEFAULT = 255
 MAX_LENGTH = 5000
 MAX_LIST_LENGTH = 15
+PK = 1
 
 
 class MediaValidatorCfg:

@@ -1,6 +1,7 @@
 MAX_LENGTH_DEFAULT = 255
 MAX_LENGTH = 5000
 MAX_LIST_LENGTH = 15
+PK = 1
 
 
 class MediaValidatorCfg:
@@ -113,7 +114,7 @@ class DisciplinesCfg:
     DISCIPLINES_IMG_URLS_HELP_MSG = (
         "Добавьте ссылки на изображения с дисциплиной"
     )
-    DISCIPLINES_RULES_VERBOSE_NAME = "Правила спортивных дисциплин"
+    DISCIPLINES_RULES_VERBOSE_NAME = "Правила спортивной дисциплины"
     DISCIPLINES_RULES_HELP_MSG = (
         f"Напишите правила дисциплины до {MAX_LENGTH} символов"
     )

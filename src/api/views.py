@@ -5,6 +5,7 @@ from rest_framework.response import Response
 
 from api.pagination import EventsPagination, NewsPagination
 from api.serializers import (DisciplinesNamesListSerializer,
+                             DisciplinesFullSerializer,
                              DisciplinesShortSerializer, EventsSerializer,
                              NewsSerializer, UserSerializer)
 from disciplines.models import Disciplines
@@ -88,6 +89,14 @@ class DisciplinesShortViewSet(mixins.RetrieveModelMixin,
     serializer_class = DisciplinesShortSerializer
     lookup_field = 'name'
 
-    @swagger_auto_schema(auto_schema=None)
-    def list(self, request, *args, **kwargs):
-        raise MethodNotAllowed('GET')
+
+class DisciplinesFullViewSet(mixins.RetrieveModelMixin,
+                             viewsets.GenericViewSet):
+    """
+    Получение полной информации о спортивной дисциплине
+    по названию дисциплины.
+    """
+
+    queryset = Disciplines.objects.all()
+    serializer_class = DisciplinesFullSerializer
+    lookup_field = 'name'

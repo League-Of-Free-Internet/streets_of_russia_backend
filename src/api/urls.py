@@ -3,8 +3,9 @@ from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import (TokenObtainPairView,
                                             TokenRefreshView)
 
-from .views import (DisciplinesShortViewSet, DisciplinesViewSet, EventsViewSet,
-                    NewsViewSet, UserViewSet)
+from api.views import (DisciplinesFullViewSet, DisciplinesShortViewSet,
+                       DisciplinesViewSet, EventsViewSet, NewsViewSet,
+                       UserViewSet)
 
 router_v1 = DefaultRouter()
 
@@ -17,6 +18,10 @@ router_v1.register(
 router_v1.register(
     r"discipline", DisciplinesShortViewSet,
     basename="disciplines-short"
+)
+router_v1.register(
+    r"full-discipline", DisciplinesFullViewSet,
+    basename="disciplines-full"
 )
 
 registration_uls = [

@@ -1,6 +1,7 @@
 from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 
+from core.utils import get_image_urls
 from disciplines.models import Disciplines, DisciplinesImageURL
 from events.models import Events, EventsImageURL
 from news.models import News, NewsImageURL
@@ -112,17 +113,18 @@ class DisciplinesShortSerializer(serializers.ModelSerializer):
 
     @staticmethod
     def get_image_urls(obj):
-        image_urls = DisciplinesImageURL.objects.filter(name=obj.id)
-        return [url.image_url for url in image_urls]
+        return get_image_urls(obj)
 
 
-class FullDisciplinesSerializer(serializers.ModelSerializer):
+class DisciplinesFullSerializer(serializers.ModelSerializer):
     """Сериализатор для вывода полного содержания спортивных дисциплин."""
+
+    image_urls = serializers.SerializerMethodField()
 
     class Meta:
         model = Disciplines
-        fields = (
-            "image_urls",
-            "description",
-            "rules"
-        )
+        exclude = ["id", "name"]
+
+    @staticmethod
+    def get_image_urls(obj):
+        return get_image_urls(obj)

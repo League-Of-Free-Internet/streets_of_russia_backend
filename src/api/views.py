@@ -3,11 +3,12 @@ from rest_framework import mixins, permissions, viewsets
 from rest_framework.exceptions import MethodNotAllowed
 from rest_framework.response import Response
 
-from api.pagination import EventsPagination, NewsPagination
+from api.pagination import NewsPagination
 from api.serializers import (DisciplinesFullSerializer,
                              DisciplinesNamesListSerializer,
                              DisciplinesShortSerializer, EventsSerializer,
                              NewsSerializer, UserSerializer)
+from core.constants import EVENTS_ORDER_FIELD
 from disciplines.models import Disciplines
 from events.models import Events
 from news.models import News
@@ -41,21 +42,25 @@ class UserViewSet(viewsets.ModelViewSet):
     http_method_names = ("post",)
 
 
-class EventsViewSet(viewsets.ModelViewSet):
+class FourLatestEventsViewSet(viewsets.ReadOnlyModelViewSet):
     """
-    Работа с событиями. Только для администратора.
+    Получение списка 4 последних событий. Только для администратора.
     """
 
     queryset = Events.objects.all()
+    pagination_class = None
     serializer_class = EventsSerializer
-    pagination_class = EventsPagination
-    permission_classes = (permissions.IsAuthenticated,
-                          permissions.IsAdminUser)
-    search_fields = (
-        "name", "start_date", "place", "deadline_registration_date"
-    )
-    http_method_names = ("get", "post")
-    lookup_field = "id"
+    permission_classes = (permissions.IsAdminUser,)
+
+    def get_queryset(self):
+        """
+        Возвращает последние 4 экземпляра модели Events.
+        """
+        return Events.objects.order_by(EVENTS_ORDER_FIELD)[:4]
+
+    @swagger_auto_schema(auto_schema=None)
+    def retrieve(self, request, *args, **kwargs):
+        raise MethodNotAllowed('GET')
 
 
 class DisciplinesViewSet(viewsets.ReadOnlyModelViewSet):

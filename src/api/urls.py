@@ -4,24 +4,26 @@ from rest_framework_simplejwt.views import (TokenObtainPairView,
                                             TokenRefreshView)
 
 from api.views import (DisciplinesFullViewSet, DisciplinesShortViewSet,
-                       DisciplinesViewSet, EventsViewSet, NewsViewSet,
-                       UserViewSet)
+                       DisciplinesViewSet, FourLatestEventsViewSet,
+                       NewsViewSet, UserViewSet)
 
 router_v1 = DefaultRouter()
 
-router_v1.register(r"events", EventsViewSet, basename="users")
+router_v1.register(
+    r"events", FourLatestEventsViewSet, basename="latest-events"
+)
 router_v1.register(r"news", NewsViewSet, basename="news")
-router_v1.register(r"users", UserViewSet, basename="events")
+router_v1.register(r"users", UserViewSet, basename="users")
 router_v1.register(
     r"disciplines", DisciplinesViewSet, basename="disciplines"
 )
 router_v1.register(
     r"discipline", DisciplinesShortViewSet,
-    basename="disciplines-short"
+    basename="discipline-short"
 )
 router_v1.register(
     r"full-discipline", DisciplinesFullViewSet,
-    basename="disciplines-full"
+    basename="discipline-full"
 )
 
 registration_uls = [

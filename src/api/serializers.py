@@ -2,9 +2,9 @@ from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 
 from core.utils import get_image_urls
-from disciplines.models import Disciplines, DisciplinesImageURL
+from disciplines.models import Disciplines
 from events.models import Events, EventsImageURL
-from news.models import News, NewsImageURL
+from news.models import News
 from users.models import CustomUser, UserRole
 
 
@@ -60,8 +60,7 @@ class NewsSerializer(serializers.ModelSerializer):
 
     @staticmethod
     def get_image_urls(obj):
-        image_urls = NewsImageURL.objects.all()
-        return [url.image_url for url in image_urls]
+        return get_image_urls(obj)
 
 
 class EventsImageURLSerializer(serializers.PrimaryKeyRelatedField,

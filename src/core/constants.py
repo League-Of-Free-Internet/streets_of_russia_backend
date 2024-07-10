@@ -1,10 +1,11 @@
 MAX_LENGTH_DEFAULT = 255
 MAX_LENGTH = 5000
 MAX_LIST_LENGTH = 15
+EVENTS_ORDER_FIELD = "-start_date"
 RELATED_NAME_MAP = {
-    'News': 'news',
-    'Events': 'event',
-    'Disciplines': 'discipline',
+    "News": "news",
+    "Events": "event",
+    "Disciplines": "discipline",
 }
 
 

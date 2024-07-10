@@ -76,9 +76,7 @@ class EventsImageURLSerializer(serializers.PrimaryKeyRelatedField,
 class EventsSerializer(serializers.ModelSerializer):
     """Сериализатор событий."""
 
-    image_urls = EventsImageURLSerializer(
-        many=True, queryset=EventsImageURL.objects.all()
-    )
+    image_urls = serializers.SerializerMethodField()
 
     class Meta:
         model = Events
@@ -87,6 +85,10 @@ class EventsSerializer(serializers.ModelSerializer):
             "discipline",
             "rules"
         )
+
+    @staticmethod
+    def get_image_urls(obj):
+        return get_image_urls(obj)
 
 
 class DisciplinesNamesListSerializer(serializers.Serializer):

@@ -4,8 +4,8 @@ from rest_framework.exceptions import MethodNotAllowed
 from rest_framework.response import Response
 
 from api.pagination import EventsPagination, NewsPagination
-from api.serializers import (DisciplinesNamesListSerializer,
-                             DisciplinesFullSerializer,
+from api.serializers import (DisciplinesFullSerializer,
+                             DisciplinesNamesListSerializer,
                              DisciplinesShortSerializer, EventsSerializer,
                              NewsSerializer, UserSerializer)
 from disciplines.models import Disciplines

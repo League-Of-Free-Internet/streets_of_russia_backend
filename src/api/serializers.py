@@ -3,7 +3,7 @@ from rest_framework import serializers
 
 from core.utils import get_image_urls
 from disciplines.models import Disciplines
-from events.models import Events, EventsImageURL
+from events.models import Events, EventSignUp, EventsImageURL
 from news.models import News
 from users.models import CustomUser, UserRole
 
@@ -102,6 +102,15 @@ class EventSerializer(serializers.ModelSerializer):
     @staticmethod
     def get_image_urls(obj):
         return get_image_urls(obj)
+
+
+class EventSignUpSerializer(serializers.ModelSerializer):
+    """Сериализатор для регистрации пользователя на конкретное событие."""
+
+    class Meta:
+        model = EventSignUp
+        fields = "__all__"
+        read_only_fields = ("user", "event", "registration_date")
 
 
 class DisciplinesNamesListSerializer(serializers.Serializer):

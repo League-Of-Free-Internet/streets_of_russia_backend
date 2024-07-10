@@ -1,5 +1,6 @@
+from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
-from rest_framework import mixins, permissions, viewsets
+from rest_framework import mixins, permissions, status, viewsets
 from rest_framework.exceptions import MethodNotAllowed
 from rest_framework.response import Response
 
@@ -7,11 +8,11 @@ from api.pagination import NewsPagination
 from api.serializers import (DisciplinesFullSerializer,
                              DisciplinesNamesListSerializer,
                              DisciplinesShortSerializer, EventSerializer,
-                             FourLatestEventsSerializer, NewsSerializer,
-                             UserSerializer)
+                             EventSignUpSerializer, FourLatestEventsSerializer,
+                             NewsSerializer, UserSerializer)
 from core.constants import EVENTS_ORDER_FIELD
 from disciplines.models import Disciplines
-from events.models import Events
+from events.models import Events, EventSignUp
 from news.models import News
 from users.models import CustomUser
 
@@ -61,7 +62,7 @@ class FourLatestEventsViewSet(viewsets.ReadOnlyModelViewSet):
 
     @swagger_auto_schema(auto_schema=None)
     def retrieve(self, request, *args, **kwargs):
-        raise MethodNotAllowed('GET')
+        raise MethodNotAllowed("GET")
 
 
 class EventViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -73,7 +74,43 @@ class EventViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     serializer_class = EventSerializer
     permission_classes = (permissions.IsAuthenticated,
                           permissions.IsAdminUser)
-    lookup_field = 'id'
+    lookup_field = "id"
+
+
+class EventSignUpViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
+    """
+    Запись пользователя на конкретное событие.
+    """
+
+    queryset = EventSignUp.objects.all()
+    serializer_class = EventSignUpSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get_event(self):
+        return Events.objects.get(id=self.kwargs.get("event_id"))
+
+    def create(self, request, *args, **kwargs):
+        event = self.get_event()
+        user = self.request.user
+        registration = EventSignUp.objects.filter(
+            user=user, event=event
+        ).first()
+        if registration:
+            registration.delete()
+            return Response(
+                {"message": "Вы отменили регистрацию на событие"},
+                status=status.HTTP_200_OK
+            )
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        return Response(
+            serializer.data, status=status.HTTP_201_CREATED,
+            headers=self.get_success_headers(serializer.data)
+        )
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user, event=self.get_event())
 
 
 class DisciplinesViewSet(viewsets.ReadOnlyModelViewSet):
@@ -85,7 +122,7 @@ class DisciplinesViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = DisciplinesNamesListSerializer
     permission_classes = (permissions.IsAuthenticated,
                           permissions.IsAdminUser)
-    lookup_field = 'id'
+    lookup_field = "id"
 
     def list(self, request, *args, **kwargs):
         disciplines = self.get_queryset()
@@ -96,7 +133,7 @@ class DisciplinesViewSet(viewsets.ReadOnlyModelViewSet):
 
     @swagger_auto_schema(auto_schema=None)
     def retrieve(self, request, *args, **kwargs):
-        raise MethodNotAllowed('GET')
+        raise MethodNotAllowed("GET")
 
 
 class DisciplinesShortViewSet(mixins.RetrieveModelMixin,
@@ -110,7 +147,7 @@ class DisciplinesShortViewSet(mixins.RetrieveModelMixin,
     serializer_class = DisciplinesShortSerializer
     permission_classes = (permissions.IsAuthenticated,
                           permissions.IsAdminUser)
-    lookup_field = 'name'
+    lookup_field = "name"
 
 
 class DisciplinesFullViewSet(mixins.RetrieveModelMixin,
@@ -124,4 +161,4 @@ class DisciplinesFullViewSet(mixins.RetrieveModelMixin,
     serializer_class = DisciplinesFullSerializer
     permission_classes = (permissions.IsAuthenticated,
                           permissions.IsAdminUser)
-    lookup_field = 'name'
+    lookup_field = "name"

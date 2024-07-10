@@ -4,7 +4,7 @@ from rest_framework_simplejwt.views import (TokenObtainPairView,
                                             TokenRefreshView)
 
 from api.views import (DisciplinesFullViewSet, DisciplinesShortViewSet,
-                       DisciplinesViewSet, EventViewSet,
+                       DisciplinesViewSet, EventSignUpViewSet, EventViewSet,
                        FourLatestEventsViewSet, NewsViewSet, UserViewSet)
 
 router_v1 = DefaultRouter()
@@ -14,6 +14,10 @@ router_v1.register(
 )
 router_v1.register(
     r"event", EventViewSet, basename="event"
+)
+router_v1.register(
+    r'event/(?P<event_id>\d+)/sign-up', EventSignUpViewSet,
+    basename='event-signup'
 )
 router_v1.register(r"news", NewsViewSet, basename="news")
 router_v1.register(r"users", UserViewSet, basename="users")

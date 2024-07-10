@@ -5,6 +5,7 @@ from django.utils.safestring import mark_safe
 from core.constants import (MAX_LENGTH, MAX_LENGTH_DEFAULT, MAX_LIST_LENGTH,
                             EventsCfg, EventsImageURLCfg)
 from core.validators import validate_image_url
+from users.models import CustomUser
 
 
 class Events(models.Model):
@@ -90,3 +91,15 @@ class EventsImageURL(models.Model):
 
     def __str__(self) -> str:
         return str(self.image_url)
+
+
+class EventSignUp(models.Model):
+    user = models.ForeignKey(
+        CustomUser,
+        on_delete=models.CASCADE
+    )
+    event = models.ForeignKey(
+        Events,
+        on_delete=models.CASCADE
+    )
+    registration_date = models.DateTimeField(auto_now_add=True)

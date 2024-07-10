@@ -77,19 +77,15 @@ class EventsSerializer(serializers.ModelSerializer):
     """Сериализатор событий."""
 
     image_urls = EventsImageURLSerializer(
-        many=True, queryset=EventsImageURL.objects.all())
+        many=True, queryset=EventsImageURL.objects.all()
+    )
 
     class Meta:
         model = Events
-        fields = (
-            "id",
-            "name",
-            "description",
-            "image_urls",
-            "start_date",
-            "place",
-            "rules",
-            "deadline_registration_date"
+        exclude = (
+            "deadline_registration_date",
+            "discipline",
+            "rules"
         )
 
 
@@ -123,7 +119,7 @@ class DisciplinesFullSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Disciplines
-        exclude = ["id", "name"]
+        exclude = ("id", "name")
 
     @staticmethod
     def get_image_urls(obj):

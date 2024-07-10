@@ -65,6 +65,8 @@ class DisciplinesViewSet(viewsets.ReadOnlyModelViewSet):
 
     queryset = Disciplines.objects.all()
     serializer_class = DisciplinesNamesListSerializer
+    permission_classes = (permissions.IsAuthenticated,
+                          permissions.IsAdminUser)
 
     def list(self, request, *args, **kwargs):
         disciplines = self.get_queryset()
@@ -87,6 +89,8 @@ class DisciplinesShortViewSet(mixins.RetrieveModelMixin,
 
     queryset = Disciplines.objects.all()
     serializer_class = DisciplinesShortSerializer
+    permission_classes = (permissions.IsAuthenticated,
+                          permissions.IsAdminUser)
     lookup_field = 'name'
 
 
@@ -99,4 +103,6 @@ class DisciplinesFullViewSet(mixins.RetrieveModelMixin,
 
     queryset = Disciplines.objects.all()
     serializer_class = DisciplinesFullSerializer
+    permission_classes = (permissions.IsAuthenticated,
+                          permissions.IsAdminUser)
     lookup_field = 'name'

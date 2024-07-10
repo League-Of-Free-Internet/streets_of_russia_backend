@@ -72,8 +72,8 @@ class EventsImageURLSerializer(serializers.PrimaryKeyRelatedField,
         fields = ("image_url",)
 
 
-class EventsSerializer(serializers.ModelSerializer):
-    """Сериализатор событий."""
+class FourLatestEventsSerializer(serializers.ModelSerializer):
+    """Сериализатор для последних 4 событий."""
 
     image_urls = serializers.SerializerMethodField()
 
@@ -84,6 +84,20 @@ class EventsSerializer(serializers.ModelSerializer):
             "discipline",
             "rules"
         )
+
+    @staticmethod
+    def get_image_urls(obj):
+        return get_image_urls(obj)
+
+
+class EventSerializer(serializers.ModelSerializer):
+    """Сериализатор для конкретного события."""
+
+    image_urls = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Events
+        exclude = ("discipline",)
 
     @staticmethod
     def get_image_urls(obj):

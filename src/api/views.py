@@ -6,8 +6,9 @@ from rest_framework.response import Response
 from api.pagination import NewsPagination
 from api.serializers import (DisciplinesFullSerializer,
                              DisciplinesNamesListSerializer,
-                             DisciplinesShortSerializer, EventsSerializer,
-                             NewsSerializer, UserSerializer)
+                             DisciplinesShortSerializer, EventSerializer,
+                             FourLatestEventsSerializer, NewsSerializer,
+                             UserSerializer)
 from core.constants import EVENTS_ORDER_FIELD
 from disciplines.models import Disciplines
 from events.models import Events
@@ -49,7 +50,7 @@ class FourLatestEventsViewSet(viewsets.ReadOnlyModelViewSet):
 
     queryset = Events.objects.all()
     pagination_class = None
-    serializer_class = EventsSerializer
+    serializer_class = FourLatestEventsSerializer
     permission_classes = (permissions.IsAdminUser,)
 
     def get_queryset(self):
@@ -63,6 +64,18 @@ class FourLatestEventsViewSet(viewsets.ReadOnlyModelViewSet):
         raise MethodNotAllowed('GET')
 
 
+class EventViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+    """
+    Получение информации о конкретном событии.
+    """
+
+    queryset = Events.objects.all()
+    serializer_class = EventSerializer
+    permission_classes = (permissions.IsAuthenticated,
+                          permissions.IsAdminUser)
+    lookup_field = 'id'
+
+
 class DisciplinesViewSet(viewsets.ReadOnlyModelViewSet):
     """
     Получение списка имён всех спортивных дисциплин.
@@ -72,6 +85,7 @@ class DisciplinesViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = DisciplinesNamesListSerializer
     permission_classes = (permissions.IsAuthenticated,
                           permissions.IsAdminUser)
+    lookup_field = 'id'
 
     def list(self, request, *args, **kwargs):
         disciplines = self.get_queryset()

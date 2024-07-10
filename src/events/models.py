@@ -63,7 +63,7 @@ class Events(models.Model):
 
 
 class EventsImageURL(models.Model):
-    events = models.ForeignKey(
+    event = models.ForeignKey(
         EventsCfg.EVENTS,
         on_delete=models.CASCADE,
         related_name=EventsImageURLCfg.EVENTS_IMG_URL_FOREIGN_RELATED_NAME,

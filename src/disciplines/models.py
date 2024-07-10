@@ -42,7 +42,7 @@ class Disciplines(models.Model):
 
 
 class DisciplinesImageURL(models.Model):
-    name = models.ForeignKey(
+    discipline = models.ForeignKey(
         DisciplinesCfg.DISCIPLINES,
         on_delete=models.CASCADE,
         related_name=(

@@ -2,6 +2,8 @@ from django.test import TestCase
 
 from news.models import News, NewsImageURL
 
+PK = 1
+
 
 class NewsModelTest(TestCase):
     @classmethod
@@ -79,6 +81,17 @@ class NewsImageURLModelTest(TestCase):
                 )
 
     def test_image_in_news(self):
-        news = News.objects.get(pk=1)
-        image = NewsImageURL.objects.get(pk=1)
-        self.assertEqual(image, news.image_urls.all()[0])
+        """
+        Тест проверяет, что изображение присутствует
+        в списке изображений новости.
+        """
+        try:
+            news = News.objects.get(pk=PK)
+            image = NewsImageURL.objects.get(pk=PK)
+        except News.DoesNotExist:
+            self.fail(f"News object with pk={PK} does not exist")
+        except NewsImageURL.DoesNotExist:
+            self.fail(f"NewsImageURL object with pk={PK} does not exist")
+
+        self.assertIn(image, news.image_urls.all(),
+                      "Image is not in the list of news images")

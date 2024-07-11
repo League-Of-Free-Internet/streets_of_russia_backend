@@ -1,7 +1,9 @@
+EVENTS_ORDER = "-start_date"
 MAX_LENGTH_DEFAULT = 255
 MAX_LENGTH = 5000
 MAX_LIST_LENGTH = 15
-EVENTS_ORDER_FIELD = "-start_date"
+NEWS_ORDER = "-pub_date"
+PAGE = "page"
 RELATED_NAME_MAP = {
     "News": "news",
     "Events": "event",

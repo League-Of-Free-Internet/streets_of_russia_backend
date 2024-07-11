@@ -10,26 +10,40 @@ from api.serializers import (DisciplinesFullSerializer,
                              DisciplinesShortSerializer, EventSerializer,
                              EventSignUpSerializer, FourLatestEventsSerializer,
                              NewsSerializer, UserSerializer)
-from core.constants import EVENTS_ORDER_FIELD
+from core.constants import EVENTS_ORDER, NEWS_ORDER, PAGE
 from disciplines.models import Disciplines
 from events.models import Events, EventSignUp
 from news.models import News
 from users.models import CustomUser
 
 
-class NewsViewSet(viewsets.ModelViewSet):
+class NewsViewSet(viewsets.ReadOnlyModelViewSet):
     """
     Реализует операции с моделью News:
     - получения списка новостей;
     - получение информации о конкретной новости;
+    Работает с пагинацией на 12 новостей на каждой странице.
     """
 
     queryset = News.objects.all()
     serializer_class = NewsSerializer
     pagination_class = NewsPagination
-    http_method_names = ("get", "post", "patch", "delete")
-    search_fields = ("name",)
     lookup_field = "id"
+
+    def get_queryset(self):
+        """
+        Если получаемый GET-запрос относится к действию list и не заданы
+        настройки для пагинации, тогда выводит список последних 3 новостей.
+        Если получаемый GET-запрос относится к действию list и заданы
+        настройки для пагинации, тогда выводит список последних 12 новостей.
+        Если получаемый GET-запрос относится к действию retrieve, тогда выводит
+        конкретную новость по id.
+        """
+        if self.action == "list" and PAGE not in self.request.query_params:
+            return News.objects.order_by(NEWS_ORDER)[:3]
+        if self.action == "retrieve":
+            return News.objects.filter(id=self.kwargs.get('id'))
+        return super().get_queryset()
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -55,7 +69,7 @@ class FourLatestEventsViewSet(viewsets.ReadOnlyModelViewSet):
         """
         Возвращает последние 4 экземпляра модели Events.
         """
-        return Events.objects.order_by(EVENTS_ORDER_FIELD)[:4]
+        return Events.objects.order_by(EVENTS_ORDER)[:4]
 
     @swagger_auto_schema(auto_schema=None)
     def retrieve(self, request, *args, **kwargs):

@@ -56,7 +56,7 @@ class NewsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = News
-        fields = ("id", "name", "description", "image_urls")
+        exclude = ("pub_date",)
 
     @staticmethod
     def get_image_urls(obj):

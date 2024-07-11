@@ -62,6 +62,9 @@ class FourLatestEventsViewSet(viewsets.ReadOnlyModelViewSet):
 
     @swagger_auto_schema(auto_schema=None)
     def retrieve(self, request, *args, **kwargs):
+        """
+        Запрет на получение конкретного события по id на данном эндпоинте.
+        """
         raise MethodNotAllowed("GET")
 
 
@@ -87,9 +90,17 @@ class EventSignUpViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     permission_classes = (permissions.IsAuthenticated,)
 
     def get_event(self):
+        """
+        Получение события по переданному event_id.
+        """
         return Events.objects.get(id=self.kwargs.get("event_id"))
 
     def create(self, request, *args, **kwargs):
+        """
+        Создание записи текущего пользователя на конкретное событие.
+        В случае повторного POST-запроса - удаление записи из БД.
+        В теле запроса поле data должно оставаться пустым.
+        """
         event = self.get_event()
         user = self.request.user
         registration = EventSignUp.objects.filter(
@@ -110,12 +121,15 @@ class EventSignUpViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
         )
 
     def perform_create(self, serializer):
+        """
+        Сохранение записи текущего пользователя на конкретное событие.
+        """
         serializer.save(user=self.request.user, event=self.get_event())
 
 
-class DisciplinesViewSet(viewsets.ReadOnlyModelViewSet):
+class DisciplinesNamesListViewSet(viewsets.ReadOnlyModelViewSet):
     """
-    Получение списка имён всех спортивных дисциплин.
+    Работа со всеми спортивными дисциплинами.
     """
 
     queryset = Disciplines.objects.all()
@@ -125,6 +139,9 @@ class DisciplinesViewSet(viewsets.ReadOnlyModelViewSet):
     lookup_field = "id"
 
     def list(self, request, *args, **kwargs):
+        """
+        Получение списка имен существующих спортивных дисциплин.
+        """
         disciplines = self.get_queryset()
         names = [discipline.name for discipline in disciplines]
         serializer = DisciplinesNamesListSerializer(data={"names": names})
@@ -133,6 +150,10 @@ class DisciplinesViewSet(viewsets.ReadOnlyModelViewSet):
 
     @swagger_auto_schema(auto_schema=None)
     def retrieve(self, request, *args, **kwargs):
+        """
+        Запрет на получение конкретной спортивной дисциплины по id
+        на данном эндпоинте.
+        """
         raise MethodNotAllowed("GET")
 
 

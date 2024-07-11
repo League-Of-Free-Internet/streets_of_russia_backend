@@ -3,9 +3,10 @@ from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import (TokenObtainPairView,
                                             TokenRefreshView)
 
-from api.views import (DisciplinesFullViewSet, DisciplinesShortViewSet,
-                       DisciplinesViewSet, EventSignUpViewSet, EventViewSet,
-                       FourLatestEventsViewSet, NewsViewSet, UserViewSet)
+from api.views import (DisciplinesFullViewSet, DisciplinesNamesListViewSet,
+                       DisciplinesShortViewSet, EventSignUpViewSet,
+                       EventViewSet, FourLatestEventsViewSet, NewsViewSet,
+                       UserViewSet)
 
 router_v1 = DefaultRouter()
 
@@ -22,7 +23,7 @@ router_v1.register(
 router_v1.register(r"news", NewsViewSet, basename="news")
 router_v1.register(r"users", UserViewSet, basename="users")
 router_v1.register(
-    r"disciplines", DisciplinesViewSet, basename="disciplines"
+    r"disciplines", DisciplinesNamesListViewSet, basename="disciplines"
 )
 router_v1.register(
     r"discipline", DisciplinesShortViewSet,

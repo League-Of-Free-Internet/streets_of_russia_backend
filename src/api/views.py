@@ -21,9 +21,7 @@ class NewsViewSet(viewsets.ModelViewSet):
     """
     Реализует операции с моделью News:
     - получения списка новостей;
-    - создание новой новости;
-    - редактирование новости;
-    - удаление новости.
+    - получение информации о конкретной новости;
     """
 
     queryset = News.objects.all()
@@ -36,7 +34,7 @@ class NewsViewSet(viewsets.ModelViewSet):
 
 class UserViewSet(viewsets.ModelViewSet):
     """
-    Работа с пользователями.
+    Реализует операции с моделью CustomUser.
     """
 
     queryset = CustomUser.objects.all()
@@ -46,11 +44,10 @@ class UserViewSet(viewsets.ModelViewSet):
 
 class FourLatestEventsViewSet(viewsets.ReadOnlyModelViewSet):
     """
-    Получение списка 4 последних событий. Только для администратора.
+    Реализует операцию List с моделью Events. Только для администратора.
     """
 
     queryset = Events.objects.all()
-    pagination_class = None
     serializer_class = FourLatestEventsSerializer
     permission_classes = (permissions.IsAdminUser,)
 
@@ -63,14 +60,15 @@ class FourLatestEventsViewSet(viewsets.ReadOnlyModelViewSet):
     @swagger_auto_schema(auto_schema=None)
     def retrieve(self, request, *args, **kwargs):
         """
-        Запрет на получение конкретного события по id на данном эндпоинте.
+        Запрещает получать информацию о конкретном событии по id на данном
+        эндпоинте.
         """
         raise MethodNotAllowed("GET")
 
 
 class EventViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     """
-    Получение информации о конкретном событии.
+    Реализует операцию Retrieve с моделью Events.
     """
 
     queryset = Events.objects.all()
@@ -82,7 +80,7 @@ class EventViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
 
 class EventSignUpViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     """
-    Запись пользователя на конкретное событие.
+    Реализует операцию Create с моделью EventSignUp.
     """
 
     queryset = EventSignUp.objects.all()
@@ -129,7 +127,7 @@ class EventSignUpViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
 
 class DisciplinesNamesListViewSet(viewsets.ReadOnlyModelViewSet):
     """
-    Работа со всеми спортивными дисциплинами.
+    Реализует операцию List с моделью Disciplines.
     """
 
     queryset = Disciplines.objects.all()
@@ -151,7 +149,7 @@ class DisciplinesNamesListViewSet(viewsets.ReadOnlyModelViewSet):
     @swagger_auto_schema(auto_schema=None)
     def retrieve(self, request, *args, **kwargs):
         """
-        Запрет на получение конкретной спортивной дисциплины по id
+        Запрещает получать информацию о конкретной спортивной дисциплине по id
         на данном эндпоинте.
         """
         raise MethodNotAllowed("GET")
@@ -160,8 +158,7 @@ class DisciplinesNamesListViewSet(viewsets.ReadOnlyModelViewSet):
 class DisciplinesShortViewSet(mixins.RetrieveModelMixin,
                               viewsets.GenericViewSet):
     """
-    Получение краткой информации о спортивной дисциплине
-    по названию дисциплины.
+    Реализует операцию Retrieve с моделью Disciplines.
     """
 
     queryset = Disciplines.objects.all()

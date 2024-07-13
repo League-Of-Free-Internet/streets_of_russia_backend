@@ -4,11 +4,13 @@ MAX_LENGTH = 5000
 MAX_LIST_LENGTH = 15
 NEWS_ORDER = "-pub_date"
 PAGE = "page"
+PK = 1
 RELATED_NAME_MAP = {
     "News": "news",
     "Events": "event",
     "Disciplines": "discipline",
 }
+
 
 
 class MediaValidatorCfg:
@@ -121,7 +123,7 @@ class DisciplinesCfg:
     DISCIPLINES_IMG_URLS_HELP_MSG = (
         "Добавьте ссылки на изображения с дисциплиной"
     )
-    DISCIPLINES_RULES_VERBOSE_NAME = "Правила спортивных дисциплин"
+    DISCIPLINES_RULES_VERBOSE_NAME = "Правила спортивной дисциплины"
     DISCIPLINES_RULES_HELP_MSG = (
         f"Напишите правила дисциплины до {MAX_LENGTH} символов"
     )

@@ -1,7 +1,4 @@
-from drf_yasg import openapi
-from drf_yasg.utils import swagger_auto_schema
 from rest_framework import mixins, permissions, status, viewsets
-from rest_framework.exceptions import MethodNotAllowed
 from rest_framework.response import Response
 
 from api.pagination import NewsPagination
@@ -56,7 +53,7 @@ class UserViewSet(viewsets.ModelViewSet):
     http_method_names = ("post",)
 
 
-class FourLatestEventsViewSet(viewsets.ReadOnlyModelViewSet):
+class FourLatestEventsViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     """
     Реализует операцию List с моделью Events. Только для администратора.
     """
@@ -70,14 +67,6 @@ class FourLatestEventsViewSet(viewsets.ReadOnlyModelViewSet):
         Возвращает последние 4 экземпляра модели Events.
         """
         return Events.objects.order_by(EVENTS_ORDER)[:4]
-
-    @swagger_auto_schema(auto_schema=None)
-    def retrieve(self, request, *args, **kwargs):
-        """
-        Запрещает получать информацию о конкретном событии по id на данном
-        эндпоинте.
-        """
-        raise MethodNotAllowed("GET")
 
 
 class EventViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -139,7 +128,8 @@ class EventSignUpViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
         serializer.save(user=self.request.user, event=self.get_event())
 
 
-class DisciplinesNamesListViewSet(viewsets.ReadOnlyModelViewSet):
+class DisciplinesNamesListViewSet(mixins.ListModelMixin,
+                                  viewsets.GenericViewSet):
     """
     Реализует операцию List с моделью Disciplines.
     """
@@ -159,14 +149,6 @@ class DisciplinesNamesListViewSet(viewsets.ReadOnlyModelViewSet):
         serializer = DisciplinesNamesListSerializer(data={"names": names})
         serializer.is_valid(raise_exception=True)
         return Response(serializer.data)
-
-    @swagger_auto_schema(auto_schema=None)
-    def retrieve(self, request, *args, **kwargs):
-        """
-        Запрещает получать информацию о конкретной спортивной дисциплине по id
-        на данном эндпоинте.
-        """
-        raise MethodNotAllowed("GET")
 
 
 class DisciplinesShortViewSet(mixins.RetrieveModelMixin,

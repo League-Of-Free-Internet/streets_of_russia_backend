@@ -12,7 +12,6 @@ RELATED_NAME_MAP = {
 }
 
 
-
 class MediaValidatorCfg:
     """
     Настройки для валидации ссылок

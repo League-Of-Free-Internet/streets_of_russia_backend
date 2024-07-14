@@ -1,7 +1,15 @@
+EVENTS_ORDER = "-start_date"
 MAX_LENGTH_DEFAULT = 255
 MAX_LENGTH = 5000
 MAX_LIST_LENGTH = 15
+NEWS_ORDER = "-pub_date"
+PAGE = "page"
 PK = 1
+RELATED_NAME_MAP = {
+    "News": "news",
+    "Events": "event",
+    "Disciplines": "discipline",
+}
 
 
 class MediaValidatorCfg:

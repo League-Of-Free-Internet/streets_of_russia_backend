@@ -34,18 +34,15 @@ class UserSerializer(serializers.Serializer):
         )
         model = CustomUser
 
-    @staticmethod
-    def validate_passwords(attrs):
-        password_1 = attrs.get("password1")
-        password_2 = attrs.pop("password2")
-        if password_1 != password_2:
+    def validate(self, data):
+        if data["password1"] != data["password2"]:
             raise serializers.ValidationError("Пароли не совпадают.")
-        return attrs
+        return data
 
     def create(self, validated_data):
-        validated_data.pop("password1")
+        validated_data.pop("password2")
         return CustomUser.objects.create_user(
-            password=make_password(validated_data.pop("password2")),
+            password=make_password(validated_data.pop("password1")),
             **validated_data
         )
 

@@ -1,11 +1,18 @@
-from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
-                                        PermissionsMixin)
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    BaseUserManager,
+    PermissionsMixin,
+)
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
 
-from core.constants import (MAX_LIST_LENGTH, CustomUserCfg,
-                            CustomUserManagerCfg, UserRoleCfg)
+from core.constants import (
+    MAX_LIST_LENGTH,
+    CustomUserCfg,
+    CustomUserManagerCfg,
+    UserRoleCfg,
+)
 
 
 class CustomUserManager(BaseUserManager):

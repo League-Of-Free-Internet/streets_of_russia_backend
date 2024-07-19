@@ -2,8 +2,13 @@ from django.db import models
 from django.utils import timezone
 from django.utils.safestring import mark_safe
 
-from core.constants import (MAX_LENGTH, MAX_LENGTH_DEFAULT, MAX_LIST_LENGTH,
-                            EventsCfg, EventsImageURLCfg)
+from core.constants import (
+    MAX_LENGTH,
+    MAX_LENGTH_DEFAULT,
+    MAX_LIST_LENGTH,
+    EventsCfg,
+    EventsImageURLCfg,
+)
 from core.validators import validate_image_url
 from users.models import CustomUser
 

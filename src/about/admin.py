@@ -1,8 +1,14 @@
 from django.contrib import admin
 from django.template.defaultfilters import truncatechars
 
-from .models import (About, BannerVideo, BrandBook, MemberRole, OurMembers,
-                     PartnerLogo)
+from .models import (
+    About,
+    BannerVideo,
+    BrandBook,
+    MemberRole,
+    OurMembers,
+    PartnerLogo,
+)
 
 
 @admin.register(BannerVideo)

@@ -2,11 +2,16 @@ from rest_framework import mixins, permissions, status, viewsets
 from rest_framework.response import Response
 
 from api.pagination import NewsPagination
-from api.serializers import (DisciplinesFullSerializer,
-                             DisciplinesNamesListSerializer,
-                             DisciplinesShortSerializer, EventSerializer,
-                             EventSignUpSerializer, FourLatestEventsSerializer,
-                             NewsSerializer, UserSerializer)
+from api.serializers import (
+    DisciplinesFullSerializer,
+    DisciplinesNamesListSerializer,
+    DisciplinesShortSerializer,
+    EventSerializer,
+    EventSignUpSerializer,
+    FourLatestEventsSerializer,
+    NewsSerializer,
+    UserSerializer,
+)
 from core.constants import EVENTS_ORDER, NEWS_ORDER, PAGE
 from disciplines.models import Disciplines
 from events.models import Events, EventSignUp

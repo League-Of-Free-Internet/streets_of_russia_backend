@@ -1,8 +1,16 @@
 from django.db import models
 
-from core.constants import (MAX_LENGTH, MAX_LENGTH_DEFAULT, MAX_LIST_LENGTH,
-                            AboutCfg, BannerVideoCfg, BrandBookCfg,
-                            MemberRoleCfg, OurMemberCfg, PartnerLogoCfg)
+from core.constants import (
+    MAX_LENGTH,
+    MAX_LENGTH_DEFAULT,
+    MAX_LIST_LENGTH,
+    AboutCfg,
+    BannerVideoCfg,
+    BrandBookCfg,
+    MemberRoleCfg,
+    OurMemberCfg,
+    PartnerLogoCfg,
+)
 from core.validators import validate_image_url, validate_url_video
 
 

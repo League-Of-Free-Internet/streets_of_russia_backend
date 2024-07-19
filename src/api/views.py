@@ -45,7 +45,12 @@ class NewsViewSet(viewsets.ReadOnlyModelViewSet):
 
 class UserViewSet(viewsets.ModelViewSet):
     """
-    Реализует операции с моделью CustomUser.
+    Набор представлений для создания пользовательских 
+    экземпляров с использованием метода POST 
+    при регистрации участника.
+
+    Этот набор представлений поддерживает 
+    только действие `создать` для метода POST.
     """
 
     queryset = CustomUser.objects.all()

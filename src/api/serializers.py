@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 
@@ -6,6 +7,8 @@ from disciplines.models import Disciplines
 from events.models import Events, EventSignUp, EventsImageURL
 from news.models import News
 from users.models import CustomUser, UserRole
+
+User = get_user_model()
 
 
 class UserSerializer(serializers.Serializer):
@@ -37,6 +40,11 @@ class UserSerializer(serializers.Serializer):
     def validate(self, data):
         if data["password1"] != data["password2"]:
             raise serializers.ValidationError("Пароли не совпадают.")
+        email = data.get('email')
+        if User.objects.filter(email=email).exists():
+            raise serializers.ValidationError(
+                "Пользователь с таким адресом "
+                + "электронной почты уже существует.")
         return data
 
     def create(self, validated_data):

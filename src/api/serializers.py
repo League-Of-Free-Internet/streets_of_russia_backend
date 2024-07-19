@@ -43,8 +43,9 @@ class UserSerializer(serializers.Serializer):
         return attrs
 
     def create(self, validated_data):
+        validated_data.pop("password1")
         return CustomUser.objects.create_user(
-            password=make_password(validated_data.pop("password1")),
+            password=make_password(validated_data.pop("password2")),
             **validated_data
         )
 

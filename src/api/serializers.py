@@ -1,5 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
+from phonenumber_field.serializerfields import (
+    PhoneNumberField as SerializerPhoneNumberField,
+)
 from rest_framework import serializers
 
 from core.utils import get_image_urls
@@ -19,7 +22,7 @@ class UserSerializer(serializers.Serializer):
     password1 = serializers.CharField(write_only=True)
     password2 = serializers.CharField(write_only=True)
     email = serializers.EmailField()
-    phone_number = serializers.CharField()
+    phone_number = SerializerPhoneNumberField()
     role = serializers.PrimaryKeyRelatedField(
         queryset=UserRole.objects.all(),
         many=False

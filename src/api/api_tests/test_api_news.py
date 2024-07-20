@@ -51,7 +51,6 @@ class NewsAPITest(APITestCase):
         self.assertEqual(response.headers["Content-Type"], "application/json")
         self.assertEqual(response.data["count"], 2)
         self.assertIn("news", response.data)
-        # Принудительная сортировка новостей по id
         sorted_news = sorted(response.data["news"], key=lambda x: x["id"])
         self.assertIn(self.news_2.name,
                       sorted_news[1]["name"])

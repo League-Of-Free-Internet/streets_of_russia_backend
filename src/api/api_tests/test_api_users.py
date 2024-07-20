@@ -25,8 +25,8 @@ class CustomUserAPITest(APITestCase):
         cls.unique_user = {
             "first_name": "Петр",
             "last_name": "Петрович",
-            "password1": "qwerty12345",
-            "password2": "qwerty12345",
+            "password1": "Hds2421241",
+            "password2": "Hds2421241",
             "email": "pert.pertrovich@test.ru",
             "phone_number": "+79095512366",
             "role": cls.role_1.id
@@ -35,8 +35,8 @@ class CustomUserAPITest(APITestCase):
         cls.user_data = {
             "first_name": "Иван",
             "last_name": "Иванов",
-            "password1": "qwerty123",
-            "password2": "qwerty123",
+            "password1": "Gksdjhsadaljad123",
+            "password2": "Gksdjhsadaljad123",
             "email": "ivan.ivanov@test.ru",
             "phone_number": "+79095512365",
             "role": cls.role_1.id

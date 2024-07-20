@@ -1,5 +1,11 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.password_validation import (
+    CommonPasswordValidator,
+    MinimumLengthValidator,
+    NumericPasswordValidator,
+    UserAttributeSimilarityValidator,
+)
 from phonenumber_field.serializerfields import (
     PhoneNumberField as SerializerPhoneNumberField,
 )
@@ -64,6 +70,30 @@ class UserSerializer(serializers.Serializer):
         if field.isalpha():
             return field
         raise serializers.ValidationError("Имя должно содержать только буквы.")
+
+    def validate_password1(self, value):
+        user = self.instance
+        if user is None:
+            user = User(email=self.initial_data.get("email"))
+
+        validators = [
+            UserAttributeSimilarityValidator(),
+            MinimumLengthValidator(),
+            CommonPasswordValidator(),
+            NumericPasswordValidator(),
+        ]
+
+        errors = []
+        for validator in validators:
+            try:
+                validator.validate(value, user)
+            except serializers.ValidationError as error:
+                errors.extend(error.messages)
+
+        if errors:
+            raise serializers.ValidationError(errors)
+
+        return value
 
     def create(self, validated_data):
         validated_data.pop("password2")

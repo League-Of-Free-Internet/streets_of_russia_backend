@@ -43,11 +43,16 @@ class UserSerializer(serializers.Serializer):
     def validate(self, data):
         if data["password1"] != data["password2"]:
             raise serializers.ValidationError("Пароли не совпадают.")
-        email = data.get('email')
+        email = data.get("email")
         if User.objects.filter(email=email).exists():
             raise serializers.ValidationError(
                 "Пользователь с таким адресом "
                 + "электронной почты уже существует.")
+        phone_number = data.get("phone_number")
+        if User.objects.filter(phone_number=phone_number).exists():
+            raise serializers.ValidationError(
+                "Пользователь с таким номером "
+                + "телефона уже существует.")
         return data
 
     def create(self, validated_data):

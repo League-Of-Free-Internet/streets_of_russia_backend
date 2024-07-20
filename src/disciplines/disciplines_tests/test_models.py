@@ -46,19 +46,19 @@ class DisciplinesImageURLModelTest(TestCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.discipline = Disciplines.objects.create(
-            name="Тестовая спортивная дисциплина",
-            description="Описание спортивной дисциплины",
-            rules="Правила спортивной дисциплины"
+            name="Тестовая спортивная дисциплина 2",
+            description="Описание спортивной дисциплины 2",
+            rules="Правила спортивной дисциплины 2"
         )
         cls.image = DisciplinesImageURL.objects.create(
-            name=cls.discipline,
+            discipline=cls.discipline,
             image_url="https://clck.ru/3AjpaT",
         )
         cls.discipline.image_urls.add(cls.image)
 
     def test_verbose_name(self):
         field_verboses = {
-            "name": "Спортивная дисциплина",
+            "discipline": "Спортивная дисциплина",
             "image_url": "Ссылка на изображение с дисциплиной",
         }
         for value, expected in field_verboses.items():

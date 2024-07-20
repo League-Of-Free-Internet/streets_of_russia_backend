@@ -35,31 +35,44 @@ class CustomUserAPITest(APITestCase):
     def test_post_user(self):
         response = self.api_client.post(
             self.url, self.user_data)
+        in_db_user = User.objects.get()
         self.assertEqual(
             response.status_code,
             status.HTTP_201_CREATED)
         self.assertEqual(User.objects.count(), 1)
         self.assertEqual(
-            User.objects.get().first_name,
-            "Иван")
+            in_db_user.first_name,
+            self.user_data["first_name"])
+        self.assertEqual(
+            in_db_user.email,
+            self.user_data["email"]
+        )
+        self.assertEqual(
+            in_db_user.email,
+            self.user_data["email"]
+        )
+        self.assertEqual(
+            in_db_user.phone_number,
+            self.user_data["phone_number"]
+        )
 
     def test_create_user_with_mismatched_passwords(self):
         mismatched_data = self.user_data.copy()
         mismatched_data["password2"] = "another123"
-        response = self.client.post(self.url, mismatched_data)
+        response = self.api_client.post(self.url, mismatched_data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(User.objects.count(), 0)
 
     def test_create_user_with_invalid_email(self):
         invalid_email_data = self.user_data.copy()
         invalid_email_data["email"] = "это почта"
-        response = self.client.post(self.url, invalid_email_data)
+        response = self.api_client.post(self.url, invalid_email_data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(User.objects.count(), 0)
 
     def test_create_user_with_invalid_phone(self):
         invalid_phone_data = self.user_data.copy()
         invalid_phone_data["phone_number"] = "1315646546"
-        response = self.client.post(self.url, invalid_phone_data)
+        response = self.api_client.post(self.url, invalid_phone_data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(User.objects.count(), 0)

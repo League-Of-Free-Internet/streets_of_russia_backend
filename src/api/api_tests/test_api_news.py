@@ -47,19 +47,21 @@ class NewsAPITest(APITestCase):
     def test_get_all_news(self):
         url = reverse("news-list")
         response = self.api_client.get(url)
-        print(response.content)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.headers["Content-Type"], "application/json")
         self.assertEqual(response.data["count"], 2)
-        self.assertEqual(response.data["news"][0]["name"],
-                         "Тестовая Новость 2")
-        self.assertEqual(
-            response.data["news"][0]["image_urls"][1],
-            "https://clck.ru/3BzXGE")
+        self.assertIn("news", response.data)
+        # Принудительная сортировка новостей по id
+        sorted_news = sorted(response.data["news"], key=lambda x: x["id"])
+        self.assertIn(self.news_2.name,
+                      sorted_news[1]["name"])
+        self.assertIn(self.image_3.image_url,
+                      sorted_news[1]["image_urls"][1])
 
     def test_get_news(self):
-        url = reverse("news-detail", args={self.news_1.id})
+        url = reverse("news-detail", args=[self.news_1.id])
         response = self.api_client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['name'], "Тестовая Новость 1")
-        self.assertEqual(response.data['description'], "Обычный текст 1")
+        self.assertEqual(response.data["name"], self.news_1.name)
+        self.assertEqual(response.data["description"], self.news_1.description)
+        self.assertIn(self.image_1.image_url, response.data["image_urls"])

@@ -55,6 +55,16 @@ class UserSerializer(serializers.Serializer):
                 + "телефона уже существует.")
         return data
 
+    def validate_first_name(self, field: str):
+        if field.isalpha():
+            return field
+        raise serializers.ValidationError("Имя должно содержать только буквы.")
+
+    def validate_last_name(self, field: str):
+        if field.isalpha():
+            return field
+        raise serializers.ValidationError("Имя должно содержать только буквы.")
+
     def create(self, validated_data):
         validated_data.pop("password2")
         return CustomUser.objects.create_user(

@@ -1,8 +1,13 @@
 from django.db import models
 from django.utils.safestring import mark_safe
 
-from core.constants import (MAX_LENGTH, MAX_LENGTH_DEFAULT, MAX_LIST_LENGTH,
-                            NewsCfg, NewsImageURLCfg)
+from core.constants import (
+    MAX_LENGTH,
+    MAX_LENGTH_DEFAULT,
+    MAX_LIST_LENGTH,
+    NewsCfg,
+    NewsImageURLCfg,
+)
 from core.validators import validate_image_url
 
 

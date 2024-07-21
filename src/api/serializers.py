@@ -1,4 +1,14 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.password_validation import (
+    CommonPasswordValidator,
+    MinimumLengthValidator,
+    NumericPasswordValidator,
+    UserAttributeSimilarityValidator,
+)
+from phonenumber_field.serializerfields import (
+    PhoneNumberField as SerializerPhoneNumberField,
+)
 from rest_framework import serializers
 
 from core.utils import get_image_urls
@@ -6,6 +16,8 @@ from disciplines.models import Disciplines
 from events.models import Events, EventSignUp, EventsImageURL
 from news.models import News
 from users.models import CustomUser, UserRole
+
+User = get_user_model()
 
 
 class UserSerializer(serializers.Serializer):
@@ -16,7 +28,7 @@ class UserSerializer(serializers.Serializer):
     password1 = serializers.CharField(write_only=True)
     password2 = serializers.CharField(write_only=True)
     email = serializers.EmailField()
-    phone_number = serializers.CharField()
+    phone_number = SerializerPhoneNumberField()
     role = serializers.PrimaryKeyRelatedField(
         queryset=UserRole.objects.all(),
         many=False
@@ -34,15 +46,57 @@ class UserSerializer(serializers.Serializer):
         )
         model = CustomUser
 
-    @staticmethod
-    def validate_passwords(attrs):
-        password_1 = attrs.get("password1")
-        password_2 = attrs.pop("password2")
-        if password_1 != password_2:
+    def validate(self, data):
+        if data["password1"] != data["password2"]:
             raise serializers.ValidationError("Пароли не совпадают.")
-        return attrs
+        email = data.get("email")
+        if User.objects.filter(email=email).exists():
+            raise serializers.ValidationError(
+                "Пользователь с таким адресом "
+                + "электронной почты уже существует.")
+        phone_number = data.get("phone_number")
+        if User.objects.filter(phone_number=phone_number).exists():
+            raise serializers.ValidationError(
+                "Пользователь с таким номером "
+                + "телефона уже существует.")
+        return data
+
+    def validate_first_name(self, field: str):
+        if field.isalpha():
+            return field
+        raise serializers.ValidationError("Имя должно содержать только буквы.")
+
+    def validate_last_name(self, field: str):
+        if field.isalpha():
+            return field
+        raise serializers.ValidationError("Имя должно содержать только буквы.")
+
+    def validate_password1(self, value):
+        user = self.instance
+        if user is None:
+            user = User(email=self.initial_data.get("email"))
+
+        validators = [
+            UserAttributeSimilarityValidator(),
+            MinimumLengthValidator(),
+            CommonPasswordValidator(),
+            NumericPasswordValidator(),
+        ]
+
+        errors = []
+        for validator in validators:
+            try:
+                validator.validate(value, user)
+            except serializers.ValidationError as error:
+                errors.extend(error.messages)
+
+        if errors:
+            raise serializers.ValidationError(errors)
+
+        return value
 
     def create(self, validated_data):
+        validated_data.pop("password2")
         return CustomUser.objects.create_user(
             password=make_password(validated_data.pop("password1")),
             **validated_data

@@ -30,7 +30,7 @@ class News(models.Model):
     )
 
     class Meta:
-        ordering = (NewsCfg.NEWS_META_ORDERING_FIELD,)
+        ordering = NewsCfg.NEWS_META_ORDERING_FIELD
         verbose_name = NewsCfg.NEWS_META_VERBOSE_NAME
         verbose_name_plural = NewsCfg.NEWS_META_VERBOSE_NAME_PLURAL
 

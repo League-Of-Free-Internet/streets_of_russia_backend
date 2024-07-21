@@ -46,7 +46,7 @@ class NewsCfg:
     NEWS_DESCRIPTION_HELP_MSG = (
         f"Напишите текст новости до {MAX_LENGTH} символов"
     )
-    NEWS_META_ORDERING_FIELD = "-" + "pub_date"
+    NEWS_META_ORDERING_FIELD = "-pub_date", "-id"
     NEWS_META_VERBOSE_NAME = "Новость"
     NEWS_META_VERBOSE_NAME_PLURAL = "Новости"
 

@@ -118,7 +118,7 @@ class EventSignUpViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
         if not event_id:
             raise NotFound("Обязательно требуется id события.")
         try:
-            Events.objects.get(id=self.kwargs.get("event_id"))
+            return Events.objects.get(id=event_id)
         except Events.DoesNotExist:
             raise NotFound("Событие не найдено.")
 

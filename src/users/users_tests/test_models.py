@@ -22,6 +22,12 @@ class CustomUserManagerTests(TestCase):
         )
         return super().setUpClass()
 
+    @classmethod
+    def tearDownClass(cls):
+        super().tearDownClass()
+        cls.user.delete()
+        cls.admin_user.delete()
+
     def test_create_user(self):
         self.assertEqual(self.user.email, "user@example.ru")
         self.assertTrue(self.user.check_password("Fool123"))

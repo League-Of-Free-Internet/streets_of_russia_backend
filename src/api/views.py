@@ -42,7 +42,7 @@ class NewsViewSet(viewsets.ReadOnlyModelViewSet):
         конкретную новость по id.
         """
         if self.action == "list" and PAGE not in self.request.query_params:
-            return News.objects.order_by(NEWS_ORDER)[:3]
+            return News.objects.order_by(*NEWS_ORDER)
         if self.action == "retrieve":
             return News.objects.filter(id=self.kwargs.get('id'))
         return super().get_queryset()

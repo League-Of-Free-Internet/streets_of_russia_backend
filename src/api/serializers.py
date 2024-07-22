@@ -11,6 +11,7 @@ from phonenumber_field.serializerfields import (
 )
 from rest_framework import serializers
 
+from core.constants import FORMAT_DATE
 from core.utils import get_image_urls
 from disciplines.models import Disciplines
 from events.models import Events, EventSignUp, EventsImageURL
@@ -107,14 +108,36 @@ class NewsSerializer(serializers.ModelSerializer):
     """Сериализатор новостей."""
 
     image_urls = serializers.SerializerMethodField()
+    pub_date = serializers.SerializerMethodField()
 
     class Meta:
         model = News
-        exclude = ("pub_date",)
+        fields = (
+            "id",
+            "name",
+            "image_urls",
+            "description",
+            "pub_date"
+        )
 
     @staticmethod
     def get_image_urls(obj):
         return get_image_urls(obj)
+
+    def get_pub_date(self, obj):
+        """Форматирование даты в формат: `2024-07-14 11:57:06`"""
+        return obj.pub_date.strftime(FORMAT_DATE)
+
+    def to_representation(self, instance):
+        """Если запрос на получение одной новости,
+        то `pub_date` включается в ответ. В иных случаях
+        `pub_date` исключается из ответа"""
+        result = super().to_representation(instance)
+        request = self.context.get("request")
+        if request and request.resolver_match.url_name == "news-detail":
+            return result
+        result.pop("pub_date", None)
+        return result
 
 
 class EventsImageURLSerializer(serializers.PrimaryKeyRelatedField,

@@ -80,3 +80,11 @@ class EventsAPITest(APITestCase):
             response.data["description"], self.event_1.description
         )
         self.assertIn(self.image_1.image_url, response.data["image_urls"])
+        self.assertNotIn(self.image_2.image_url, response.data["image_urls"])
+        self.assertNotIn(self.image_3.image_url, response.data["image_urls"])
+
+
+    def test_event_id_sign_up(self):
+        url = reverse("event-signup-list", args=[self.event_1.id])
+        response = self.client.post(url)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)

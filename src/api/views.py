@@ -121,6 +121,11 @@ class EventSignUpViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
         В случае повторного POST-запроса - удаление записи из БД.
         В теле запроса поле data должно оставаться пустым.
         """
+        if request.data:
+            return Response(
+                {"message": "Данные запроса должны быть пустыми."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
         event = self.get_event()
         user = self.request.user
         registration = EventSignUp.objects.filter(

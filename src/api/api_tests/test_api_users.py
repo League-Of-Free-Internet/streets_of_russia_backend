@@ -42,6 +42,16 @@ class CustomUserAPITest(APITestCase):
             "role": cls.role_1.id
         }
 
+    @classmethod
+    def tearDownClass(cls):
+        super().tearDownClass()
+        del cls.url
+        del cls.api_client
+        cls.role_1.delete()
+        cls.role_2.delete()
+        del cls.unique_user
+        del cls.user_data
+
     def test_post_user(self):
         response = self.api_client.post(
             self.url, self.user_data)
@@ -114,3 +124,14 @@ class CustomUserAPITest(APITestCase):
         self.assertEqual(
             failed_response.status_code,
             status.HTTP_400_BAD_REQUEST)
+
+    def test_user_without_or_invalid_role(self):
+        invalid_role_data = self.user_data.copy()
+        invalid_role_data["role"] = ""
+        response = self.api_client.post(self.url, invalid_role_data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(User.objects.count(), 0)
+        invalid_role_data["role"] = "fsdfsdf"
+        response = self.api_client.post(self.url, invalid_role_data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(User.objects.count(), 0)

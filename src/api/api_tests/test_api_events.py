@@ -113,9 +113,8 @@ class EventsAPITest(APITestCase):
 
     def test_missing_event_id(self):
         with self.assertRaises(NoReverseMatch):
-            self.client.post(reverse(
-                'event-signup-list', args=[None]
-                ), data={}
+            self.client.post(
+                reverse('event-signup-list', args=[None])
             )
 
     def test_unauthenticated_user(self):

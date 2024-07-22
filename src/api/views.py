@@ -1,6 +1,6 @@
 from rest_framework import mixins, permissions, status, viewsets
-from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
+from rest_framework.response import Response
 
 from api.pagination import NewsPagination
 from api.serializers import (

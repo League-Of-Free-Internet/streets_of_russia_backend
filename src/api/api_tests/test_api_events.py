@@ -63,10 +63,20 @@ class EventsAPITest(APITestCase):
         self.assertIn("events", response.data)
         events = response.data["events"]
         events_names = {event["name"] for event in events}
-        event_image_urls = {image_url for event in events for image_url in
-                            event["image_urls"]}
+        event_images_urls = {image_url for event in events for image_url in
+                             event["image_urls"]}
         self.assertIn(self.event_1.name, events_names)
         self.assertIn(self.event_2.name, events_names)
-        self.assertIn(self.image_1.image_url, event_image_urls)
-        self.assertIn(self.image_2.image_url, event_image_urls)
-        self.assertIn(self.image_3.image_url, event_image_urls)
+        self.assertIn(self.image_1.image_url, event_images_urls)
+        self.assertIn(self.image_2.image_url, event_images_urls)
+        self.assertIn(self.image_3.image_url, event_images_urls)
+
+    def test_get_event(self):
+        url = reverse("event-detail", args=[self.event_1.id])
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["name"], self.event_1.name)
+        self.assertEqual(
+            response.data["description"], self.event_1.description
+        )
+        self.assertIn(self.image_1.image_url, response.data["image_urls"])

@@ -1,4 +1,5 @@
 from django.urls import reverse
+from django.urls.exceptions import NoReverseMatch
 from rest_framework import status
 from rest_framework.test import APITestCase
 from rest_framework_simplejwt.tokens import AccessToken
@@ -8,6 +9,7 @@ from api.api_tests.factories import (
     EventsFactory,
     EventsImageURLFactory,
 )
+from events.models import EventSignUp
 from users.models import CustomUser
 
 
@@ -55,8 +57,7 @@ class EventsAPITest(APITestCase):
         self.user.delete()
 
     def test_get_all_events(self):
-        url = reverse("latest-events-list")
-        response = self.client.get(url)
+        response = self.client.get(reverse("latest-events-list"))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.headers["Content-Type"], "application/json")
         self.assertEqual(response.data["count"], 2)
@@ -72,8 +73,9 @@ class EventsAPITest(APITestCase):
         self.assertIn(self.image_3.image_url, event_images_urls)
 
     def test_get_event(self):
-        url = reverse("event-detail", args=[self.event_1.id])
-        response = self.client.get(url)
+        response = self.client.get(reverse(
+            "event-detail", args=[self.event_1.id])
+        )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["name"], self.event_1.name)
         self.assertEqual(
@@ -83,8 +85,42 @@ class EventsAPITest(APITestCase):
         self.assertNotIn(self.image_2.image_url, response.data["image_urls"])
         self.assertNotIn(self.image_3.image_url, response.data["image_urls"])
 
-
-    def test_event_id_sign_up(self):
-        url = reverse("event-signup-list", args=[self.event_1.id])
-        response = self.client.post(url)
+    def test_successful_signup(self):
+        response = self.client.post(reverse(
+            "event-signup-list", args=[self.event_1.id])
+        )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertTrue(
+            EventSignUp.objects.filter(
+                user=self.user, event=self.event_1).exists()
+        )
+
+    def test_non_empy_data(self):
+        response = self.client.post(
+            reverse(
+                "event-signup-list",
+                args=[self.event_1.id]
+            ),
+            data={"some_field": "some_value"}
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_nonexistent_event(self):
+        response = self.client.post(reverse(
+            'event-signup-list', args=[999])
+        )
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_missing_event_id(self):
+        with self.assertRaises(NoReverseMatch):
+            self.client.post(reverse(
+                'event-signup-list', args=[None]
+                ), data={}
+            )
+
+    def test_unauthenticated_user(self):
+        self.client.credentials()
+        response = self.client.post(reverse(
+            "event-signup-list", args=[self.event_1.id])
+        )
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)

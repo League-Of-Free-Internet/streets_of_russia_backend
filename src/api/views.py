@@ -1,5 +1,6 @@
 from rest_framework import mixins, permissions, status, viewsets
 from rest_framework.response import Response
+from rest_framework.exceptions import NotFound
 
 from api.pagination import NewsPagination
 from api.serializers import (
@@ -113,7 +114,13 @@ class EventSignUpViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
         """
         Получение события по переданному event_id.
         """
-        return Events.objects.get(id=self.kwargs.get("event_id"))
+        event_id = self.kwargs.get("event_id")
+        if not event_id:
+            raise NotFound("Обязательно требуется id события.")
+        try:
+            Events.objects.get(id=self.kwargs.get("event_id"))
+        except Events.DoesNotExist:
+            raise NotFound("Событие не найдено.")
 
     def create(self, request, *args, **kwargs):
         """

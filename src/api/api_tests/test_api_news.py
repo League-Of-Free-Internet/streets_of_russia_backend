@@ -51,11 +51,9 @@ class NewsAPITest(APITestCase):
         self.assertEqual(response.headers["Content-Type"], "application/json")
         self.assertEqual(response.data["count"], 2)
         self.assertIn("news", response.data)
-        sorted_news = sorted(response.data["news"], key=lambda x: x["id"])
-        self.assertIn(self.news_2.name,
-                      sorted_news[1]["name"])
-        self.assertIn(self.image_3.image_url,
-                      sorted_news[1]["image_urls"][1])
+        self.assertEqual(response.data["news"][0]["name"], self.news_2.name,)
+        self.assertEqual([self.image_1.image_url],
+                         response.data["news"][1]["image_urls"])
 
     def test_get_news(self):
         url = reverse("news-detail", args=[self.news_1.id])
@@ -63,4 +61,4 @@ class NewsAPITest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["name"], self.news_1.name)
         self.assertEqual(response.data["description"], self.news_1.description)
-        self.assertIn(self.image_1.image_url, response.data["image_urls"])
+        self.assertEqual([self.image_1.image_url], response.data["image_urls"])

@@ -1,4 +1,5 @@
 from rest_framework import mixins, permissions, status, viewsets
+from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 
 from api.pagination import NewsPagination
@@ -78,6 +79,15 @@ class FourLatestEventsViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
         """
         return Events.objects.order_by(EVENTS_ORDER)[:4]
 
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        data = {
+            "count": len(serializer.data),
+            "events": serializer.data
+        }
+        return Response(data)
+
 
 class EventViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     """
@@ -104,7 +114,13 @@ class EventSignUpViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
         """
         Получение события по переданному event_id.
         """
-        return Events.objects.get(id=self.kwargs.get("event_id"))
+        event_id = self.kwargs.get("event_id")
+        if not event_id:
+            raise NotFound("Обязательно требуется id события.")
+        try:
+            return Events.objects.get(id=event_id)
+        except Events.DoesNotExist:
+            raise NotFound("Событие не найдено.")
 
     def create(self, request, *args, **kwargs):
         """
@@ -112,6 +128,11 @@ class EventSignUpViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
         В случае повторного POST-запроса - удаление записи из БД.
         В теле запроса поле data должно оставаться пустым.
         """
+        if request.data:
+            return Response(
+                {"message": "Данные запроса должны быть пустыми."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
         event = self.get_event()
         user = self.request.user
         registration = EventSignUp.objects.filter(

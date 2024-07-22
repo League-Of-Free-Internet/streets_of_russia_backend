@@ -162,4 +162,4 @@ cython_debug/
 migrations/
 
 # static
-collected_static/
+static/

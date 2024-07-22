@@ -78,6 +78,15 @@ class FourLatestEventsViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
         """
         return Events.objects.order_by(EVENTS_ORDER)[:4]
 
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        data = {
+            "count": len(serializer.data),
+            "events": serializer.data
+        }
+        return Response(data)
+
 
 class EventViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     """

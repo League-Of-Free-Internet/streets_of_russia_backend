@@ -19,6 +19,7 @@ class Disciplines(models.Model):
         unique=True
     )
     slug = models.SlugField(
+        help_text=DisciplinesCfg.DISCIPLINES_SLUG_HELP_MSG,
         unique=True,
         blank=True,
         null=True)

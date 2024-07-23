@@ -138,6 +138,8 @@ class DisciplinesCfg:
     DISCIPLINES_META_ORDERING_FIELD = "name"
     DISCIPLINES_META_VERBOSE_NAME = "Спортивная дисциплина"
     DISCIPLINES_META_VERBOSE_NAME_PLURAL = "Спортивные дисциплины"
+    DISCIPLINES_SLUG_HELP_MSG = ("Часть URL-адреса на транслите. "
+                                 + "Например `testovaya-disciplina`")
 
 
 class DisciplinesImageURLCfg:

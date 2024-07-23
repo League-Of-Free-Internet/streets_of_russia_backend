@@ -192,7 +192,7 @@ class DisciplinesShortViewSet(mixins.RetrieveModelMixin,
     serializer_class = DisciplinesShortSerializer
     permission_classes = (permissions.IsAuthenticated,
                           permissions.IsAdminUser)
-    lookup_field = "name"
+    lookup_field = "slug"
 
 
 class DisciplinesFullViewSet(mixins.RetrieveModelMixin,

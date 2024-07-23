@@ -133,16 +133,14 @@ class EventSignUpViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
                 {"message": "Данные запроса должны быть пустыми."},
                 status=status.HTTP_400_BAD_REQUEST
             )
-        event = self.get_event()
-        user = self.request.user
         registration = EventSignUp.objects.filter(
-            user=user, event=event
+            user=self.request.user, event=self.get_event()
         ).first()
         if registration:
             registration.delete()
             return Response(
-                {"message": "Вы отменили регистрацию на событие"},
-                status=status.HTTP_200_OK
+                {"message": "Вы уже зарегистрированы на это событие"},
+                status=status.HTTP_409_CONFLICT
             )
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)

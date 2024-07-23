@@ -1,4 +1,7 @@
+from rest_framework.exceptions import NotFound
+
 from core.constants import RELATED_NAME_MAP
+from events.models import Events
 
 
 def get_image_urls(obj):
@@ -14,3 +17,13 @@ def get_image_urls(obj):
         )
     image_urls = getattr(obj, related_name).all()
     return [url.image_url for url in image_urls]
+
+
+def get_event(event_id):
+    """
+    Получение события по переданному event_id.
+    """
+    try:
+        return Events.objects.get(id=event_id)
+    except Events.DoesNotExist:
+        raise NotFound("Событие не найдено.")

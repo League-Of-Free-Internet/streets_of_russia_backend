@@ -14,6 +14,7 @@ from api.serializers import (
     UserSerializer,
 )
 from core.constants import EVENTS_ORDER, NEWS_ORDER, PAGE
+from core.utils import get_event
 from disciplines.models import Disciplines
 from events.models import Events, EventSignUp
 from news.models import News
@@ -110,18 +111,6 @@ class EventSignUpViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     serializer_class = EventSignUpSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
-    def get_event(self):
-        """
-        Получение события по переданному event_id.
-        """
-        event_id = self.kwargs.get("event_id")
-        if not event_id:
-            raise NotFound("Обязательно требуется id события.")
-        try:
-            return Events.objects.get(id=event_id)
-        except Events.DoesNotExist:
-            raise NotFound("Событие не найдено.")
-
     def create(self, request, *args, **kwargs):
         """
         Создание записи текущего пользователя на конкретное событие.
@@ -133,11 +122,14 @@ class EventSignUpViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
                 {"message": "Данные запроса должны быть пустыми."},
                 status=status.HTTP_400_BAD_REQUEST
             )
+        event_id = kwargs.get("event_id")
+        if not event_id:
+            raise NotFound("Обязательно требуется id события.")
         registration = EventSignUp.objects.filter(
-            user=self.request.user, event=self.get_event()
+            user=self.request.user,
+            event=get_event(event_id)
         ).first()
         if registration:
-            registration.delete()
             return Response(
                 {"message": "Вы уже зарегистрированы на это событие"},
                 status=status.HTTP_409_CONFLICT
@@ -154,7 +146,8 @@ class EventSignUpViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
         """
         Сохранение записи текущего пользователя на конкретное событие.
         """
-        serializer.save(user=self.request.user, event=self.get_event())
+        serializer.save(user=self.request.user,
+                        event=get_event(self.kwargs.get("event_id")))
 
 
 class EventSignOutViewSet(mixins.DestroyModelMixin, viewsets.GenericViewSet):

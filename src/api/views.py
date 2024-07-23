@@ -206,4 +206,4 @@ class DisciplinesFullViewSet(mixins.RetrieveModelMixin,
     serializer_class = DisciplinesFullSerializer
     permission_classes = (permissions.IsAuthenticated,
                           permissions.IsAdminUser)
-    lookup_field = "name"
+    lookup_field = "slug"

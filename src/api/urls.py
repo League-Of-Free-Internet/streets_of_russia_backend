@@ -1,10 +1,10 @@
 from django.urls import include, path
-from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
 
+from api.routers import CustomRouter
 from api.views import (
     DisciplinesFullViewSet,
     DisciplinesNamesListViewSet,
@@ -17,7 +17,7 @@ from api.views import (
     UserViewSet,
 )
 
-router_v1 = DefaultRouter()
+router_v1 = CustomRouter()
 
 router_v1.register(
     r"events", FourLatestEventsViewSet, basename="latest-events"
@@ -28,12 +28,12 @@ router_v1.register(
 router_v1.register(
     r"event/(?P<event_id>\d+)/sign-up",
     EventSignUpViewSet,
-    basename="event-signup"
+    basename="event-sign-up"
 )
 router_v1.register(
     r"event/(?P<event_id>\d+)/sign-out",
     EventSignOutViewSet,
-    basename="event-signout"
+    basename="event-sign-out"
 )
 router_v1.register(r"news", NewsViewSet, basename="news")
 router_v1.register(r"users", UserViewSet, basename="users")

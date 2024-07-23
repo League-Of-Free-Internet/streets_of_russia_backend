@@ -98,7 +98,7 @@ class EventsImageURL(models.Model):
         return str(self.image_url)
 
 
-class EventSignUp(models.Model):
+class EventRegistration(models.Model):
     user = models.ForeignKey(
         CustomUser,
         on_delete=models.CASCADE

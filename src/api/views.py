@@ -7,8 +7,8 @@ from api.serializers import (
     DisciplinesFullSerializer,
     DisciplinesNamesListSerializer,
     DisciplinesShortSerializer,
+    EventRegistrationSerializer,
     EventSerializer,
-    EventSignUpSerializer,
     FourLatestEventsSerializer,
     NewsSerializer,
     UserSerializer,
@@ -108,7 +108,7 @@ class EventSignUpViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     """
 
     queryset = EventSignUp.objects.all()
-    serializer_class = EventSignUpSerializer
+    serializer_class = EventRegistrationSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
     def create(self, request, *args, **kwargs):
@@ -155,8 +155,19 @@ class EventSignOutViewSet(mixins.DestroyModelMixin, viewsets.GenericViewSet):
     Реализует операцию Delete с моделью EventSignUp.
     """
     queryset = EventSignUp.objects.all()
-    serializer_class = EventSignUpSerializer
+    serializer_class = EventRegistrationSerializer
     permission_classes = (permissions.IsAuthenticated,)
+
+    def destroy(self, request, *args, **kwargs):
+        """
+        Удаление записи текущего пользователя на конкретное событие.
+        """
+        instance = self.get_object()
+        self.perform_destroy(instance)
+        return Response(
+            {"message": "Регистрация успешно удалена"},
+            status=status.HTTP_204_NO_CONTENT
+        )
 
 
 class DisciplinesNamesListViewSet(mixins.ListModelMixin,

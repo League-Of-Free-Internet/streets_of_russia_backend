@@ -14,7 +14,7 @@ from rest_framework import serializers
 from core.constants import FORMAT_DATE
 from core.utils import get_image_urls
 from disciplines.models import Disciplines
-from events.models import Events, EventSignUp, EventsImageURL
+from events.models import EventRegistration, Events, EventsImageURL
 from news.models import News
 from users.models import CustomUser, UserRole
 
@@ -124,7 +124,8 @@ class NewsSerializer(serializers.ModelSerializer):
     def get_image_urls(obj):
         return get_image_urls(obj)
 
-    def get_pub_date(self, obj):
+    @staticmethod
+    def get_pub_date(obj):
         """Форматирование даты в формат: `2024-07-14 11:57:06`"""
         return obj.pub_date.strftime(FORMAT_DATE)
 
@@ -181,13 +182,13 @@ class EventSerializer(serializers.ModelSerializer):
         return get_image_urls(obj)
 
 
-class EventSignUpSerializer(serializers.ModelSerializer):
+class EventRegistrationSerializer(serializers.ModelSerializer):
     """Сериализатор для регистрации пользователя на конкретное событие."""
 
     class Meta:
-        model = EventSignUp
+        model = EventRegistration
         fields = "__all__"
-        read_only_fields = ("user", "event", "registration_date")
+        read_only_fields = ("id", "user", "event", "registration_date")
 
 
 class DisciplinesNamesListSerializer(serializers.Serializer):

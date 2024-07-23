@@ -157,6 +157,15 @@ class EventSignUpViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
         serializer.save(user=self.request.user, event=self.get_event())
 
 
+class EventSignOutViewSet(mixins.DestroyModelMixin, viewsets.GenericViewSet):
+    """
+    Реализует операцию Delete с моделью EventSignUp.
+    """
+    queryset = EventSignUp.objects.all()
+    serializer_class = EventSignUpSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+
 class DisciplinesNamesListViewSet(mixins.ListModelMixin,
                                   viewsets.GenericViewSet):
     """

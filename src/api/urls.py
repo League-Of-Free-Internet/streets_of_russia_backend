@@ -10,6 +10,7 @@ from api.views import (
     DisciplinesNamesListViewSet,
     DisciplinesShortViewSet,
     EventSignUpViewSet,
+    EventSignOutViewSet,
     EventViewSet,
     FourLatestEventsViewSet,
     NewsViewSet,
@@ -25,8 +26,14 @@ router_v1.register(
     r"event", EventViewSet, basename="event"
 )
 router_v1.register(
-    r'event/(?P<event_id>\d+)/sign-up', EventSignUpViewSet,
-    basename='event-signup'
+    r"event/(?P<event_id>\d+)/sign-up",
+    EventSignUpViewSet,
+    basename="event-signup"
+)
+router_v1.register(
+    r"event/(?P<event_id>\d+)/sign-out",
+    EventSignOutViewSet,
+    basename="event-signout"
 )
 router_v1.register(r"news", NewsViewSet, basename="news")
 router_v1.register(r"users", UserViewSet, basename="users")
@@ -43,10 +50,10 @@ router_v1.register(
 )
 
 registration_uls = [
-    path('token/', TokenObtainPairView.as_view(),
-         name='token_obtain_pair'),
-    path('token/refresh/', TokenRefreshView.as_view(),
-         name='token_refresh'),
+    path("token/", TokenObtainPairView.as_view(),
+         name="token_obtain_pair"),
+    path("token/refresh/", TokenRefreshView.as_view(),
+         name="token_refresh"),
 ]
 
 urlpatterns = [

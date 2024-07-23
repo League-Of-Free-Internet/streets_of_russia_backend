@@ -16,7 +16,7 @@ from api.serializers import (
 from core.constants import EVENTS_ORDER, NEWS_ORDER, PAGE
 from core.utils import get_event
 from disciplines.models import Disciplines
-from events.models import Events, EventSignUp
+from events.models import Events, EventRegistration
 from news.models import News
 from users.models import CustomUser
 
@@ -107,7 +107,7 @@ class EventSignUpViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     Реализует операцию Create с моделью EventSignUp.
     """
 
-    queryset = EventSignUp.objects.all()
+    queryset = EventRegistration.objects.all()
     serializer_class = EventRegistrationSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
@@ -125,7 +125,7 @@ class EventSignUpViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
         event_id = kwargs.get("event_id")
         if not event_id:
             raise NotFound("Обязательно требуется id события.")
-        registration = EventSignUp.objects.filter(
+        registration = EventRegistration.objects.filter(
             user=self.request.user,
             event=get_event(event_id)
         ).first()
@@ -154,7 +154,7 @@ class EventSignOutViewSet(mixins.DestroyModelMixin, viewsets.GenericViewSet):
     """
     Реализует операцию Delete с моделью EventSignUp.
     """
-    queryset = EventSignUp.objects.all()
+    queryset = EventRegistration.objects.all()
     serializer_class = EventRegistrationSerializer
     permission_classes = (permissions.IsAuthenticated,)
 

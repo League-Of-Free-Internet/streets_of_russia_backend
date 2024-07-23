@@ -183,7 +183,8 @@ class EventSerializer(serializers.ModelSerializer):
 
 
 class EventRegistrationSerializer(serializers.ModelSerializer):
-    """Сериализатор для регистрации пользователя на конкретное событие."""
+    """Сериализатор для создания и удаления регистрации пользователя
+     на конкретное событие."""
 
     class Meta:
         model = EventRegistration

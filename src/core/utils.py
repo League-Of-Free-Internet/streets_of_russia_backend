@@ -1,4 +1,7 @@
-from core.constants import RELATED_NAME_MAP
+
+from django.template.defaultfilters import slugify as django_slugify
+
+from core.constants import ALPHABET, RELATED_NAME_MAP
 
 
 def get_image_urls(obj):
@@ -14,3 +17,7 @@ def get_image_urls(obj):
         )
     image_urls = getattr(obj, related_name).all()
     return [url.image_url for url in image_urls]
+
+
+def slugify(s):
+    return django_slugify("".join(ALPHABET.get(w, w) for w in s.lower()))

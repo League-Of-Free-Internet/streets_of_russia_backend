@@ -26,31 +26,14 @@
 
 <!-- Short description: -->
   <h2>В проекте использовались:</h2>
-  <a href="https://www.python.org/" style="text-decoration: none;">
-    <img src="https://img.shields.io/badge/Python-3.12-blue?style=flat&logo=python&logoColor=ffdd54" height="20" alt="python">
-  </a>
-  <a href="https://www.djangoproject.com/" style="text-decoration: none;">
-    <img src="https://img.shields.io/badge/Django-5.0.6-blue?style=flat&logo=django" height="20" alt="django">
-  </a>
-  <a href="https://www.django-rest-framework.org/" style="text-decoration: none;">
-    <img src="https://img.shields.io/badge/DRF-3.15.1-blue?style=flat&logo=rest-framework" height="20" alt="django-rest-framework">
-  </a>
-  <a href="https://gunicorn.org/" style="text-decoration: none;">
-    <img src="https://img.shields.io/badge/Gunicorn-22.0.0-blue?style=flat&logo=gunicorn" height="20" alt="gunicorn">
-  </a>
-  <a href="https://daviddrysdale.github.io/python-phonenumbers/" style="text-decoration: none;">
-    <img src="https://img.shields.io/badge/phonenumberslite-8.13.37-blue?style=flat&logo=phonenumberslite" height="20" alt="python-phonenumbers">
-  </a>
-  <a href="https://drf-yasg.readthedocs.io/en/stable/readme.html" style="text-decoration: none;">
-    <img src="https://img.shields.io/badge/drf_yasg-1.21.7-blue?style=flat&logo=drf-yasg" height="20" alt="drf-yasg">
-  </a>
-  <a href="https://django-rest-framework-simplejwt.readthedocs.io/en/latest/" style="text-decoration: none;">
-    <img src="https://img.shields.io/badge/simplejwt-5.3.1-blue?style=flat&logo=simplejwt" height="20" alt="django-rest-framework-simplejwt">
-  </a>
-  <a href="https://www.docker.com/" style="text-decoration: none;">
-    <img src="https://img.shields.io/badge/Docker-new-blue?style=flat&logo=docker" height="20" alt="docker">
-  </a>
-  
+  <a href="https://www.python.org/" style="text-decoration: none;"><img src="https://img.shields.io/badge/Python-3.12-blue?style=flat&logo=python&logoColor=ffdd54" height="20" alt="python"></a>
+  <a href="https://www.djangoproject.com/" style="text-decoration: none;"><img src="https://img.shields.io/badge/Django-5.0.6-blue?style=flat&logo=django" height="20" alt="django"></a>
+  <a href="https://www.django-rest-framework.org/" style="text-decoration: none;"><img src="https://img.shields.io/badge/DRF-3.15.1-blue?style=flat&logo=rest-framework" height="20" alt="django-rest-framework"></a>
+  <a href="https://gunicorn.org/" style="text-decoration: none;"><img src="https://img.shields.io/badge/Gunicorn-22.0.0-blue?style=flat&logo=gunicorn" height="20" alt="gunicorn"></a>
+  <a href="https://daviddrysdale.github.io/python-phonenumbers/" style="text-decoration: none;"><img src="https://img.shields.io/badge/phonenumberslite-8.13.37-blue?style=flat&logo=phonenumberslite" height="20" alt="python-phonenumbers"></a>
+  <a href="https://drf-yasg.readthedocs.io/en/stable/readme.html" style="text-decoration: none;"><img src="https://img.shields.io/badge/drf_yasg-1.21.7-blue?style=flat&logo=drf-yasg" height="20" alt="drf-yasg"></a>
+  <a href="https://django-rest-framework-simplejwt.readthedocs.io/en/latest/" style="text-decoration: none;"><img src="https://img.shields.io/badge/simplejwt-5.3.1-blue?style=flat&logo=simplejwt" height="20" alt="django-rest-framework-simplejwt"></a>
+  <a href="https://www.docker.com/" style="text-decoration: none;"><img src="https://img.shields.io/badge/Docker-new-blue?style=flat&logo=docker" height="20" alt="docker"></a>
 </div>
 
 > На стадии разработки.

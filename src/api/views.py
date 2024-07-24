@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import mixins, permissions, status, viewsets
 from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
@@ -7,15 +8,15 @@ from api.serializers import (
     DisciplinesFullSerializer,
     DisciplinesNamesListSerializer,
     DisciplinesShortSerializer,
+    EventRegistrationSerializer,
     EventSerializer,
-    EventSignUpSerializer,
     FourLatestEventsSerializer,
     NewsSerializer,
     UserSerializer,
 )
 from core.constants import EVENTS_ORDER, NEWS_ORDER, PAGE
 from disciplines.models import Disciplines
-from events.models import Events, EventSignUp
+from events.models import EventRegistration, Events
 from news.models import News
 from users.models import CustomUser
 
@@ -106,8 +107,8 @@ class EventSignUpViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     Реализует операцию Create с моделью EventSignUp.
     """
 
-    queryset = EventSignUp.objects.all()
-    serializer_class = EventSignUpSerializer
+    queryset = EventRegistration.objects.all()
+    serializer_class = EventRegistrationSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
     def get_event(self):
@@ -125,7 +126,6 @@ class EventSignUpViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     def create(self, request, *args, **kwargs):
         """
         Создание записи текущего пользователя на конкретное событие.
-        В случае повторного POST-запроса - удаление записи из БД.
         В теле запроса поле data должно оставаться пустым.
         """
         if request.data:
@@ -133,16 +133,14 @@ class EventSignUpViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
                 {"message": "Данные запроса должны быть пустыми."},
                 status=status.HTTP_400_BAD_REQUEST
             )
-        event = self.get_event()
-        user = self.request.user
-        registration = EventSignUp.objects.filter(
-            user=user, event=event
+        registration = EventRegistration.objects.filter(
+            user=self.request.user,
+            event=self.get_event()
         ).first()
         if registration:
-            registration.delete()
             return Response(
-                {"message": "Вы отменили регистрацию на событие"},
-                status=status.HTTP_200_OK
+                {"message": "Вы уже зарегистрированы на это событие"},
+                status=status.HTTP_409_CONFLICT
             )
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -157,6 +155,35 @@ class EventSignUpViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
         Сохранение записи текущего пользователя на конкретное событие.
         """
         serializer.save(user=self.request.user, event=self.get_event())
+
+
+class EventSignOutViewSet(mixins.DestroyModelMixin, viewsets.GenericViewSet):
+    """
+    Реализует операцию Delete с моделью EventSignUp.
+    """
+    queryset = EventRegistration.objects.all()
+    serializer_class = EventRegistrationSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get_object(self):
+        """
+        Переопределение стандартного метода get_object
+        для корректной работы эндпоинта event/{event_id}/sign-out/ на роутере
+        """
+        return get_object_or_404(
+            EventRegistration, user=self.request.user,
+            event_id=self.kwargs.get("event_id")
+        )
+
+    def destroy(self, request, *args, **kwargs):
+        """
+        Удаление записи текущего пользователя на конкретное событие.
+        """
+        self.perform_destroy(self.get_object())
+        return Response(
+            {"message": "Регистрация успешно удалена"},
+            status=status.HTTP_204_NO_CONTENT
+        )
 
 
 class DisciplinesNamesListViewSet(mixins.ListModelMixin,

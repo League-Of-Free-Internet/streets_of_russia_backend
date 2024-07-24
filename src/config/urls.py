@@ -35,3 +35,8 @@ urlpatterns = [
         name="schema-redoc",
     )
 ]
+
+handler400 = "core.utils.bad_request"
+handler403 = "core.utils.forbidden"
+handler404 = "core.utils.not_found"
+handler500 = "core.utils.server_error"

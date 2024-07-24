@@ -7,6 +7,7 @@ from core.constants import (
     DisciplinesCfg,
     DisciplinesImageURLCfg,
 )
+from core.utils import slugify
 from core.validators import validate_image_url
 
 
@@ -17,6 +18,11 @@ class Disciplines(models.Model):
         help_text=DisciplinesCfg.DISCIPLINES_NAME_HELP_MSG,
         unique=True
     )
+    slug = models.SlugField(
+        help_text=DisciplinesCfg.DISCIPLINES_SLUG_HELP_MSG,
+        unique=True,
+        blank=True,
+        null=True)
     description = models.TextField(
         verbose_name=DisciplinesCfg.DISCIPLINES_DESCRIPTION_VERBOSE_NAME,
         max_length=MAX_LENGTH,
@@ -43,6 +49,11 @@ class Disciplines(models.Model):
 
     def __str__(self) -> str:
         return self.name[:25]
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        return super().save(*args, **kwargs)
 
 
 class DisciplinesImageURL(models.Model):

@@ -20,7 +20,9 @@
   <a href="https://github.com/psf/black" style="text-decoration: none;"><img src="https://img.shields.io/static/v1?label=code%20style&message=black&color=black&style=flat-square" height="20" alt="code style: black"></a>
   <!-- Third row: -->
   <br>
-  <a href="https://github.com/League-Of-Free-Internet/empty_project/branches" style="text-decoration: none;"><img src="https://img.shields.io/github/commit-activity/w/League-Of-Free-Internet/empty_project" height="20" alt="commit-activity"></a><a href="https://github.com/League-Of-Free-Internet/empty_project/branches" style="text-decoration: none;"><img src="https://img.shields.io/github/last-commit/League-Of-Free-Internet/empty_project" height="20" alt="last-commit"></a><a href="https://github.com/orgs/League-Of-Free-Internet/projects/2" style="text-decoration: none;"><img src="https://img.shields.io/github/issues/League-Of-Free-Internet/empty_project" height="20" alt="issues"></a>
+  <a href="https://github.com/League-Of-Free-Internet/empty_project/branches" style="text-decoration: none;"><img src="https://img.shields.io/github/commit-activity/w/League-Of-Free-Internet/empty_project" height="20" alt="commit-activity"></a>
+  <a href="https://github.com/League-Of-Free-Internet/empty_project/branches" style="text-decoration: none;"><img src="https://img.shields.io/github/last-commit/League-Of-Free-Internet/empty_project" height="20" alt="last-commit"></a>
+  <a href="https://github.com/orgs/League-Of-Free-Internet/projects/2" style="text-decoration: none;"><img src="https://img.shields.io/github/issues/League-Of-Free-Internet/empty_project" height="20" alt="issues"></a>
 
 <!-- Short description: -->
   <h2>В проекте использовались:</h2>

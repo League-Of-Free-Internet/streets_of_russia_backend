@@ -120,46 +120,65 @@
 ```
 ## Установка для разработки локальный запуск:
 
-- Клонируйте проект на свой компьютер:
-```
-git@github.com:League-Of-Free-Internet/empty_project.git
-```
-- Установите и активируйте виртуальное окружение c Python 3.12.3
-```
-cd ./empty_project/ &&
-py -m venv venv
-```
-Для Windows:
-```
-source venv/Scripts/Activate
-```
-Для Linux
-```
-source venv/bin/activate
-```
-- Установите зависимости из файла requirements/develop.txt
+1. Клонируйте проект на свой компьютер:
+    ```bash
+    git@github.com:League-Of-Free-Internet/empty_project.git
+    ```
+2. Установите и активируйте виртуальное окружение c Python 3.12.3
+    ```bash
+    cd ./empty_project/ &&
+    py -m venv venv
+    ```
+    Для Windows:
+    ```bash
+    source venv/Scripts/Activate
+    ```
+    Для Linux
+    ```bash
+    source venv/bin/activate
+    ```
+3. Установите зависимости из файла requirements/develop.txt
+    Для Windows:
+    ```bash
+    python -m pip install --upgrade pip
+    pip install -r requirements/develop.txt
+    ```
+    для Linux:
+    ```bash
+    pip install --upgrade pip
+    pip install -r requirements.txt
+    ```
+4. Создайте переменные окружения в основной папке проекта "empty_project"
+    ```bash
+    touch .env
+    ```
+5. Добавьте ваши данные в файл .env (подробнее в .env.example)
+    ```
+    SECRET_KEY="Секретный код Django"
+    DEBUG="True или False"
+    ALLOWED_HOSTS="IP (домен) вашего сервера"
+    ```
+6. Добавьте ваши данные в файл .env.db (подробнее в .env.db.example)
+    ```
+    DB_ENGINE=django.db.backends.postgresql
+    DB_NAME=postgres
+    POSTGRES_USER=postgres
+    POSTGRES_PASSWORD=postgres
+    DB_HOST=db
+    DB_PORT=5432
+    ```
+## Локальный запуск Docker контейнеров:
 
-Для Windows:
-```
-python -m pip install --upgrade pip
-pip install -r requirements/develop.txt
-```
-для Linux:
-```
-pip install --upgrade pip
-pip install -r requirements.txt
-```
-- Создайте переменные окружения в основной папке проекта "empty_project"
-```
-touch .env
-```
-- Добавьте ваши данные в файл .env
-```
-SECRET_KEY="Секретный код Django"
-DEBUG=True
-[Подробнее в файле .env.example]
-```
-
+1. Убедитесь, что docker compose установлен:
+    ```bash
+   docker compose --version
+    ```
+2. Проверьте, что данные в файле .env и .env.db актуальны для вас, для
+корректной работы требуется значение DEBUG=False
+3. Из папки infra/ запустите конфигурационный файл Docker Compose проекта
+    ```bash
+    sudo docker compose -f ../empty_project/infra/docker-compose.yml up
+    ```
 ## Проект разрабатывали:
 
 | <!-- --> | <!-- -->      | <!-- -->    |

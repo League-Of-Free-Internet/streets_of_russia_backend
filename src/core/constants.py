@@ -12,6 +12,14 @@ RELATED_NAME_MAP = {
     "Disciplines": "discipline",
 }
 
+ALPHABET = {"а": "a", "б": "b", "в": "v", "г": "g", "д": "d",
+            "е": "e", "ё": "yo", "ж": "zh", "з": "z", "и": "i",
+            "й": "j", "к": "k", "л": "l", "м": "m", "н": "n",
+            "о": "o", "п": "p", "р": "r", "с": "s", "т": "t",
+            "у": "u", "ф": "f", "х": "kh", "ц": "ts", "ч": "ch",
+            "ш": "sh", "щ": "shch", "ы": "i", "э": "e", "ю": "yu",
+            "я": "ya"}
+
 
 class MediaValidatorCfg:
     """
@@ -130,6 +138,8 @@ class DisciplinesCfg:
     DISCIPLINES_META_ORDERING_FIELD = "name"
     DISCIPLINES_META_VERBOSE_NAME = "Спортивная дисциплина"
     DISCIPLINES_META_VERBOSE_NAME_PLURAL = "Спортивные дисциплины"
+    DISCIPLINES_SLUG_HELP_MSG = ("Часть URL-адреса на транслите. "
+                                 + "Например `testovaya-disciplina`")
 
 
 class DisciplinesImageURLCfg:

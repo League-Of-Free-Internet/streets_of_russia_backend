@@ -4,9 +4,10 @@ from events.models import Events, EventsImageURL
 
 class DisciplinesFactory:
     @staticmethod
-    def create_discipline(name, description, rules):
+    def create_discipline(name, slug, description, rules):
         return Disciplines.objects.create(
             name=name,
+            slug=slug,
             description=description,
             rules=rules
         )

@@ -22,11 +22,13 @@ class DisciplineAPITest(APITestCase):
         )
         self.discipline_1 = DisciplinesFactory.create_discipline(
             name="Тестовая спортивная дисциплина 1",
+            slug="test-discipline-1",
             description="Описание тестовой дисциплины 1",
             rules="Правила тестовой спортивной дисциплины 1"
         )
         self.discipline_2 = DisciplinesFactory.create_discipline(
             name="Тестовая спортивная дисциплина 2",
+            slug="test-discipline-2",
             description="Описание тестовой дисциплины 2",
             rules="Правила тестовой спортивной дисциплины 2"
         )
@@ -60,7 +62,7 @@ class DisciplineAPITest(APITestCase):
 
     def test_get_discipline_with_short_info(self):
         response = self.client.get(reverse(
-            "discipline-short-detail", args=[self.discipline_1.name])
+            "discipline-short-detail", args=[self.discipline_1.slug])
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(
@@ -72,7 +74,7 @@ class DisciplineAPITest(APITestCase):
 
     def test_get_discipline_with_full_info(self):
         response = self.client.get(reverse(
-            "discipline-full-detail", args=[self.discipline_1.name])
+            "discipline-full-detail", args=[self.discipline_1.slug])
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(

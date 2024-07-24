@@ -95,6 +95,13 @@ class EventsAPITest(APITestCase):
                 user=self.user, event=self.event_1).exists()
         )
 
+    def test_duplicate_signup(self):
+        EventRegistration.objects.create(user=self.user, event=self.event_1)
+        response = self.client.post(
+            reverse("event-sign-up-list", args=[self.event_1.id])
+        )
+        self.assertEqual(response.status_code, status.HTTP_409_CONFLICT)
+
     def test_successful_signout(self):
         EventRegistration.objects.create(user=self.user, event=self.event_1)
         response = self.client.delete(reverse(

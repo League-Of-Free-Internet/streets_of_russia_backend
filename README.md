@@ -8,37 +8,14 @@
   <h1><a href="https://streetrussia.ru/">Улицы России</a> - начинаются с тебя</h1>
 <!-- Labels: -->
   <!-- First row: -->
-  <a href="https://github.com/League-Of-Free-Internet/empty_project" style="text-decoration: none;">
-    <img src="https://img.shields.io/github/contributors/League-Of-Free-Internet/empty_project" height="20" alt="Contributions">
-  </a>
-  <img src="https://pypi-camo.freetls.fastly.net/18c2771271928b1071e8d436680f9a0abf272294/68747470733a2f2f696d672e736869656c64732e696f2f707970692f762f646a616e676f726573746672616d65776f726b2e737667?style=flat-square" height="20">
-  <img src="https://img.shields.io/github/repo-size/League-Of-Free-Internet/empty_project" height="20" alt="repo-size">
-  <img src="https://img.shields.io/github/languages/code-size/League-Of-Free-Internet/empty_project" height="20" alt="code-size">
-  <a href="https://img.shields.io/github/license/League-Of-Free-Internet/empty_project" style="text-decoration: none;">
-    <img src="https://img.shields.io/github/license/League-Of-Free-Internet/empty_project" height="20" alt="license">
-  </a>
+  <a href="https://github.com/League-Of-Free-Internet/empty_project" style="text-decoration: none;"><img src="https://img.shields.io/github/contributors/League-Of-Free-Internet/empty_project" height="20" alt="Contributions"></a>
+  <img src="https://pypi-camo.freetls.fastly.net/18c2771271928b1071e8d436680f9a0abf272294/68747470733a2f2f696d672e736869656c64732e696f2f707970692f762f646a616e676f726573746672616d65776f726b2e737667?style=flat-square" height="20"><img src="https://img.shields.io/github/repo-size/League-Of-Free-Internet/empty_project" height="20" alt="repo-size"><img src="https://img.shields.io/github/languages/code-size/League-Of-Free-Internet/empty_project" height="20" alt="code-size"><a href="https://img.shields.io/github/license/League-Of-Free-Internet/empty_project" style="text-decoration: none;"><img src="https://img.shields.io/github/license/League-Of-Free-Internet/empty_project" height="20" alt="license"></a>
   <!-- Second row: -->
   <br>
-  <a href="https://github.com/League-Of-Free-Internet/empty_project/actions" style="text-decoration: none;">
-    <img src="https://img.shields.io/github/actions/workflow/status/League-Of-Free-Internet/empty_project/empty_project_workflow.yml?label=workflow%20build" height="20" alt="GitHub Workflow Status">
-  </a>
-  <a href="https://github.com/pre-commit/pre-commit" style="text-decoration: none;">
-    <img src="https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white&style=flat-square" height="20" alt="pre-commit">
-  </a>
-  <a href="https://github.com/psf/black" style="text-decoration: none;">
-    <img src="https://img.shields.io/static/v1?label=code%20style&message=black&color=black&style=flat-square" height="20" alt="code style: black">
-  </a>
+  <a href="https://github.com/League-Of-Free-Internet/empty_project/actions" style="text-decoration: none;"><img src="https://img.shields.io/github/actions/workflow/status/League-Of-Free-Internet/empty_project/empty_project_workflow.yml?label=workflow%20build" height="20" alt="GitHub Workflow Status"></a><a href="https://github.com/pre-commit/pre-commit" style="text-decoration: none;"><img src="https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white&style=flat-square" height="20" alt="pre-commit"></a><a href="https://github.com/psf/black" style="text-decoration: none;"><img src="https://img.shields.io/static/v1?label=code%20style&message=black&color=black&style=flat-square" height="20" alt="code style: black"></a>
   <!-- Third row: -->
   <br>
-  <a href="https://github.com/League-Of-Free-Internet/empty_project/branches" style="text-decoration: none;">
-    <img src="https://img.shields.io/github/commit-activity/w/League-Of-Free-Internet/empty_project" height="20" alt="commit-activity">
-  </a>
-  <a href="https://github.com/League-Of-Free-Internet/empty_project/branches" style="text-decoration: none;">
-    <img src="https://img.shields.io/github/last-commit/League-Of-Free-Internet/empty_project" height="20" alt="last-commit">
-  </a>
-  <a href="https://github.com/orgs/League-Of-Free-Internet/projects/2" style="text-decoration: none;">
-    <img src="https://img.shields.io/github/issues/League-Of-Free-Internet/empty_project" height="20" alt="issues">
-  </a>
+  <a href="https://github.com/League-Of-Free-Internet/empty_project/branches" style="text-decoration: none;"><img src="https://img.shields.io/github/commit-activity/w/League-Of-Free-Internet/empty_project" height="20" alt="commit-activity"></a><a href="https://github.com/League-Of-Free-Internet/empty_project/branches" style="text-decoration: none;"><img src="https://img.shields.io/github/last-commit/League-Of-Free-Internet/empty_project" height="20" alt="last-commit"></a><a href="https://github.com/orgs/League-Of-Free-Internet/projects/2" style="text-decoration: none;"><img src="https://img.shields.io/github/issues/League-Of-Free-Internet/empty_project" height="20" alt="issues"></a>
 
 <!-- Short description: -->
   <h2>В проекте использовались:</h2>

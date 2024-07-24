@@ -22,7 +22,8 @@ class Disciplines(models.Model):
         help_text=DisciplinesCfg.DISCIPLINES_SLUG_HELP_MSG,
         unique=True,
         blank=True,
-        null=True)
+        null=True
+    )
     description = models.TextField(
         verbose_name=DisciplinesCfg.DISCIPLINES_DESCRIPTION_VERBOSE_NAME,
         max_length=MAX_LENGTH,

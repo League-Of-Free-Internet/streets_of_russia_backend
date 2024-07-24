@@ -1,13 +1,24 @@
-from disciplines.models import Disciplines
+from disciplines.models import Disciplines, DisciplinesImageURL
 from events.models import Events, EventsImageURL
 
 
 class DisciplinesFactory:
     @staticmethod
-    def create_discipline(name, description):
+    def create_discipline(name, slug, description, rules):
         return Disciplines.objects.create(
             name=name,
-            description=description
+            slug=slug,
+            description=description,
+            rules=rules
+        )
+
+
+class DisciplinesImageURLFactory:
+    @staticmethod
+    def create_discipline_image_url(discipline, image_url):
+        return DisciplinesImageURL.objects.create(
+            discipline=discipline,
+            image_url=image_url
         )
 
 

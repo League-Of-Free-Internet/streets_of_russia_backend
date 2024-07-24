@@ -173,8 +173,9 @@
     ```bash
    docker compose --version
     ```
+    Плагин docker compose можно установить с [официального сайта](https://docs.docker.com/compose/install/linux/)
 2. Проверьте, что данные в файле .env и .env.db актуальны для вас, для
-корректной работы требуется значение DEBUG=False
+корректной работы требуется значение `DEBUG=False` в .env файле.
 3. Из папки infra/ запустите конфигурационный файл Docker Compose проекта
     ```bash
     sudo docker compose -f ../empty_project/infra/docker-compose.yml up

@@ -9,7 +9,7 @@ from api.api_tests.factories import (
     EventsFactory,
     EventsImageURLFactory,
 )
-from events.models import EventSignUp
+from events.models import EventRegistration
 from users.models import CustomUser
 
 
@@ -87,18 +87,29 @@ class EventsAPITest(APITestCase):
 
     def test_successful_signup(self):
         response = self.client.post(reverse(
-            "event-signup-list", args=[self.event_1.id])
+            "event-sign-up-list", args=[self.event_1.id])
         )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertTrue(
-            EventSignUp.objects.filter(
+            EventRegistration.objects.filter(
+                user=self.user, event=self.event_1).exists()
+        )
+
+    def test_successful_signout(self):
+        EventRegistration.objects.create(user=self.user, event=self.event_1)
+        response = self.client.delete(reverse(
+            "event-sign-out-detail", args=[self.event_1.id])
+        )
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertFalse(
+            EventRegistration.objects.filter(
                 user=self.user, event=self.event_1).exists()
         )
 
     def test_non_empy_data(self):
         response = self.client.post(
             reverse(
-                "event-signup-list",
+                "event-sign-up-list",
                 args=[self.event_1.id]
             ),
             data={"some_field": "some_value"}
@@ -107,19 +118,19 @@ class EventsAPITest(APITestCase):
 
     def test_nonexistent_event(self):
         response = self.client.post(reverse(
-            'event-signup-list', args=[999])
+            'event-sign-up-list', args=[999])
         )
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_missing_event_id(self):
         with self.assertRaises(NoReverseMatch):
             self.client.post(
-                reverse('event-signup-list', args=[None])
+                reverse('event-sign-up-list', args=[None])
             )
 
     def test_unauthenticated_user(self):
         self.client.credentials()
         response = self.client.post(reverse(
-            "event-signup-list", args=[self.event_1.id])
+            "event-sign-up-list", args=[self.event_1.id])
         )
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)

@@ -1,25 +1,8 @@
-
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient, APITestCase
 
-from news.models import News, NewsImageURL
-
-
-class NewsFactory:
-    @staticmethod
-    def create_news(name, description):
-        return News.objects.create(name=name,
-                                   description=description)
-
-
-class NewsImageURLFactory:
-    @staticmethod
-    def create_news_image_url(news, image_url):
-        return NewsImageURL.objects.create(
-            news=news,
-            image_url=image_url
-        )
+from api.api_tests.factories import NewsFactory, NewsImageURLFactory
 
 
 class NewsAPITest(APITestCase):

@@ -1,5 +1,6 @@
 from disciplines.models import Disciplines, DisciplinesImageURL
 from events.models import Events, EventsImageURL
+from news.models import News, NewsImageURL
 
 
 class DisciplinesFactory:
@@ -37,5 +38,23 @@ class EventsImageURLFactory:
     def create_event_image_url(event, image_url):
         return EventsImageURL.objects.create(
             event=event,
+            image_url=image_url
+        )
+
+
+class NewsFactory:
+    @staticmethod
+    def create_news(name, description):
+        return News.objects.create(
+            name=name,
+            description=description
+        )
+
+
+class NewsImageURLFactory:
+    @staticmethod
+    def create_news_image_url(news, image_url):
+        return NewsImageURL.objects.create(
+            news=news,
             image_url=image_url
         )

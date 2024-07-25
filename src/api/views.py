@@ -2,6 +2,10 @@ from django.shortcuts import get_object_or_404
 from rest_framework import mixins, permissions, status, viewsets
 from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 from api.pagination import NewsPagination
 from api.serializers import (
@@ -12,6 +16,8 @@ from api.serializers import (
     EventSerializer,
     FourLatestEventsSerializer,
     NewsSerializer,
+    ProjectTokenObtainPairSerializer,
+    ProjectTokenRefreshSerializer,
     UserSerializer,
 )
 from core.constants import EVENTS_ORDER, NEWS_ORDER, PAGE
@@ -19,6 +25,23 @@ from disciplines.models import Disciplines
 from events.models import EventRegistration, Events
 from news.models import News
 from users.models import CustomUser
+
+
+class ProjectTokenObtainPairView(TokenObtainPairView):
+    """
+    Принимает набор учетных данных пользователя и возвращает пару веб-токенов
+    доступа и обновления JSON для подтверждения аутентификации этих учетных
+    данных.
+    """
+    serializer_class = ProjectTokenObtainPairSerializer
+
+
+class ProjectTokenRefreshView(TokenRefreshView):
+    """
+    Принимает веб-токен JSON типа обновления и возвращает веб-токен JSON типа
+    доступа, если токен обновления действителен.
+    """
+    serializer_class = ProjectTokenRefreshSerializer
 
 
 class NewsViewSet(viewsets.ReadOnlyModelViewSet):

@@ -10,6 +10,10 @@ from phonenumber_field.serializerfields import (
     PhoneNumberField as SerializerPhoneNumberField,
 )
 from rest_framework import serializers
+from rest_framework_simplejwt.serializers import (
+    TokenObtainPairSerializer,
+    TokenRefreshSerializer,
+)
 
 from core.constants import FORMAT_DATE
 from core.utils import get_image_urls
@@ -102,6 +106,14 @@ class UserSerializer(serializers.Serializer):
             password=make_password(validated_data.pop("password1")),
             **validated_data
         )
+
+
+class ProjectTokenObtainPairSerializer(TokenObtainPairSerializer):
+    pass
+
+
+class ProjectTokenRefreshSerializer(TokenRefreshSerializer):
+    pass
 
 
 class NewsSerializer(serializers.ModelSerializer):

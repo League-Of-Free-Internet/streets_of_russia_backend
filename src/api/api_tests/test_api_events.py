@@ -25,7 +25,9 @@ class EventsAPITest(APITestCase):
         )
         self.discipline = DisciplinesFactory.create_discipline(
             name="Тестовая спортивная дисциплина",
-            description="Описание спортивной дисциплины"
+            slug="test-discipline",
+            description="Описание спортивной дисциплины",
+            rules="Правила тестовой спортивной дисциплины"
         )
         self.event_1 = EventsFactory.create_event(
             name="Тестовое событие 1",

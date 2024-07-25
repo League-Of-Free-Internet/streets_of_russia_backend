@@ -1,8 +1,4 @@
 from django.urls import include, path
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
 
 from api.routers import CustomRouter
 from api.views import (
@@ -14,6 +10,8 @@ from api.views import (
     EventViewSet,
     FourLatestEventsViewSet,
     NewsViewSet,
+    ProjectTokenObtainPairView,
+    ProjectTokenRefreshView,
     UserViewSet,
 )
 
@@ -50,9 +48,9 @@ router_v1.register(
 )
 
 registration_uls = [
-    path("token/", TokenObtainPairView.as_view(),
+    path("token/", ProjectTokenObtainPairView.as_view(),
          name="token_obtain_pair"),
-    path("token/refresh/", TokenRefreshView.as_view(),
+    path("token/refresh/", ProjectTokenRefreshView.as_view(),
          name="token_refresh"),
 ]
 

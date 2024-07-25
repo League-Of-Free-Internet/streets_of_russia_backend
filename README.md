@@ -137,17 +137,43 @@
     ```
 ## Локальный запуск Docker контейнеров:
 
-1. Убедитесь, что docker compose установлен:
+1. Убедитесь, что docker и docker compose установлен:
     ```bash
    docker compose --version
     ```
-    Плагин docker compose можно установить с [официального сайта](https://docs.docker.com/compose/install/linux/)
+    Инструмент Docker engine можно установить с [этого официального сайта](https://docs.docker.com/engine/install/)
+    Плагин Docker compose можно установить с [этого официального сайта](https://docs.docker.com/compose/install/linux/)
 2. Проверьте, что данные в файле .env и .env.db актуальны для вас, для
 корректной работы требуется значение `DEBUG=False` в .env файле.
 3. Из папки infra/ запустите конфигурационный файл Docker Compose проекта
     ```bash
     sudo docker compose -f ../empty_project/infra/docker-compose.yml up
     ```
+## Развёртывание и запуск проекта на удалённом сервере:
+
+1. Убедитесь, что на удалённом сервере установлен Docker и Docker Compose.
+2. Скопируйте ваши актуальные файлы .env, .env.db, конфигурационный файл
+для запуска проекта docker-compose.yml из папки infra/ и настроенный для
+вашего удалённого сервера конфигурационный файл nginx/default.conf. Для этого
+можно использовать утилиту scp:
+    ```bash
+    scp -r /path/to/your/project user@remote_server:/path/on/remote/server
+    ```
+3. Подключитесь к удалённому серверу через SSH:
+    ```bash
+    ssh user@remote_server
+    ```
+4. Перейдите в директорию с вашим проектом и выполните команду для сборки и
+запуска контейнеров:
+    ```bash
+    cd /path/on/remote/server
+    docker compose up --build
+    ```
+5. Откройте браузер и перейдите по адресу, например,
+http://remote_server_ip:8000, чтобы убедиться, что приложение работает.
+6. Теперь ваш проект должен быть развёрнут и запущен в Docker-контейнерах на
+удалённом сервере. Вы можете управлять контейнерами с помощью команд
+Docker compose и следить за их состоянием через docker ps и docker logs.
 ## Проект разрабатывали:
 
 | <!-- --> | <!-- -->      | <!-- -->    |

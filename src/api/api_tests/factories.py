@@ -1,3 +1,5 @@
+from faker import Faker
+
 from disciplines.models import Disciplines, DisciplinesImageURL
 from events.models import Events, EventsImageURL
 from news.models import News, NewsImageURL
@@ -50,6 +52,13 @@ class NewsFactory:
             description=description
         )
 
+    @staticmethod
+    def create_news_batch(count):
+        return [NewsFactory.create_news(
+            f'Тестовая новость {i}',
+            f'Описание тестовой новости {i}'
+        ) for i in range(count)]
+
 
 class NewsImageURLFactory:
     @staticmethod
@@ -58,3 +67,11 @@ class NewsImageURLFactory:
             news=news,
             image_url=image_url
         )
+
+    @staticmethod
+    def create_image_urls_batch(news_batch):
+        fake_url = Faker()
+        return [NewsImageURLFactory.create_news_image_url(
+            news=news,
+            image_url=fake_url.image_url()
+        ) for news in news_batch]

@@ -14,5 +14,6 @@ class NewsPagination(pagination.PageNumberPagination):
                 'previous': self.get_previous_link()
             },
             "count": self.page.paginator.count,
+            'page_number': self.page.number,
             "news": data
         })

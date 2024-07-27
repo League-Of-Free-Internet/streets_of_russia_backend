@@ -7,10 +7,11 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-from api.pagination import NewsPagination
+from api.pagination import DisciplinesPagination, NewsPagination
 from api.serializers import (
     DisciplinesFullSerializer,
     DisciplinesNamesListSerializer,
+    DisciplinesSerializer,
     DisciplinesShortSerializer,
     EventRegistrationSerializer,
     EventSerializer,
@@ -207,6 +208,17 @@ class EventSignOutViewSet(mixins.DestroyModelMixin, viewsets.GenericViewSet):
             {"message": "Регистрация успешно удалена"},
             status=status.HTTP_204_NO_CONTENT
         )
+
+
+class DisciplinesViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    Реализует операции с моделью Disciplines:
+    - получение списка дисциплин;
+    """
+    queryset = Disciplines.objects.all()
+    serializer_class = DisciplinesSerializer
+    pagination_class = DisciplinesPagination
+    max_page_size = 12
 
 
 class DisciplinesNamesListViewSet(mixins.ListModelMixin,

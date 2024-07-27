@@ -36,7 +36,7 @@ router_v1.register(
 router_v1.register(r"news", NewsViewSet, basename="news")
 router_v1.register(r"users", UserViewSet, basename="users")
 router_v1.register(
-    r"disciplines", DisciplinesNamesListViewSet, basename="disciplines"
+    r"disciplines-names", DisciplinesNamesListViewSet, basename="disciplines"
 )
 router_v1.register(
     r"discipline", DisciplinesShortViewSet,

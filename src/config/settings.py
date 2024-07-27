@@ -19,6 +19,11 @@ DEBUG = os.getenv("DEBUG", default="True").lower() == "true"
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS",
                           default="127.0.0.1, localhost").split(", ")
 
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
+]
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -36,6 +41,7 @@ INSTALLED_APPS = [
     "drf_yasg",
     "phonenumber_field",
     "djoser",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
@@ -46,6 +52,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"

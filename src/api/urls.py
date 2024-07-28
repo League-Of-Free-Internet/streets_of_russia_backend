@@ -5,6 +5,7 @@ from api.views import (
     DisciplinesFullViewSet,
     DisciplinesNamesListViewSet,
     DisciplinesShortViewSet,
+    DisciplinesViewSet,
     EventSignOutViewSet,
     EventSignUpViewSet,
     EventViewSet,
@@ -35,8 +36,11 @@ router_v1.register(
 )
 router_v1.register(r"news", NewsViewSet, basename="news")
 router_v1.register(r"users", UserViewSet, basename="users")
+router_v1.register(r"disciplines", DisciplinesViewSet,
+                   basename="disciplines")
 router_v1.register(
-    r"disciplines", DisciplinesNamesListViewSet, basename="disciplines"
+    r"disciplines-names", DisciplinesNamesListViewSet,
+    basename="disciplines-names"
 )
 router_v1.register(
     r"discipline", DisciplinesShortViewSet,

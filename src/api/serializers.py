@@ -204,6 +204,25 @@ class EventRegistrationSerializer(serializers.ModelSerializer):
         read_only_fields = ("id", "user", "event", "registration_date")
 
 
+class DisciplinesSerializer(serializers.ModelSerializer):
+    """Сериализатор дисциплин."""
+
+    image_urls = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Disciplines
+        fields = (
+            "id",
+            "name",
+            "image_urls",
+            "description",
+        )
+
+    @staticmethod
+    def get_image_urls(obj):
+        return get_image_urls(obj)
+
+
 class DisciplinesNamesListSerializer(serializers.Serializer):
     """Сериализатор для вывода списка названий спортивных дисциплин."""
 

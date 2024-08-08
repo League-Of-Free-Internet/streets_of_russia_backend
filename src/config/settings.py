@@ -73,14 +73,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-if config("DEBUG", default=True, cast=bool):
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-        }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
-elif os.getenv("GITHUB_WORKFLOW"):
+    if config("DEBUG", default=True, cast=bool)
+    else {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": config("DB_NAME", default="github_action_db"),
+        "USER": config("POSTGRES_USER", default="postgres"),
+        "PASSWORD": config("POSTGRES_PASSWORD", default="postgres"),
+        "HOST": config("DB_HOST", default="127.0.0.1"),
+        "PORT": config("DB_PORT", default="5432"),
+    }
+}
+
+if os.getenv("GITHUB_WORKFLOW"):
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
@@ -89,19 +98,6 @@ elif os.getenv("GITHUB_WORKFLOW"):
             "PASSWORD": "postgres",
             "HOST": "127.0.0.1",
             "PORT": "5432",
-        }
-    }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": config("DB_NAME", default="default_db_name"),
-            "USER": config("POSTGRES_USER", default="default_db_user"),
-            "PASSWORD": config(
-                "POSTGRES_PASSWORD", default="default_db_password"
-            ),
-            "HOST": config("DB_HOST", default="db"),
-            "PORT": config("DB_PORT", default="5432"),
         }
     }
 

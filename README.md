@@ -39,6 +39,8 @@
 
 > На стадии разработки.
 
+## О проекте
+
 Улицы России это проект единственной общероссийской организации в такой сфере, которая способствует
 развитию уличных культур: воркаут, паркур, граффити, хип хоп и другие.
 Улицы России ломают стереотипы о том, что это агрессивный и травмоопасный спорт
@@ -49,9 +51,11 @@
 [![Code Style](https://img.shields.io/badge/Прочитать-Документацию_Code_Style-blue?style=for-the-badge)](https://github.com//League-Of-Free-Internet/empty_project/blob/dev/.github/docs/code_style_rules.md) [![Pull Request](https://img.shields.io/badge/Прочитать-Документацию_Pull_Request-2ea44f?style=for-the-badge)](https://github.com/League-Of-Free-Internet/empty_project/blob/dev/.github/docs/pull_request_rules.md)
 
 ## Ссылка на проект
+
 [![Site](https://img.shields.io/badge/Перейти_на-Сайт-2ea44f?style=for-the-badge)]()
 
 ## Технологии
+
 - Python
 - Django Rest Framework
 - Djoser
@@ -60,6 +64,7 @@
 - phonenumberslite
 
 ### Общая структура проекта:
+
 ```
 ├──.github/                 # Файлы и настройки, связанные с GitHub/Github actions
 ├──infra/                   # Директория с docker compose
@@ -143,6 +148,7 @@
     DB_HOST="Хост базы данных"
     DB_PORT="Порт хоста базы данных"
     ```
+
 ## Локальный запуск проекта в Docker контейнерах:
 
 1. Убедитесь, что docker и docker compose установлен:
@@ -157,6 +163,7 @@
     ```bash
     docker compose -f ../streets_of_russia_backend/infra/docker-compose.yml up
     ```
+
 ## Развёртывание и запуск проекта на удалённом сервере:
 
 1. Убедитесь, что на удалённом сервере установлен Docker и Docker Compose.

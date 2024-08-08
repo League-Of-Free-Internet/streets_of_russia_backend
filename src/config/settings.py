@@ -1,23 +1,20 @@
+"""Основные настройки проекта."""
+
 import os
 from datetime import timedelta
 from pathlib import Path
 
-from dotenv import find_dotenv, load_dotenv
-
-dotenv_path = find_dotenv(".env")
-load_dotenv(dotenv_path)
-
-dotenv_db_path = find_dotenv(".env.db")
-load_dotenv(dotenv_db_path)
+from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv("SECRET_KEY", default="0123456789")
+SECRET_KEY = config("SECRET_KEY", default="0123456789")
 
-DEBUG = os.getenv("DEBUG", default="True").lower() == "true"
+DEBUG = config("DEBUG", default="True", cast=bool)
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS",
-                          default="127.0.0.1, localhost").split(", ")
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="127.0.0.1, localhost").split(
+    ", "
+)
 
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = [
@@ -76,14 +73,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-if os.environ.get("DEBUG").lower() == "true":
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-        }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
-elif os.environ.get("GITHUB_WORKFLOW"):
+    if config("DEBUG", default=True, cast=bool)
+    else {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": config("DB_NAME", default="github_action_db"),
+        "USER": config("POSTGRES_USER", default="postgres"),
+        "PASSWORD": config("POSTGRES_PASSWORD", default="postgres"),
+        "HOST": config("DB_HOST", default="127.0.0.1"),
+        "PORT": config("DB_PORT", default="5432"),
+    }
+}
+
+if os.getenv("GITHUB_WORKFLOW"):
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
@@ -92,29 +98,6 @@ elif os.environ.get("GITHUB_WORKFLOW"):
             "PASSWORD": "postgres",
             "HOST": "127.0.0.1",
             "PORT": "5432",
-        }
-    }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": os.getenv(
-                "DB_ENGINE", default="django.db.backends.postgresql"
-            ),
-            "NAME": os.getenv(
-                "DB_NAME", default="default_db_name"
-            ),
-            "USER": os.getenv(
-                "POSTGRES_USER", default="default_db_user"
-            ),
-            "PASSWORD": os.getenv(
-                "POSTGRES_PASSWORD", default="default_db_password"
-            ),
-            "HOST": os.getenv(
-                "DB_HOST", default="localhost"
-            ),
-            "PORT": os.getenv(
-                "DB_PORT", default="5432"
-            )
         }
     }
 
@@ -166,18 +149,14 @@ SWAGGER_SETTINGS = {
 }
 
 REST_FRAMEWORK = {
-    "DEFAULT_PERMISSION_CLASSES": (
-        "rest_framework.permissions.AllowAny",
-    ),
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.AllowAny",),
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
     "EXCEPTION_HANDLER": "core.utils.custom_exception_handler",
 }
 
-SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(days=2)
-}
+SIMPLE_JWT = {"ACCESS_TOKEN_LIFETIME": timedelta(days=2)}
 
 DJOSER = {
     "LOGIN_FIELD": "email",

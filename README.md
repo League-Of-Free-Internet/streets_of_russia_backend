@@ -127,14 +127,14 @@
     ```
 5. Добавьте ваши данные в файл .env (подробнее в .env.example)
     ```
-    SECRET_KEY="Секретный код Django"
-    DEBUG="True или False"
-    ALLOWED_HOSTS="IP (домен) вашего сервера"
-    DB_ENGINE="backend django для работы с PostgreSQL"
-    DB_NAME="Название базы данных"
-    POSTGRES_USER="Пользователь базы данных"
-    POSTGRES_PASSWORD="Пароль пользователя"
-    DB_HOST="Хост базы данных"
+    SECRET_KEY = "Секретный код Django"
+    DEBUG = "True или False"
+    ALLOWED_HOSTS = "IP (домен) вашего сервера"
+    DB_NAME = "Название базы данных"
+    POSTGRES_USER = "Пользователь базы данных"
+    POSTGRES_PASSWORD = "Пароль пользователя"
+    DB_HOST = "Хост базы данных"
+    DB_PORT = "Порт хоста базы данных"
     ```
 6. Создайте файл с переменными окружения для базы данных в основной папке проекта "streets_of_russia_backend"
     ```bash
@@ -142,11 +142,11 @@
     ```
 7. Добавьте ваши данные в файл .env.db (подробнее в .env.db.example)
     ```
-    DB_NAME="Название базы данных"
-    POSTGRES_USER="Пользователь базы данных"
-    POSTGRES_PASSWORD="Пароль пользователя"
-    DB_HOST="Хост базы данных"
-    DB_PORT="Порт хоста базы данных"
+    DB_NAME = "Название базы данных"
+    POSTGRES_USER = "Пользователь базы данных"
+    POSTGRES_PASSWORD = "Пароль пользователя"
+    DB_HOST = "Хост базы данных"
+    DB_PORT = "Порт хоста базы данных"
     ```
 
 ## Локальный запуск проекта в Docker контейнерах:

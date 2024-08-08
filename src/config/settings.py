@@ -80,7 +80,7 @@ if config("DEBUG", default=True, cast=bool):
             "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
         }
     }
-elif config("GITHUB_WORKFLOW", default=False, cast=bool):
+elif os.getenv("GITHUB_WORKFLOW"):
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",

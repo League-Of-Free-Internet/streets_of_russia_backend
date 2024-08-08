@@ -1,5 +1,5 @@
 asgiref==3.8.1
-black @ git+https://github.com/psf/black@3be19b306f77980349d2c9edece2d86b1f58663d
+black @ git+https://github.com/psf/black
 certifi==2024.2.2
 cffi==1.16.0
 cfgv==3.4.0
@@ -43,7 +43,7 @@ pycodestyle==2.11.1
 pycparser==2.22
 pyflakes==3.2.0
 PyJWT==2.8.0
-python-dotenv==1.0.1
+python-decouple==3.8
 python3-openid==3.2.0
 pytz==2024.1
 PyYAML==6.0.1

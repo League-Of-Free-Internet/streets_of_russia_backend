@@ -76,9 +76,9 @@
 │   ├── disciplines/        # Приложение для моделей дисциплин и спорта [в разработке]
 │   ├── events/             # Приложение для моделей о событиях и календаря [в разработке]
 │   ├── news/               # Приложение для моделей новостной рубрики [в разработке]
-│   ├── news/               # Приложение для моделей пользователей и участников проекта [в разработке]
 │   └── manage.py           # Исполняемый файл
 ├── .dockerignore           # Файл исключений Docker из сборки образа
+├── .env.db.example         # Файл примера для секретных переменных базы данных
 ├── .env.example            # Файл примера для секретных переменных
 ├── .gitignore              # Файл со списком неотслеживаемых файлов и каталогов
 ├── Dockerfile              # Файл настройки базового Docker образа
@@ -90,12 +90,12 @@
 
 1. Клонируйте проект на свой компьютер:
     ```bash
-    git@github.com:League-Of-Free-Internet/empty_project.git
+    git clone git@github.com:League-Of-Free-Internet/streets_of_russia_backend.git
     ```
 2. Установите и активируйте виртуальное окружение c Python 3.12.3
     ```bash
-    cd ./empty_project/ &&
-    py -m venv venv
+    cd ./streets_of_russia_backend/ &&
+    python -m venv venv
     ```
     Для Windows:
     ```bash
@@ -103,7 +103,7 @@
     ```
     Для Linux
     ```bash
-    source venv/bin/activate
+    source . venv/bin/activate
     ```
 3. Установите зависимости из файла requirements/develop.txt
     Для Windows:
@@ -116,7 +116,7 @@
     pip install --upgrade pip
     pip install -r requirements.txt
     ```
-4. Создайте переменные окружения в основной папке проекта "empty_project"
+4. Создайте файл с переменными окружения в основной папке проекта "streets_of_russia_backend"
     ```bash
     touch .env
     ```
@@ -125,17 +125,25 @@
     SECRET_KEY="Секретный код Django"
     DEBUG="True или False"
     ALLOWED_HOSTS="IP (домен) вашего сервера"
+    DB_ENGINE="backend django для работы с PostgreSQL"
+    DB_NAME="Название базы данных"
+    POSTGRES_USER="Пользователь базы данных"
+    POSTGRES_PASSWORD="Пароль пользователя"
+    DB_HOST="Хост базы данных"
     ```
-6. Добавьте ваши данные в файл .env.db (подробнее в .env.db.example)
+6. Создайте файл с переменными окружения для базы данных в основной папке проекта "streets_of_russia_backend"
+    ```bash
+    touch .env.db
     ```
-    DB_ENGINE=django.db.backends.postgresql
-    DB_NAME=postgres
-    POSTGRES_USER=postgres
-    POSTGRES_PASSWORD=postgres
-    DB_HOST=db
-    DB_PORT=5432
+7. Добавьте ваши данные в файл .env.db (подробнее в .env.db.example)
     ```
-## Локальный запуск Docker контейнеров:
+    DB_NAME="Название базы данных"
+    POSTGRES_USER="Пользователь базы данных"
+    POSTGRES_PASSWORD="Пароль пользователя"
+    DB_HOST="Хост базы данных"
+    DB_PORT="Порт хоста базы данных"
+    ```
+## Локальный запуск проекта в Docker контейнерах:
 
 1. Убедитесь, что docker и docker compose установлен:
     ```bash
@@ -147,7 +155,7 @@
 корректной работы требуется значение `DEBUG=False` в .env файле.
 3. Из папки infra/ запустите конфигурационный файл Docker Compose проекта
     ```bash
-    sudo docker compose -f ../empty_project/infra/docker-compose.yml up
+    docker compose -f ../streets_of_russia_backend/infra/docker-compose.yml up
     ```
 ## Развёртывание и запуск проекта на удалённом сервере:
 
@@ -174,6 +182,7 @@ http://remote_server_ip:8000, чтобы убедиться, что прилож
 6. Теперь ваш проект должен быть развёрнут и запущен в Docker-контейнерах на
 удалённом сервере. Вы можете управлять контейнерами с помощью команд
 Docker compose и следить за их состоянием через docker ps и docker logs.
+
 ## Проект разрабатывали:
 
 | <!-- --> | <!-- -->      | <!-- -->    |

@@ -130,7 +130,6 @@
     SECRET_KEY = "Секретный код Django"
     DEBUG = "True или False"
     ALLOWED_HOSTS = "IP (домен) вашего сервера"
-    GITHUB_WORKFLOW = "Подключение тестовой БД на Github Actions (True для dev-режима)"
     DB_NAME = "Название базы данных"
     POSTGRES_USER = "Пользователь базы данных"
     POSTGRES_PASSWORD = "Пароль пользователя"

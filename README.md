@@ -156,6 +156,7 @@
    docker compose --version
     ```
     Инструмент Docker engine можно установить с [этого официального сайта](https://docs.docker.com/engine/install/)
+
     Плагин Docker compose можно установить с [этого официального сайта](https://docs.docker.com/compose/install/linux/)
 2. Проверьте, что данные в файле .env и .env.db актуальны для вас, для
 корректной работы требуется значение `DEBUG=False` в .env файле.

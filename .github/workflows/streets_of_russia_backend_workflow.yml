@@ -5,7 +5,6 @@ on: [ push ]
 env:
   ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
   DEBUG: ${{ secrets.DEBUG }}
-  PROJECT_FOLDER: ${{ secrets.PROJECT_FOLDER }}
   SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
 jobs:
@@ -56,18 +55,18 @@ jobs:
           echo "Waiting for PostgreSQL..."
           attempt_counter=0
           max_attempts=10
-          
+
           until nc -z localhost 5432; do
             if [ $attempt_counter -eq $max_attempts ]; then
               echo "Failed to connect to PostgreSQL after $max_attempts attempts"
               exit 1
             fi
-          
+
             echo "PostgreSQL is unavailable - sleeping"
             sleep 1
             attempt_counter=$((attempt_counter+1))
           done
-          
+
           echo "PostgreSQL is up - continuing"
 
       - name: Set up database
